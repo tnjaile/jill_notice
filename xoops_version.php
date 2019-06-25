@@ -78,11 +78,13 @@ $modversion['templates'][] = array('file' => 'jill_notice_index.tpl', 'descripti
 
 //---區塊設定---//
 $i                                       = 0;
-$modversion['blocks'][$i]['file']        = 'jill_notice_show.php';
+$modversion['blocks'][$i]['file']        = 'showBlock.php';
 $modversion['blocks'][$i]['name']        = _MI_JILL_NOTICE_SHOW_BLOCK_NAME;
 $modversion['blocks'][$i]['description'] = _MI_JILL_NOTICE_SHOW_BLOCK_DESC;
 $modversion['blocks'][$i]['show_func']   = 'jill_notice_show';
+$modversion['blocks'][$i]['edit_func']   = 'jill_notice_show_edit';
 $modversion['blocks'][$i]['template']    = 'jill_notice_show.tpl';
+$modversion['blocks'][$i]['options']     = '';
 
 //---偏好設定---//
 $i                                       = 0;

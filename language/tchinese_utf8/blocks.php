@@ -17,4 +17,4 @@
  * @version    $Id $
  **/
 
-
+define('_MB_JILL_NOTICE_SHOWCATE', '顯示分類');

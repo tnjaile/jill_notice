@@ -1,62 +1,37 @@
-<{if $smarty.session.notice_adm}><{$jquery}><{/if}>
-<script type="text/javascript" src="<{$xoops_url}>/modules/tadtools/jeditable/jquery.jeditable.mini.js"></script>
-<script type="text/javascript" src="<{$xoops_url}>/modules/jill_notice/js/pass.js"></script>
-<div class="row">
-  <div class="col-sm-3">
-      <select name="cate_sn" id="cate_sn" class="form-control" size="<{$size}>" onChange="location.href='<{$action}>?cate_sn='+this.value">
+<{if $smarty.session.notice_adm}>
+  <{$jquery}>
+  <script type="text/javascript" src="<{$xoops_url}>/modules/tadtools/jeditable/jquery.jeditable.mini.js"></script>
+<{/if}>
+<div class="alert alert-primary">
+  <form action="<{$action}>" method="post" id="myForm" class="form-inline" role="form">
+    <div class="form-group mr-2">
+      <select name="cate_sn" id="cate_sn" class="form-control">
         <{foreach from=$allCate key=cate_sn item=cate_title}>
           <option value=<{$cate_sn}> <{if $def_cate_sn==$cate_sn}>selected<{/if}> ><{$cate_title}></option>
         <{/foreach}>
       </select>
-  </div>
-  <div class="col-sm-9">
-    <p>
-        <{foreach from=$statusArr key=k item=status}>
+    </div>
+    <div class="form-group">
+      <{foreach from=$statusArr key=k item=status}>
         <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" name="status" id="status" value="<{$k}>" onClick="notice_list('<{$k}>','<{$def_cate_sn}>')">
+          <input class="form-check-input" type="radio" name="status" id="status" value="<{$k}>" <{if $def_status==$k}>checked<{/if}>>
           <label class="form-check-label" for="status"><{$status}></label>
         </div>
-        <{/foreach}>
-    </p>
-    <{if $def_cate_sn}>
-      <table class="table table-striped table-hover">
-        <thead>
-          <tr class="info">
-              <th>
-                  <!--分類-->
-                  <{$smarty.const._MD_JILLNOTICE_CATE}>
-              </th>
-              <th>
-                <!--下架時間-->
-                <{$smarty.const._MD_JILLNOTICE_DEADLINE}>
-              </th>
-              <th>
-                <!--類型-->
-                <{$smarty.const._MD_JILLNOTICE_TYPE}>
-              </th>
+      <{/foreach}>
+    </div>
+    <div class="form-group ml-2">
+      <input type="submit" name="send" value="<{$smarty.const._TAD_SEARCH}>" class="btn btn-primary" />
+    </div>
+  </form>
+</div>
 
-              <th>
-                <!--標題-->
-                <{$smarty.const._MD_JILLNOTICE_TITLE}>
-              </th>
-              <th>
-                <!--申請人員-->
-                <{$smarty.const._MD_JILLNOTICE_UID}>
-              </th>
-              <th>
-                <!--是否啟用-->
-                <{$smarty.const._MD_JILLNOTICE_STATUS}>
-              </th>
-              <!--<th>
-                備註
-                <{$smarty.const._MD_JILLNOTICE_NOTE}>
-              </th>-->
-              <th><{$smarty.const._TAD_FUNCTION}></th>
-          </tr>
-        </thead>
-
-        <tbody id="notice_sort"></tbody>
-      </table>
-    <{/if}>
-  </div>
+<div class="container">
+  <{if $AllNotice}>
+    <{includeq file="$xoops_rootpath/modules/jill_notice/templates/snippet_notice_table.tpl"}>
+    <{includeq file="$xoops_rootpath/modules/jill_notice/templates/snippet_page.tpl"}>
+  <{else}>
+    <div class="jumbotron text-center">
+        <h3><{$smarty.const._MD_JILLNOTICE_NODATA}></h3>
+    </div>
+  <{/if}>
 </div>

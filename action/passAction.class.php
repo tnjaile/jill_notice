@@ -1,8 +1,8 @@
 <?php
 use XoopsModules\Tadtools\FormValidator;
+use XoopsModules\Tadtools\Jeditable;
 use XoopsModules\Tadtools\SweetAlert;
 use XoopsModules\Tadtools\TadUpFiles;
-use XoopsModules\Tadtools\Utility;
 
 class PassAction extends Action
 {
@@ -21,35 +21,38 @@ class PassAction extends Action
     //頁面載入
     public function main()
     {
-        if (isset($_GET['cate_sn'])) {
-
-            $cate_sn = Tool::setFormString($_REQUEST['cate_sn'], "int");
-            $this->_tpl->assign('def_cate_sn', $cate_sn);
-
-            // 排序
-            $this->_tpl->assign('jquery', Utility::get_jquery(true));
-
-            $statusArr = array(0 => _MD_JILLNOTICE_STATUS0, 1 => _MD_JILLNOTICE_STATUS1, 2 => _MD_JILLNOTICE_STATUS2);
-            $this->_tpl->assign('statusArr', $statusArr);
-
-            // $file      = "save_col_val.php";
-            // $jeditable = new Jeditable();
-            // $jeditable->setSelectCol(".jq_select", $file, "{0:'" . _MD_JILLNOTICE_STATUS0 . "' , 1:'" . _MD_JILLNOTICE_STATUS1 . "',2:'" . _MD_JILLNOTICE_STATUS2 . "'}");
-            // $jeditable->render();
-            // die(print_r(get_declared_classes()));
-        }
-
         // 分類選單
         $_allCate = $this->_cate->findCateTitle();
-        $_size    = count($_allCate);
-
-        $this->_tpl->assign('size', $_size);
         $this->_tpl->assign('allCate', $_allCate);
+        $statusArr = array(0 => _MD_JILLNOTICE_STATUS0, 1 => _MD_JILLNOTICE_STATUS1, 2 => _MD_JILLNOTICE_STATUS2);
+        $this->_tpl->assign('statusArr', $statusArr);
 
+        if (isset($_POST['send'])) {
+            $cate_sn = Tool::setFormString($_REQUEST['cate_sn'], "int");
+            $status  = Tool::setFormString($_REQUEST['status'], "int");
+        } else {
+            $_cateValues = array_keys($_allCate);
+            $cate_sn     = $_cateValues[0];
+            $status      = 0;
+        }
+
+        $_AllNotice = $this->_notice->notice_list(array("cate_sn='{$cate_sn}'", "status='{$status}'"));
+        // die(var_dump($_AllNotice));
+        $this->_tpl->assign('AllNotice', $_AllNotice);
+
+        // 刪除
         $sweet_alert = new SweetAlert();
 
         $sweet_alert->render('delete_notice_func', "{$_SERVER['PHP_SELF']}?op=delete&sn=", "sn");
 
+        // 點擊編輯
+        $file      = "pass_save.ajax.php";
+        $jeditable = new Jeditable();
+        $jeditable->setSelectCol(".jq_select", $file, "{0:'" . _MD_JILLNOTICE_STATUS0 . "' , 1:'" . _MD_JILLNOTICE_STATUS1 . "',2:'" . _MD_JILLNOTICE_STATUS2 . "'}");
+        $jeditable->render();
+
+        $this->_tpl->assign('def_cate_sn', $cate_sn);
+        $this->_tpl->assign('def_status', $status);
         $this->_tpl->assign('action', $_SERVER['PHP_SELF']);
         $this->_tpl->assign('now_op', "pass_list");
         $this->_tpl->assign('can_notice', 1);

@@ -1,5 +1,5 @@
 <?php
-include "header.php";
+include_once "../../mainfile.php";
 include_once $GLOBALS['xoops']->path('/modules/system/include/functions.php');
 
 if (!$_SESSION['notice_adm']) {

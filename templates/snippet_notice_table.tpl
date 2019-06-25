@@ -1,5 +1,3 @@
-<div id="notice_sort_save_msg"></div>
-
 <table class="table table-striped table-hover">
   <thead>
     <tr class="info">
@@ -63,7 +61,7 @@
             <{$data.uid_name}>
           </td>
 
-          <td>
+          <td class="jq_select" id="status:<{$data.sn}>">
             <!--是否啟用-->
             <{$data.status_name}>
           </td>
@@ -75,9 +73,6 @@
           <td>
             <a href="javascript:delete_notice_func(<{$data.sn}>);" class="btn btn-xs btn-danger"><{$smarty.const._TAD_DEL}></a>
             <a href="<{$action}>?op=notice_form&sn=<{$data.sn}>" class="btn btn-xs btn-warning"><{$smarty.const._TAD_EDIT}></a>
-            <{if $smarty.session.notice_adm && $action=="/modules/jill_notice/pass.php"}>
-              <i class="fa fa-sort" aria-hidden="true" title="<{$smarty.const._TAD_SORTABLE}>"></i>
-            <{/if}>
           </td>
 
       </tr>

@@ -33,7 +33,7 @@ class NoticeModel extends Model
             $_where = $_whereData;
         }
 
-        $_AllNotice = parent::select($this->_fields, array('where' => $_where, 'limit' => $this->_limit, 'order' => 'cate_sn,sort desc'));
+        $_AllNotice = parent::select($this->_fields, array('where' => $_where, 'limit' => $this->_limit, 'order' => 'cate_sn,status,sort desc'));
         // 增加外鍵查詢欄
         $this->_tables = array(DB_PREFIX . "jill_notice_cate");
 

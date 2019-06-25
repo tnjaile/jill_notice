@@ -1,5 +1,3 @@
-<{if $smarty.session.notice_adm}><{$jquery}><{/if}>
-<script type="text/javascript" src="<{$xoops_url}>/modules/jill_notice/js/notice.js"></script>
 <div class="container">
   <{if $AllNotice}>
     <{includeq file="$xoops_rootpath/modules/jill_notice/templates/snippet_notice_table.tpl"}>

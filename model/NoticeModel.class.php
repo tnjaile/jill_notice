@@ -196,4 +196,22 @@ class NoticeModel extends Model
         }
         return $_type_name;
     }
+    // 區塊用
+    public function show_block($_whereData = array())
+    {
+        $_where = array();
+        if (!empty($_whereData)) {
+            $_where = $_whereData;
+        }
+        $myts = \MyTextSanitizer::getInstance();
+
+        $_AllNotice = parent::select($this->_fields, array('where' => $_where, 'order' => 'create_date desc,sort'));
+        foreach ($_AllNotice as $key => $value) {
+            if ($value['type'] == "url") {
+                $_AllNotice[$key]['content'] = strip_tags($value['content']);
+            }
+        }
+
+        return $_AllNotice;
+    }
 }

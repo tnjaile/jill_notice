@@ -16,17 +16,17 @@
   }
 </style>
 <div class="container-fluid">
-  <{foreach from=$block.content key=cate item=c}>    
-    <{if $cate=="url"}>
+  <{foreach from=$block.content key=type item=c}>
+    <{if $type=="url"}>
       <div class="list-group">
-        <{foreach from=$c item=data }>          
+        <{foreach from=$c item=data }>
           <li class="list-group-item">
-            <a href="<{$data.content}>" target="_blank"><{$data.title}></a>
-          </li>          
+            <a href='<{$data.content}>' target='_blank'><{$data.title}></a>
+          </li>
         <{/foreach}>
       </div>
-    <{elseif $cate=="img"}>
-      <div class='row' > 
+    <{elseif $type=="img"}>
+      <div class='row' >
         <{foreach from=$c item=data}>
           <{if $data.content}>
             <div class="col-sm-12 col">
@@ -34,7 +34,7 @@
                 <div class="media-left">
                   <a href="#">
                     <img src="<{$xoops_url}>/uploads/jill_notice/image/sn_1_1.png" alt="<{$data.title}>" class="media-object" ></a>
-                </div>              
+                </div>
                   <div class="media-body">
                     <h4 class="media-heading"><a href="#"><{$data.title}></a></h4>
                     <p><{$data.content}></p>
@@ -50,19 +50,19 @@
           </div>
         <{/foreach}>
       </div>
-    <{elseif $cate=="textarea"}>
+    <{elseif $type=="textarea"}>
       <div class="list-group">
-        <{foreach from=$c item=data}>          
+        <{foreach from=$c item=data}>
           <h4 class="list-group-item-heading"><{$data.title}></h4>
-          <p class="list-group-item-text"><{$data.content}></p>        
+          <p class="list-group-item-text"><{$data.content}></p>
         <{/foreach}>
       </div>
     <{else}>
       <ul class="list-group">
-        <{foreach from=$c item=data }>          
+        <{foreach from=$c item=data }>
           <li class="list-group-item list-group-item-info"><{$data.title}></li>
         <{/foreach}>
       </ul>
-    <{/if}>    
+    <{/if}>
   <{/foreach}>
 </div>

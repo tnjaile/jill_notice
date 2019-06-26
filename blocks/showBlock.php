@@ -17,18 +17,15 @@ require_once MODULE_DIR . "/configs/autoload.inc.php";
 //區塊主函式 (jill_notice_show)
 function jill_notice_show($options)
 {
-    global $xoopsDB;
-    $cate_arr = array('text', 'textarea', 'url', 'img');
-    foreach ($cate_arr as $cate) {
-        $sql     = "select * from `" . $xoopsDB->prefix("jill_notice") . "` where `status`='1' && `cate`='{$cate}'order by `create_date` desc";
-        $result  = $xoopsDB->query($sql) or web_error($sql);
-        $i       = 0;
-        $content = array();
-        while ($all = $xoopsDB->fetchArray($result)) {
-            $content[$i] = $all;
-            $i++;
+    $_notice  = new NoticeModel();
+    $type_arr = array('text', 'textarea', 'url', 'img');
+    foreach ($type_arr as $type) {
+        $_whereData = array("cate_sn='{$options[0]}'", "type='{$type}'", "status='1'");
+        $_AllNotice = $_notice->show_block($_whereData);
+        if (!empty($_AllNotice)) {
+            $block['content'][$type] = $_AllNotice;
         }
-        $block['content'][$cate] = $content;
+
     }
 
     // die(var_dump($block));
@@ -38,8 +35,8 @@ function jill_notice_show($options)
 //區塊編輯函式 (jill_notice_show_edit)
 function jill_notice_show_edit($options)
 {
-    $_Cate    = new CateModel();
-    $_allCate = $_Cate->findCateTitle();
+    $_cate    = new CateModel();
+    $_allCate = $_cate->findCateTitle();
 
     $opt = "";
     foreach ($_allCate as $cate_sn => $cate_title) {

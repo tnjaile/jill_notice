@@ -10,7 +10,7 @@ CREATE TABLE `jill_notice` (
   `note` varchar(300) NOT NULL COMMENT '備註',
   `sort` smallint(5) unsigned NOT NULL COMMENT '排序',
   `cate_sn` smallint(6) unsigned NOT NULL COMMENT '分類編號',
-  `read_group` varchar(255) NOT NULL default '可閱讀群組' ,
+  `auditor` mediumint(8) unsigned NOT NULL COMMENT '審核者',
   PRIMARY KEY (`sn`)
 ) ENGINE=MyISAM COMMENT='臨時公告';
 
@@ -20,7 +20,8 @@ CREATE TABLE `jill_notice_cate` (
   `cate_desc` varchar(255) NOT NULL COMMENT '分類說明',
   `cate_sort` smallint(6) unsigned NOT NULL COMMENT '分類排序',
   `post_group` varchar(255) NOT NULL default '可編寫群組' ,
-  `approval` varchar(255) NOT NULL COMMENT '審核人員',
+  `read_group` varchar(255) NOT NULL default '可讀群組',
+  `auditors` varchar(255) NOT NULL COMMENT '審核人員',
   PRIMARY KEY  (`cate_sn`)
 ) ENGINE=MyISAM;
 

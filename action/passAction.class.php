@@ -126,7 +126,7 @@ class PassAction extends Action
         if ($_type == "ckeditor") {
             $_content = (empty($_OneNotice)) ? "" : $_OneNotice[0]['content'];
             $ck       = new CkEditor("jill_notice", "content", $_content);
-            $ck->setHeight(400);
+            $ck->setWidth(400);
             $this->_tpl->assign('editor_content', $ck->render());
         }
         // die(var_dump($TadUpFiles));

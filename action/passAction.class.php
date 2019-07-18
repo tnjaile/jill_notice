@@ -1,4 +1,5 @@
 <?php
+use XoopsModules\Tadtools\CkEditor;
 use XoopsModules\Tadtools\FormValidator;
 use XoopsModules\Tadtools\Jeditable;
 use XoopsModules\Tadtools\SweetAlert;
@@ -122,6 +123,12 @@ class PassAction extends Action
 
         }
         $this->_tpl->assign('def_type', $_type);
+        if ($_type == "ckeditor") {
+            $_content = (empty($_OneNotice)) ? "" : $_OneNotice[0]['content'];
+            $ck       = new CkEditor("jill_notice", "content", $_content);
+            $ck->setHeight(400);
+            $this->_tpl->assign('editor_content', $ck->render());
+        }
         // die(var_dump($TadUpFiles));
         $up_sn_form = $TadUpFiles->upform(false, "up_sn", "1");
         $this->_tpl->assign('up_sn_form', $up_sn_form);

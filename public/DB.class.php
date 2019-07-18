@@ -49,7 +49,7 @@ class DB
                     $_objs[$k] = intval($v);
                 } elseif ($_fileld[$k] == "textarea") {
                     $_objs[$k] = $myts->displayTarea($v, 0, 1, 0, 1, 0);
-                } elseif ($_fileld[$k] == "ckedit") {
+                } elseif ($_fileld[$k] == "ckeditor") {
                     $_objs[$k] = $myts->displayTarea($v, 1, 1, 0, 1, 0);
                 } else {
                     $_objs[$k] = $myts->htmlSpecialChars($v);

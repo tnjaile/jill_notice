@@ -38,6 +38,7 @@ define('_MD_JILLNOTICE_TYPE0', '標題');
 define('_MD_JILLNOTICE_TYPE1', '大量文字');
 define('_MD_JILLNOTICE_TYPE2', '超連結');
 define('_MD_JILLNOTICE_TYPE3', '圖文集');
+define('_MD_JILLNOTICE_TYPE4', '線上編輯器');
 define('_MD_JILLNOTICE_ERRORLOGION', '無權限使用，請聯絡管理員!');
 define('_MD_JILLNOTICE_NODATA', '無資料!');
 define('_MD_JILLNOTICE_URL', '網址');

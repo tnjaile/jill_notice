@@ -127,7 +127,8 @@ class NoticeModel extends Model
         }
 
         // 秀出此編號的詳細資訊
-        $_OneNotice                 = parent::select($this->_fields, array('where' => $_where, 'limit' => '1'));
+        $_OneNotice = parent::select(array('sn' => 'int', 'create_date' => 'date', 'deadline' => 'date', 'type' => 'string', 'title' => 'string', 'content' => 'ckeditor', 'uid' => 'int', 'status' => 'int', 'note' => 'textarea', 'sort' => 'int', 'cate_sn' => 'int'), array('where' => $_where, 'limit' => '1'));
+
         $_OneNotice[0]['type_name'] = $this->getTypeName($_OneNotice[0]['type']);
         // 增加外鍵查詢欄
         $this->_tables               = array(DB_PREFIX . "jill_notice_cate");
@@ -152,6 +153,7 @@ class NoticeModel extends Model
 
             $_OneNotice[0]['list_file'] = $_show_files;
         }
+
         return $_OneNotice;
     }
 
@@ -181,6 +183,9 @@ class NoticeModel extends Model
     public function getTypeName($_type = 'text')
     {
         switch ($_type) {
+            case 'ckeditor':
+                $_type_name = _MD_JILLNOTICE_TYPE4;
+                break;
             case 'textarea':
                 $_type_name = _MD_JILLNOTICE_TYPE1;
                 break;
@@ -196,6 +201,13 @@ class NoticeModel extends Model
         }
         return $_type_name;
     }
+    // 設定類型
+    public function setType()
+    {
+        $_typeArr = array('text' => _MD_JILLNOTICE_TYPE0, 'textarea' => _MD_JILLNOTICE_TYPE1, 'url' => _MD_JILLNOTICE_TYPE2, 'img' => _MD_JILLNOTICE_TYPE3, 'ckeditor' => _MD_JILLNOTICE_TYPE4);
+
+        return $_typeArr;
+    }
     // 區塊用
     public function show_block($_whereData = array())
     {
@@ -205,7 +217,7 @@ class NoticeModel extends Model
         }
         $myts = \MyTextSanitizer::getInstance();
 
-        $_AllNotice = parent::select($this->_fields, array('where' => $_where, 'order' => 'create_date desc,sort'));
+        $_AllNotice = parent::select(array('sn' => 'int', 'create_date' => 'date', 'deadline' => 'date', 'type' => 'string', 'title' => 'string', 'content' => 'ckeditor', 'uid' => 'int', 'status' => 'int', 'note' => 'textarea', 'sort' => 'int', 'cate_sn' => 'int'), array('where' => $_where, 'order' => 'create_date desc,sort'));
         foreach ($_AllNotice as $key => $value) {
             if ($value['type'] == "url") {
                 $_AllNotice[$key]['content'] = strip_tags($value['content']);

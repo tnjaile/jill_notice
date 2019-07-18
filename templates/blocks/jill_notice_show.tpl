@@ -50,11 +50,11 @@
           </div>
         <{/foreach}>
       </div>
-    <{elseif $type=="textarea"}>
+    <{elseif $type=="textarea" || $type=="ckeditor"}>
       <div class="list-group">
         <{foreach from=$c item=data}>
           <h4 class="list-group-item-heading"><{$data.title}></h4>
-          <p class="list-group-item-text"><{$data.content}></p>
+          <p class="list-group-item-text"><{$data.content|nl2br}></p>
         <{/foreach}>
       </div>
     <{else}>

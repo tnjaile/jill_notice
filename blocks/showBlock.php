@@ -18,8 +18,8 @@ require_once MODULE_DIR . "/configs/autoload.inc.php";
 function jill_notice_show($options)
 {
     $_notice  = new NoticeModel();
-    $type_arr = array('text', 'textarea', 'url', 'img');
-    foreach ($type_arr as $type) {
+    $_typeArr = $_notice->setType();
+    foreach ($_typeArr as $type => $typename) {
         $_whereData = array("cate_sn='{$options[0]}'", "type='{$type}'", "status='1'");
         $_AllNotice = $_notice->show_block($_whereData);
         if (!empty($_AllNotice)) {
@@ -27,7 +27,6 @@ function jill_notice_show($options)
         }
 
     }
-
     // die(var_dump($block));
     return $block;
 }

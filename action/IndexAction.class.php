@@ -1,4 +1,5 @@
 <?php
+use XoopsModules\Tadtools\CkEditor;
 use XoopsModules\Tadtools\FormValidator;
 use XoopsModules\Tadtools\SweetAlert;
 use XoopsModules\Tadtools\TadUpFiles;
@@ -110,13 +111,18 @@ class IndexAction extends Action
 
         } else {
             // 給定預設值
-            $_typeArr = array('text' => _MD_JILLNOTICE_TYPE0, 'textarea' => _MD_JILLNOTICE_TYPE1, 'url' => _MD_JILLNOTICE_TYPE2, 'img' => _MD_JILLNOTICE_TYPE3);
-            $this->_tpl->assign('typeArr', $_typeArr);
+            $this->_tpl->assign('typeArr', $this->_notice->setType());
             $_type = !isset($_GET['type']) ? 'text' : Tool::setFormString($_GET['type']);
             $this->_tpl->assign('next_op', "add");
 
         }
         $this->_tpl->assign('def_type', $_type);
+        if ($_type == "ckeditor") {
+            $_content = (empty($_OneNotice)) ? "" : $_OneNotice[0]['content'];
+            $ck       = new CkEditor("jill_notice", "content", $_content);
+            $ck->setHeight(400);
+            $this->_tpl->assign('editor_content', $ck->render());
+        }
         // die(var_dump($TadUpFiles));
         $up_sn_form = $TadUpFiles->upform(false, "up_sn", "1");
         $this->_tpl->assign('up_sn_form', $up_sn_form);

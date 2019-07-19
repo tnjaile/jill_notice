@@ -46,10 +46,14 @@ class Request
             $myts = \MyTextSanitizer::getInstance();
             foreach ($_POST as $_key => $_value) {
                 if (Validate::inArray($_key, $_fields)) {
-                    $_value = $myts->addSlashes($_value);
-
+                    if (is_array($_value)) {
+                        $_value = json_encode($_value, JSON_UNESCAPED_UNICODE);
+                    } else {
+                        $_value = $myts->addSlashes($_value);
+                    }
                     $_selectData[$_key] = $_value;
                 }
+
             }
         }
 

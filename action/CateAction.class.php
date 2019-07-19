@@ -74,6 +74,9 @@ class CateAction extends Action
         } else {
             $this->_tpl->assign('next_op', "add");
         }
+        // die(var_dump($_OneCate[0]));
+        $this->_tpl->assign("post_group", Group::get_all_groups(array(3)));
+        $this->_tpl->assign("read_group", Group::get_all_groups());
         //套用formValidator驗證機制
         $formValidator      = new FormValidator("#myForm", true);
         $formValidator_code = $formValidator->render();

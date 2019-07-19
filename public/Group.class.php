@@ -35,12 +35,12 @@ class Group
     }
 
     //抓取所有群組(除訪客外)
-    public static function get_all_groups()
+    public static function get_all_groups($filterOutKeys=array())
     {
 
         $member_handler = xoops_gethandler('member');
         $group_list     = $member_handler->getGroupList();
-        $filterOutKeys  = array(3);
+        // $filterOutKeys  = array(3);
         $group_list     = array_diff_key($group_list, array_flip($filterOutKeys));
         return $group_list;
     }

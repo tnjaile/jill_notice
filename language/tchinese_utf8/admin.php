@@ -23,3 +23,5 @@ define('_MA_JILL_NOTICE_CATE_DESC', '分類說明');
 define('_MA_UPDATE_FAILED', '更新失敗');
 define('_MA_UPDATE_COMPLETED', '更新成功');
 define('_MA_JILL_BACK', '返回');
+define('_MA_JILLNOTICE_POST_GROUP', '可發佈群組');
+define('_MA_JILLNOTICE_READ_GROUP', '可讀取群組');

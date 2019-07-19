@@ -6,7 +6,7 @@ class CateModel extends Model
         parent::__construct();
 
         // 要顯示的欄位及欄位類型
-        $this->_fields = array('cate_sn' => 'int', 'cate_title' => 'string', 'cate_desc' => 'textarea', 'cate_sort' => 'int');
+        $this->_fields = array('cate_sn' => 'int', 'cate_title' => 'string', 'cate_desc' => 'textarea', 'cate_sort' => 'int', 'post_group' => 'string', 'read_group' => 'string', 'approval' => 'string');
         // 要查詢的表
         $this->_tables = array(DB_PREFIX . "jill_notice_cate");
         // 欄位檢查
@@ -70,8 +70,9 @@ class CateModel extends Model
         }
 
         // 秀出此編號的詳細資訊
-        return parent::select($this->_fields, array('where' => $_where, 'limit' => '1'));
-
+        $_OneCate = parent::select($this->_fields, array('where' => $_where, 'limit' => '1'));
+        // die(var_dump($_OneCate));
+        return $_OneCate;
     }
 
     public function allNum()

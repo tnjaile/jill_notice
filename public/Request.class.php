@@ -45,8 +45,9 @@ class Request
         if (Validate::isArray($_POST) && !Validate::isNullArray($_POST)) {
             $myts = \MyTextSanitizer::getInstance();
             foreach ($_POST as $_key => $_value) {
-                if (Validate::inArray($_key, $_fields)) {
-                    if (is_array($_value)) {
+                if (Validate::inArray($_key, array_keys($_fields))) {
+                    // 陣列就用json存
+                    if ($_fields[$_key] == "json") {
                         $_value = json_encode($_value, JSON_UNESCAPED_UNICODE);
                     } else {
                         $_value = $myts->addSlashes($_value);

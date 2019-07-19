@@ -82,7 +82,7 @@ class NoticeModel extends Model
             $this->_check->error();
         }
         // 過濾表單$_POST
-        $_addData = $this->getRequest()->filter(array_keys($this->_fields));
+        $_addData = $this->getRequest()->filter($this->_fields);
 
         $_addData['sort'] = $this->getSort('sort', array("cate_sn='{$_addData['cate_sn']}'")) + 1;
 
@@ -110,7 +110,7 @@ class NoticeModel extends Model
             $this->_check->error();
         }
 
-        $_updateData = $this->getRequest()->filter(array_keys($this->_fields));
+        $_updateData = $this->getRequest()->filter($this->_fields);
 
         parent::update($_where, $_updateData);
         return $this->_R['sn'];

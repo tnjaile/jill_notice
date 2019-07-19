@@ -6,7 +6,7 @@ class CateModel extends Model
         parent::__construct();
 
         // 要顯示的欄位及欄位類型
-        $this->_fields = array('cate_sn' => 'int', 'cate_title' => 'string', 'cate_desc' => 'textarea', 'cate_sort' => 'int', 'post_group' => 'string', 'read_group' => 'string', 'approval' => 'string');
+        $this->_fields = array('cate_sn' => 'int', 'cate_title' => 'string', 'cate_desc' => 'textarea', 'cate_sort' => 'int', 'post_group' => 'json', 'read_group' => 'json', 'approval' => 'json');
         // 要查詢的表
         $this->_tables = array(DB_PREFIX . "jill_notice_cate");
         // 欄位檢查
@@ -23,7 +23,27 @@ class CateModel extends Model
 
     public function cate_list()
     {
-        return parent::select($this->_fields, array('limit' => $this->_limit, 'order' => 'cate_sort DESC'));
+        $_ALLCate = parent::select($this->_fields, array('limit' => $this->_limit, 'order' => 'cate_sort DESC'));
+        foreach ($_ALLCate as $key => $value) {
+            if (!empty($value['post_group'])) {
+                foreach ($value['post_group'] as $group_id) {
+                    $post_groupname[] = Group::get_groupname($group_id);
+                }
+
+                $_ALLCate[$key]['post_group'] = implode(" | ", $post_groupname);
+            }
+            if (!empty($value['read_group'])) {
+                foreach ($value['read_group'] as $group_id) {
+                    $read_group[] = Group::get_groupname($group_id);
+                }
+
+                $_ALLCate[$key]['read_group'] = implode(" | ", $read_group);
+            }
+
+        }
+
+        // die(var_dump($_ALLCate));
+        return $_ALLCate;
     }
 
     public function cate_delete()
@@ -38,7 +58,7 @@ class CateModel extends Model
             $this->_check->error();
         }
 
-        $_addData = $this->getRequest()->filter(array_keys($this->_fields));
+        $_addData = $this->getRequest()->filter($this->_fields);
         // 去除自動遞增
         unset($_addData['cate_sn']);
         $_addData['cate_sort'] = $this->getSort('cate_sort') + 1;
@@ -56,7 +76,7 @@ class CateModel extends Model
             $this->_check->error();
         }
 
-        $_updateData = $this->getRequest()->filter(array_keys($this->_fields));
+        $_updateData = $this->getRequest()->filter($this->_fields);
         // die(var_dump($_updateData));
         return parent::update($_where, $_updateData);
     }
@@ -71,7 +91,21 @@ class CateModel extends Model
 
         // 秀出此編號的詳細資訊
         $_OneCate = parent::select($this->_fields, array('where' => $_where, 'limit' => '1'));
-        // die(var_dump($_OneCate));
+        if (!empty($_OneCate[0]['post_group'])) {
+            foreach ($_OneCate[0]['post_group'] as $group_id) {
+                $post_groupname[] = Group::get_groupname($group_id);
+            }
+
+            $_OneCate[0]['post_group'] = implode(" | ", $post_groupname);
+        }
+        if (!empty($_OneCate[0]['read_group'])) {
+            foreach ($_OneCate[0]['read_group'] as $group_id) {
+                $read_group[] = Group::get_groupname($group_id);
+            }
+
+            $_OneCate[0]['read_group'] = implode(" | ", $read_group);
+        }
+        // die(var_dump($_OneCate[0]));
         return $_OneCate;
     }
 

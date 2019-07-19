@@ -47,12 +47,8 @@ class DB
             foreach ($_objs as $k => $v) {
                 if ($_fileld[$k] == "int") {
                     $_objs[$k] = intval($v);
-                } elseif ($_fileld[$k] == "string"){
-                    if(!is_array(json_decode($v, true))){
-                        $_objs[$k]=$myts->htmlSpecialChars($v);
-                    }else{
-                        $_objs[$k]=json_decode($v, true);
-                    }
+                } elseif ($_fileld[$k] == "json"){
+                    $_objs[$k]=json_decode($v, true);
                 }elseif ($_fileld[$k] == "textarea") {
                     $_objs[$k] = $myts->displayTarea($v, 0, 1, 0, 1, 0);
                 } elseif ($_fileld[$k] == "ckeditor") {

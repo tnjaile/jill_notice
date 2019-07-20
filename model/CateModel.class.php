@@ -117,6 +117,15 @@ class CateModel extends Model
 
             $_OneCate[0]['read_group'] = implode(" | ", $read_group);
         }
+        if (!empty($_OneCate[0]['auditors'])) {
+            $auditors = explode(";", $_OneCate[0]['auditors']);
+            $auditor_uname = array();
+            foreach ($auditors as $auditor) {
+                $_OneCate[0]['auditor_group'][$auditor] = XoopsUser::getUnameFromId($auditor, 0);
+                $auditor_uname[] = XoopsUser::getUnameFromId($auditor, 0);
+            }
+            $_OneCate[0]['auditors_name'] = implode(" | ", $auditor_uname);
+        }
         // die(var_dump($_OneCate[0]));
         return $_OneCate;
     }

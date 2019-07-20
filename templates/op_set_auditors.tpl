@@ -29,13 +29,13 @@
             </div>
             <div class="col-sm-5">
                 <h3 class="text-info text-center">
-                    <{$smarty.const._MA_JILLNOTICE_APPROVER}>
+                    <{$smarty.const._MA_JILLNOTICE_AUDITORS}>
                 </h3>
                 <select name='destination' id='destination' size='12' multiple='multiple' tmt:linkedselect='true' class='col-sm-12'>
-            <{if $all_content2}>
-              <{foreach from=$all_content2 item=data}>
-                <option value="<{$data.uid}>">
-                  <{$data.uname}>
+            <{if $OneCate.auditor_group}>
+              <{foreach from=$OneCate.auditor_group key=uid_auditor item=auditor}>
+                <option value="<{$uid_auditor}>">
+                  <{$auditor}>
                 </option>
               <{/foreach}>
             <{/if}>

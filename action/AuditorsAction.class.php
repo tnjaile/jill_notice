@@ -15,6 +15,9 @@ class AuditorsAction extends Action
         if (isset($_GET['cate_sn'])) {
             $_user_menu = $this->get_users();
             $_OneCate   = $this->_cate->findOne();
+            if (!empty($_OneCate)) {
+                $_user_menu = array_diff($_user_menu, $_OneCate[0]['auditor_group']);
+            }
 
             $this->_tpl->assign('user_menu', $_user_menu);
             $this->_tpl->assign('OneCate', $_OneCate[0]);

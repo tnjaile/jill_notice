@@ -36,7 +36,7 @@
         </label>
         <div class="col-sm-9">
             <{if $OneCate.auditors}>
-                <{$OneCate.auditors}>
+                <{$OneCate.auditors_name}>
                     <{else}>
                         <img src="<{$xoops_url}>/modules/jill_notice/images/no.gif" style="cursor: s-resize;margin:0px 4px;" alt="<{$smarty.const._NO}>" title="<{$smarty.const._NO}>">
                         <{/if}>

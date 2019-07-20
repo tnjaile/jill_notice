@@ -26,18 +26,20 @@ class CateModel extends Model
         $_ALLCate = parent::select($this->_fields, array('limit' => $this->_limit, 'order' => 'cate_sort DESC'));
         foreach ($_ALLCate as $key => $value) {
             if (!empty($value['post_group'])) {
+                $post_group=array();
                 foreach ($value['post_group'] as $group_id) {
-                    $post_groupname[] = Group::get_groupname($group_id);
+                    $post_group[] = Group::get_groupname($group_id);
                 }
-
-                $_ALLCate[$key]['post_group'] = implode(" | ", $post_groupname);
+                $_ALLCate[$key]['post_group'] = implode(" | ", $post_group);
+                
             }
             if (!empty($value['read_group'])) {
+                $read_group=array();
                 foreach ($value['read_group'] as $group_id) {
                     $read_group[] = Group::get_groupname($group_id);
                 }
-
                 $_ALLCate[$key]['read_group'] = implode(" | ", $read_group);
+                
             }
             if (!empty($value['auditors'])) {
                 $auditors = explode(";", $value['auditors']);
@@ -48,9 +50,10 @@ class CateModel extends Model
                 }
                 $_ALLCate[$key]['auditors'] = implode(" | ", $auditor_uname);
             }
-
+           
+            
         }
-
+        
         // die(var_dump($_ALLCate));
         return $_ALLCate;
     }

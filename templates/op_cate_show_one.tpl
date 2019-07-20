@@ -17,7 +17,7 @@
             <{$smarty.const._MA_JILLNOTICE_POST_GROUP}>
         </label>
         <div class="col-sm-9">
-            <{$OneCate.post_group}>
+            <{$OneCate.post_group_name}>
         </div>
     </div>
     <!--可讀取群組-->
@@ -26,7 +26,7 @@
             <{$smarty.const._MA_JILLNOTICE_READ_GROUP}>
         </label>
         <div class="col-sm-9">
-            <{$OneCate.read_group}>
+            <{$OneCate.read_group_name}>
         </div>
     </div>
     <!--審核者-->
@@ -53,7 +53,11 @@
             <a href="<{$action}>?op=cate_form" class="btn btn-info">
                 <{$smarty.const._TAD_ADD}>
             </a>
+            <a href="<{$xoops_url}>/modules/jill_notice/admin/auditors.php?cate_sn=<{$OneCate.cate_sn}>" class="btn btn-sm btn-primary">
+                <{$smarty.const._MI_JILLNOTICE_ADMENU2}>
+            </a>
             <{/if}>
+
                 <a href="<{$action}>" class="btn btn-success">
                     <{$smarty.const._MA_JILL_BACK}>
                 </a>

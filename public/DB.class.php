@@ -164,7 +164,7 @@ class DB
     //取得排序
     protected function getMaxSort($_tables, $_col, array $_param = array())
     {
-        $_where = 'where ' . implode(' && ', $_param);
+        $_where =(empty($_param))?"": 'where ' . implode(' && ', $_param);
 
         $_sql = "SELECT max($_col) as sort FROM $_tables[0] $_where";
 

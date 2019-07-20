@@ -108,14 +108,14 @@ class CateModel extends Model
                 $post_groupname[] = Group::get_groupname($group_id);
             }
 
-            $_OneCate[0]['post_group'] = implode(" | ", $post_groupname);
+            $_OneCate[0]['post_group_name'] = implode(" | ", $post_groupname);
         }
         if (!empty($_OneCate[0]['read_group'])) {
             foreach ($_OneCate[0]['read_group'] as $group_id) {
                 $read_group[] = Group::get_groupname($group_id);
             }
 
-            $_OneCate[0]['read_group'] = implode(" | ", $read_group);
+            $_OneCate[0]['read_group_name'] = implode(" | ", $read_group);
         }
         if (!empty($_OneCate[0]['auditors'])) {
             $auditors = explode(";", $_OneCate[0]['auditors']);

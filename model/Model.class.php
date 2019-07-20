@@ -18,7 +18,7 @@ class Model extends DB
         return Request::getInstance($this, $this->_check);
     }
 
-    protected function getSort($_col, $_param)
+    protected function getSort($_col, $_param = array())
     {
         return $this->_db->getMaxSort($this->_tables, $_col, $_param);
     }

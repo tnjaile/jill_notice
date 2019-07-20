@@ -24,8 +24,8 @@ define('_MI_JILLNOTICE_DESC', '此模組的用途是提供管理者快速建立�
 define('_MI_JILLNOTICE_AUTHOR_WEB', 'Jill開發網站');
 define('_MI_JILLNOTICE_ADMENU1', '主管理介面');
 define('_MI_JILLNOTICE_ADMENU1_DESC', '主管理介面');
-define('_MI_JILLNOTICE_ADMENU2', '設定分類');
-define('_MI_JILLNOTICE_ADMENU2_DESC', '設定分類介面');
+define('_MI_JILLNOTICE_ADMENU2', '設定審核人員');
+define('_MI_JILLNOTICE_ADMENU2_DESC', '設定審核人員介面');
 define('_MI_JILLNOTICE_SMNAME2', '審核清單');
 
 define('_MI_JILL_NOTICE_SHOW_BLOCK_NAME', '臨時公告區塊');

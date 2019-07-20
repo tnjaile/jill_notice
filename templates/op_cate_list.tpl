@@ -56,7 +56,11 @@
                         </td>
                         <!--審核人員-->
                         <td>
-                            <{$data.auditors}>
+                            <{if $data.auditors}>
+                                <{$data.auditors}>
+                                    <{else}>
+                                        <img src="<{$xoops_url}>/modules/jill_notice/images/no.gif" style="cursor: s-resize;margin:0px 4px;" alt="<{$smarty.const._NO}>" title="<{$smarty.const._NO}>">
+                                        <{/if}>
                         </td>
                         <{if $smarty.session.notice_adm}>
                             <td>
@@ -65,6 +69,9 @@
                                 </a>
                                 <a href="<{$action}>?op=cate_form&cate_sn=<{$data.cate_sn}>" class="btn btn-xs btn-warning">
                                     <{$smarty.const._TAD_EDIT}>
+                                </a>
+                                <a href="<{$xoops_url}>/modules/jill_notice/admin/auditors.php?cate_sn=<{$data.cate_sn}>" class="btn btn-sm btn-primary">
+                                    <{$smarty.const._MI_JILLNOTICE_ADMENU2}>
                                 </a>
                                 <i class="fa fa-sort" aria-hidden="true" title="<{$smarty.const._TAD_SORTABLE}>"></i>
                             </td>

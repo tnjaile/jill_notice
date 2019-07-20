@@ -51,6 +51,7 @@
                   </select>
             </div>
         </div>
+
         <div class="text-center">
             <{$token_form}>
                 <input type="hidden" name="next_op" value="<{$next_op}>">

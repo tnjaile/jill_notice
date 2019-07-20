@@ -35,7 +35,11 @@
             <{$smarty.const._MA_JILLNOTICE_AUDITORS}>
         </label>
         <div class="col-sm-9">
-            <{$OneCate.auditors}>
+            <{if $OneCate.auditors}>
+                <{$OneCate.auditors}>
+                    <{else}>
+                        <img src="<{$xoops_url}>/modules/jill_notice/images/no.gif" style="cursor: s-resize;margin:0px 4px;" alt="<{$smarty.const._NO}>" title="<{$smarty.const._NO}>">
+                        <{/if}>
         </div>
     </div>
     <div class="text-right">

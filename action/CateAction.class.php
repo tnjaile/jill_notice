@@ -6,23 +6,25 @@ use XoopsModules\Tadtools\Utility;
 //分類控制器(後臺分類)
 class CateAction extends Action
 {
+    private $_cate = null;
     public function __construct()
     {
         parent::__construct();
+        $this->_cate = new CateModel();
     }
 
     //頁面載入
     public function main()
     {
         if (isset($_GET['cate_sn'])) {
-            $_OneCate = $this->_model->findOne();
+            $_OneCate = $this->_cate->findOne();
             $this->_tpl->assign('now_op', "cate_show_one");
             $this->_tpl->assign("OneCate", $_OneCate[0]);
         } else {
             //分頁
-            parent::page(20, 10);
+            parent::page(20, 10, $this->_cate);
 
-            $_AllCate = $this->_model->cate_list();
+            $_AllCate = $this->_cate->cate_list();
 
             // die(var_dump($_AllCate));
             $this->_tpl->assign('AllCate', $_AllCate);
@@ -41,7 +43,7 @@ class CateAction extends Action
     public function delete()
     {
         if (isset($_GET['cate_sn'])) {
-            $_row = $this->_model->cate_delete();
+            $_row = $this->_cate->cate_delete();
         }
         header("location: {$_SERVER['PHP_SELF']}");
     }
@@ -57,10 +59,10 @@ class CateAction extends Action
             }
             if (isset($_POST['next_op'])) {
                 if ($_POST['next_op'] == "update") {
-                    $_message = $this->_model->cate_update() ? "修改成功!" : "修改失敗";
+                    $_message = $this->_cate->cate_update() ? "修改成功!" : "修改失敗";
                 }
                 if ($_POST['next_op'] == "add") {
-                    $_message = $this->_model->cate_add() ? "新增成功!" : "新增失敗";
+                    $_message = $this->_cate->cate_add() ? "新增成功!" : "新增失敗";
                 }
             }
 
@@ -68,7 +70,7 @@ class CateAction extends Action
             exit();
         }
         if (isset($_GET['cate_sn'])) {
-            $_OneCate = $this->_model->findOne();
+            $_OneCate = $this->_cate->findOne();
             $this->_tpl->assign('next_op', "update");
             $this->_tpl->assign("OneCate", $_OneCate[0]);
         } else {

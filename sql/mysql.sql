@@ -21,7 +21,7 @@ CREATE TABLE `jill_notice_cate` (
   `cate_sort` smallint(6) unsigned NOT NULL COMMENT '分類排序',
   `post_group` varchar(255) NOT NULL default '可編寫群組' ,
   `read_group` varchar(255) NOT NULL default '可讀群組',
-  `auditors` varchar(255) NOT NULL COMMENT '審核人員',
+  `auditors` varchar(255) NOT NULL COMMENT '審核者',
   PRIMARY KEY  (`cate_sn`)
 ) ENGINE=MyISAM;
 

@@ -29,7 +29,7 @@
             <{$OneCate.read_group}>
         </div>
     </div>
-    <!--審核人員-->
+    <!--審核者-->
     <div class="row">
         <label class="col-sm-3 text-right">
             <{$smarty.const._MA_JILLNOTICE_AUDITORS}>

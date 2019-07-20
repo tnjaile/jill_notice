@@ -6,7 +6,7 @@ class CateModel extends Model
         parent::__construct();
 
         // 要顯示的欄位及欄位類型
-        $this->_fields = array('cate_sn' => 'int', 'cate_title' => 'string', 'cate_desc' => 'textarea', 'cate_sort' => 'int', 'post_group' => 'json', 'read_group' => 'json', 'approval' => 'json');
+        $this->_fields = array('cate_sn' => 'int', 'cate_title' => 'string', 'cate_desc' => 'textarea', 'cate_sort' => 'int', 'post_group' => 'json', 'read_group' => 'json', 'auditors' => 'string');
         // 要查詢的表
         $this->_tables = array(DB_PREFIX . "jill_notice_cate");
         // 欄位檢查
@@ -39,6 +39,15 @@ class CateModel extends Model
 
                 $_ALLCate[$key]['read_group'] = implode(" | ", $read_group);
             }
+            if (!empty($value['auditors'])) {
+                $auditors = explode(";", $value['auditors']);
+
+                $auditor_uname = array();
+                foreach ($auditors as $auditor) {
+                    $auditor_uname[] = XoopsUser::getUnameFromId($auditor, 0);
+                }
+                $_ALLCate[$key]['auditors'] = implode(" | ", $auditor_uname);
+            }
 
         }
 
@@ -65,25 +74,28 @@ class CateModel extends Model
         return parent::add($_addData);
     }
 
-    public function cate_update()
+    public function cate_update($_selectData = array(), $_ischeck = 1)
     {
         $_where = array("cate_sn='{$this->_R['cate_sn']}'");
         if (!$this->_check->oneCheck($this, $_where)) {
             $this->_check->error();
         }
-
-        if (!$this->_check->titleCheck($this)) {
-            $this->_check->error();
+        if (!empty($_ischeck)) {
+            if (!$this->_check->titleCheck($this)) {
+                $this->_check->error();
+            }
         }
 
-        $_updateData = $this->getRequest()->filter($this->_fields);
-        // die(var_dump($_updateData));
+        $_selectData = empty($_selectData) ? $this->_fields : $_selectData;
+        $_updateData = $this->getRequest()->filter($_selectData);
         return parent::update($_where, $_updateData);
     }
-    public function findOne()
+    public function findOne($_whereData = array())
     {
         $_where = array("cate_sn='{$this->_R['cate_sn']}'");
-
+        if (!empty($_whereData)) {
+            $_where = array_merge($_where, $_whereData);
+        }
         //先驗證是否有此編號的資料
         if (!$this->_check->oneCheck($this, $_where)) {
             $this->_check->error();

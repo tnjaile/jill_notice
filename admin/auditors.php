@@ -12,7 +12,7 @@
 /*-----------引入檔案區--------------*/
 include_once $_SERVER["DOCUMENT_ROOT"] . "/modules/jill_notice/configs/run.inc.php";
 $_SESSION['notice_adm'] = true;
-$_obj                   = new AdminAction();
+$_obj                   = new AuditorsAction();
 $_obj->run();
 /*-----------秀出結果區--------------*/
 $xoTheme->addStylesheet('/modules/tadtools/css/font-awesome/css/font-awesome.css');

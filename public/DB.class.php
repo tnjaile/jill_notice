@@ -47,9 +47,9 @@ class DB
             foreach ($_objs as $k => $v) {
                 if ($_fileld[$k] == "int") {
                     $_objs[$k] = intval($v);
-                } elseif ($_fileld[$k] == "json"){
-                    $_objs[$k]=json_decode($v, true);
-                }elseif ($_fileld[$k] == "textarea") {
+                } elseif ($_fileld[$k] == "json") {
+                    $_objs[$k] = json_decode($v, true);
+                } elseif ($_fileld[$k] == "textarea") {
                     $_objs[$k] = $myts->displayTarea($v, 0, 1, 0, 1, 0);
                 } elseif ($_fileld[$k] == "ckeditor") {
                     $_objs[$k] = $myts->displayTarea($v, 1, 1, 0, 1, 0);
@@ -99,7 +99,7 @@ class DB
         $_setData = substr($_setData, 0, -1);
 
         $_sql = "UPDATE $_tables[0] SET $_setData $_where LIMIT 1";
-        //  die($_sql);
+        // die($_sql);
         $_result = $this->_db->queryF($_sql) or XoopsModules\Tadtools\Utility::web_error($_sql);
         return $_result;
     }

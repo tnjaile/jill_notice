@@ -21,7 +21,7 @@
                     <th class="col-sm-2">
                         <{$smarty.const._MA_JILLNOTICE_READ_GROUP}>
                     </th>
-                    <!--審核人員-->
+                    <!--審核者-->
                     <th class="col-sm-2">
                         <{$smarty.const._MA_JILLNOTICE_AUDITORS}>
                     </th>
@@ -54,7 +54,7 @@
                         <td>
                             <{$data.read_group}>
                         </td>
-                        <!--審核人員-->
+                        <!--審核者-->
                         <td>
                             <{if $data.auditors}>
                                 <{$data.auditors}>

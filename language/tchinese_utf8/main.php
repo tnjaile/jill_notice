@@ -47,3 +47,5 @@ define('_MD_JILLNOTICE_SQUARE', '圖片格式:140X140');
 define('_MD_UPDATE_FAILED', '更新失敗');
 define('_MD_UPDATE_COMPLETED', '更新成功');
 define('_MD_JILLNOTICE_ILLEGAL', '無權限');
+define('_MD_JILLNOTICE_CHECK', '須審核');
+define('_MD_JILLNOTICE_PASS', '無須審核');

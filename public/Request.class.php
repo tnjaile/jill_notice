@@ -41,7 +41,7 @@ class Request
     public function filter(array $_fields)
     {
         $_selectData = array();
-
+        // die(var_dump($_POST));
         if (Validate::isArray($_POST) && !Validate::isNullArray($_POST)) {
             $myts = \MyTextSanitizer::getInstance();
             foreach ($_POST as $_key => $_value) {

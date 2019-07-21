@@ -77,20 +77,24 @@ class NoticeModel extends Model
     public function notice_add()
     {
         global $xoopsUser;
+        
         // 檢查表單是否有填
         if (!$this->_check->allCheck($this, array('type' => "{$this->_R['type']}"))) {
             $this->_check->error();
         }
-        // 過濾表單$_POST
-        $_addData = $this->getRequest()->filter($this->_fields);
 
+        // json型態轉陣列(不在欄位的額外變數，不過濾)
+        $_status=json_decode($_POST['status'],true);
+        // die(var_dump($_status));
+        //過濾表單 $_POST
+        $_addData = $this->getRequest()->filter($this->_fields);
+        // die(var_dump($_POST));
         $_addData['sort'] = $this->getSort('sort', array("cate_sn='{$_addData['cate_sn']}'")) + 1;
 
         // 增加額外欄位
         $_addData['create_date'] = date("Y-m-d H:i:s", xoops_getUserTimestamp(time()));
         $_addData['uid']         = $xoopsUser->uid();
-        $_addData['status']      = '0';
-
+        $_addData['status']= $_status[$_addData['cate_sn']];
         // 去除自動遞增
         unset($_addData['sn']);
         return parent::add($_addData);
@@ -110,8 +114,12 @@ class NoticeModel extends Model
             $this->_check->error();
         }
 
+        // json型態轉陣列(不在欄位的額外變數，不過濾)
+        $_status=json_decode($_POST['status'],true);
+
         $_updateData = $this->getRequest()->filter($this->_fields);
 
+        $_updateData['status']= $_status[$_updateData['cate_sn']];
         parent::update($_where, $_updateData);
         return $this->_R['sn'];
     }

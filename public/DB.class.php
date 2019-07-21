@@ -37,7 +37,7 @@ class DB
         $_table        = implode(',', $_tables);
 
         $_sql = "SELECT $_selectFields FROM $_table $_where $_order $_limit";
-        // die($_sql);
+        
         $_result = $this->_db->query($_sql) or XoopsModules\Tadtools\Utility::web_error($_sql);
 
         $_output = array();

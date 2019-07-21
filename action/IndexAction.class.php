@@ -22,7 +22,7 @@ class IndexAction extends Action
     public function main()
     {
         global $can_notice, $xoopsUser;
-
+        
         if (empty($can_notice)) {
             $this->_tpl->assign('now_op', "notice_list");
         } else {
@@ -128,8 +128,9 @@ class IndexAction extends Action
         $this->_tpl->assign('up_sn_form', $up_sn_form);
         // 分類選單
         $_allCate = $this->_cate->findCateTitle();
-        $this->_tpl->assign('allCate', $_allCate);
-
+        $this->_tpl->assign('allCate', $_allCate['cates']);
+        $this->_tpl->assign('status', json_encode($_allCate['status'],JSON_UNESCAPED_UNICODE));
+        // die(var_dump(json_encode($_allCate['status'])));
         //套用formValidator驗證機制
         $formValidator      = new FormValidator("#myForm", true);
         $formValidator_code = $formValidator->render();

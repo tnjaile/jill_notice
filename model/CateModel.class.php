@@ -141,11 +141,14 @@ class CateModel extends Model
     // 產生分類選單
     public function findCateTitle()
     {
-        $_cates = parent::select(array('cate_sn' => 'int', 'cate_title' => 'string'));
-
+        $_cates = parent::select(array('cate_sn' => 'int', 'cate_title' => 'string','auditors' => 'string'));
+        // die(var_dump($_cates));
         $_allCate = array();
         foreach ($_cates as $value) {
-            $_allCate[$value['cate_sn']] = $value['cate_title'];
+            $value['cate_sn']=intval($value['cate_sn']);
+            $_allCate['cates'][$value['cate_sn']] = $value['cate_title'];
+            // Notice是否啟用           
+            $_allCate['status'][$value['cate_sn']]=(empty($value['auditors']))?1:0;
         }
         return $_allCate;
     }

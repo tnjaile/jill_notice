@@ -24,7 +24,14 @@ class PassAction extends Action
     {
         // 分類選單
         $_allCate = $this->_cate->findCateTitle();
-        $this->_tpl->assign('allCate', $_allCate);
+
+        $_cates=array();
+        foreach ($_allCate['cates'] as $c => $title) {
+            $_ischeck=($_allCate['status'][$c]==1)?_MD_JILLNOTICE_PASS:_MD_JILLNOTICE_CHECK;
+            $_cates[$c]=$title." : ".$_ischeck;
+        }
+        $this->_tpl->assign('allCate', $_cates);
+
         $statusArr = array(0 => _MD_JILLNOTICE_STATUS0, 1 => _MD_JILLNOTICE_STATUS1, 2 => _MD_JILLNOTICE_STATUS2);
         $this->_tpl->assign('statusArr', $statusArr);
 
@@ -32,7 +39,7 @@ class PassAction extends Action
             $cate_sn = Tool::setFormString($_REQUEST['cate_sn'], "int");
             $status  = Tool::setFormString($_REQUEST['status'], "int");
         } else {
-            $_cateValues = array_keys($_allCate);
+            $_cateValues = array_keys($_allCate['cates']);
             $cate_sn     = $_cateValues[0];
             $status      = 0;
         }
@@ -116,8 +123,7 @@ class PassAction extends Action
 
         } else {
             // 給定預設值
-            $_typeArr = array('text' => _MD_JILLNOTICE_TYPE0, 'textarea' => _MD_JILLNOTICE_TYPE1, 'url' => _MD_JILLNOTICE_TYPE2, 'img' => _MD_JILLNOTICE_TYPE3);
-            $this->_tpl->assign('typeArr', $_typeArr);
+            $this->_tpl->assign('typeArr', $this->_notice->setType());
             $_type = !isset($_GET['type']) ? 'text' : Tool::setFormString($_GET['type']);
             $this->_tpl->assign('next_op', "add");
 
@@ -134,7 +140,7 @@ class PassAction extends Action
         $this->_tpl->assign('up_sn_form', $up_sn_form);
         // 分類選單
         $_allCate = $this->_cate->findCateTitle();
-        $this->_tpl->assign('allCate', $_allCate);
+        $this->_tpl->assign('allCate', $_allCate['cates']);
 
         //套用formValidator驗證機制
         $formValidator      = new FormValidator("#myForm", true);

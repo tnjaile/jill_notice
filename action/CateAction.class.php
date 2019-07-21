@@ -74,8 +74,9 @@ class CateAction extends Action
             $this->_tpl->assign('next_op', "update");
             $this->_tpl->assign("OneCate", $_OneCate[0]);
         } else {
-            $_OneCate['post_group']=$_OneCate['read_group']=array();
-            $this->_tpl->assign("OneCate",$_OneCate);
+            $_OneCate['post_group'] = array(1);
+            $_OneCate['read_group'] = array(3);
+            $this->_tpl->assign("OneCate", $_OneCate);
             $this->_tpl->assign('next_op', "add");
         }
         // die(var_dump($_OneCate[0]));

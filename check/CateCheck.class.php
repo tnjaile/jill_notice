@@ -8,6 +8,14 @@ class CateCheck extends Check
             $this->_message[] = '標題不得為空';
             $this->_flag      = false;
         }
+        if (self::isNullArray($_POST['post_group'])) {
+            $this->_message[] = '發布群組不得為空';
+            $this->_flag      = false;
+        }
+        if (self::isNullArray($_POST['read_group'])) {
+            $this->_message[] = '讀取群組不得為空';
+            $this->_flag      = false;
+        }
         return $this->_flag;
     }
 

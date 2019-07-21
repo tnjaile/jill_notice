@@ -12,11 +12,17 @@ class Group
                 exit;
             }
 
-            $needle_groups   = $xoopsUser->groups();
-            $haystack_groups = $xoopsModuleConfig[$conf_name];
+            $needle_groups = array_unique($xoopsUser->groups());
+            // die(var_dump($needle_groups));
+            $_cate = new CateModel();
+
+            $haystack_groups = $_cate->findGroup('post_group');
+            $filter_group    = array_unique(explode(',', implode(',', $haystack_groups)));
+
+            // $haystack_groups = $xoopsModuleConfig[$conf_name];
             //die(var_export($xoopsModuleConfig[$conf_name]) . $conf_name);
             foreach ($needle_groups as $key => $group) {
-                if (in_array($group, $haystack_groups)) {
+                if (in_array($group, $filter_group)) {
                     return true;
                 }
             }

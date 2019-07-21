@@ -153,4 +153,17 @@ class CateModel extends Model
         return $_allCate;
     }
 
+    // 判斷讀寫群組
+    public function findGroup($_group_name)
+    {
+        $_cates = parent::select(array('cate_sn' => 'int', 'post_group' => 'json','read_group' => 'json'));
+        // die(var_dump($_cates));
+        $_groups =array();
+        foreach ($_cates as $value) {
+            $value['cate_sn']=intval($value['cate_sn']);
+            $_groups[$value['cate_sn']] = implode(',',$value[$_group_name]);
+        }
+        return $_groups;
+    }
+
 }

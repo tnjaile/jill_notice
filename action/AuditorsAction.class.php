@@ -1,5 +1,5 @@
 <?php
-//管理員控制器(後臺首頁)
+//審核者
 class AuditorsAction extends Action
 {
     private $_cate = null;

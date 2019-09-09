@@ -1,6 +1,6 @@
 <{$jquery}>
     <script type="text/javascript" src="<{$xoops_url}>/modules/jill_notice/js/cate.js"></script>
-    <{if $AllCate}>
+<{if $AllCate}>
         <div id="cate_sort_save_msg"></div>
         <table class="table table-striped table-hover">
             <thead>
@@ -87,18 +87,18 @@
                     <{$smarty.const._TAD_ADD}>
                 </a>
             </div>
-            <{/if}>
-                <{includeq file="$xoops_rootpath/modules/jill_notice/templates/snippet_page.tpl" }>
-                    <{else}>
-                        <div class="jumbotron text-center">
-                            <{if $smarty.session.notice_adm}>
-                                <a href="<{$xoops_url}>/modules/jill_notice/admin/cate.php?op=cate_form" class="btn btn-info">
-                                    <{$smarty.const._TAD_ADD}>
-                                </a>
-                                <{else}>
-                                    <h3>
-                                        <{$smarty.const._TAD_EMPTY}>
-                                    </h3>
-                                    <{/if}>
-                        </div>
-                        <{/if}>
+        <{/if}>
+        <{includeq file="$xoops_rootpath/modules/jill_notice/templates/snippet_page.tpl" }>
+<{else}>
+    <div class="jumbotron text-center">
+        <{if $smarty.session.notice_adm}>
+            <a href="<{$xoops_url}>/modules/jill_notice/admin/cate.php?op=cate_form" class="btn btn-info">
+                <{$smarty.const._TAD_ADD}>
+            </a>
+        <{else}>
+            <h3>
+                <{$smarty.const._TAD_EMPTY}>
+            </h3>
+        <{/if}>
+    </div>
+<{/if}>

@@ -3,11 +3,9 @@
 if (!isset($_SESSION['notice_adm'])) {
     $_SESSION['notice_adm'] = ($xoopsUser) ? $xoopsUser->isAdmin() : false;
 }
-$can_notice = false;
-if ($xoopsUser) {
-    $module_id  = $xoopsModule->getVar('mid');
-    $can_notice = Group::group_perm('notice_group');
-}
+
+$can_post = Group::group_perm('post_group');
+
 $interface_menu[_MD_JILLNOTICE_SMNAME1] = "index.php";
 $interface_icon[_MD_JILLNOTICE_SMNAME1] = "fa-chevron-right";
 

@@ -96,12 +96,10 @@
     </div>
   <{/if}>
   <div class="text-right">
-    <{if $can_notice}>
       <{if $OneNotice.status=='0' || $OneNotice.status==''}>
         <a href="javascript:delete_notice_func(<{$OneNotice.sn}>);" class="btn btn-danger"><{$smarty.const._TAD_DEL}></a>
         <a href="<{$action}>?op=notice_form&sn=<{$OneNotice.sn}>" class="btn btn-warning"><{$smarty.const._TAD_EDIT}></a>
-      <{/if}>
-      <a href="<{$action}>?op=notice_form" class="btn btn-primary"><{$smarty.const._TAD_ADD}></a>
+        <a href="<{$action}>?op=notice_form" class="btn btn-primary"><{$smarty.const._TAD_ADD}></a>
     <{/if}>
     <a href="<{$action}>" class="btn btn-success"><{$smarty.const._TAD_HOME}></a>
   </div>

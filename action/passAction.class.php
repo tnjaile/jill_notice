@@ -11,12 +11,9 @@ class PassAction extends Action
     private $_cate   = null;
     public function __construct()
     {
-        global $can_notice;
         parent::__construct();
-        if ($can_notice) {
-            $this->_notice = new NoticeModel();
-            $this->_cate   = new CateModel();
-        }
+        $this->_notice = new NoticeModel();
+        $this->_cate   = new CateModel();
     }
 
     //頁面載入
@@ -25,10 +22,10 @@ class PassAction extends Action
         // 分類選單
         $_allCate = $this->_cate->findCateTitle();
 
-        $_cates=array();
+        $_cates = array();
         foreach ($_allCate['cates'] as $c => $title) {
-            $_ischeck=($_allCate['status'][$c]==1)?_MD_JILLNOTICE_PASS:_MD_JILLNOTICE_CHECK;
-            $_cates[$c]=$title." : ".$_ischeck;
+            $_ischeck   = ($_allCate['status'][$c] == 1) ? _MD_JILLNOTICE_PASS : _MD_JILLNOTICE_CHECK;
+            $_cates[$c] = $title . " : " . $_ischeck;
         }
         $this->_tpl->assign('allCate', $_cates);
 

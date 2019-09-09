@@ -9,11 +9,11 @@
  * @author     jill Lee
  * @version    $Id $
  **/
-define('MODULE_DIR', XOOPS_ROOT_PATH . "/modules/" . basename(dirname(__DIR__)));
+define('JILLNOTICE_DIR', XOOPS_ROOT_PATH . "/modules/" . basename(dirname(__DIR__)));
 //引入系统配置文件
-require_once MODULE_DIR . '/configs/profile.inc.php';
+require_once JILLNOTICE_DIR . '/configs/profile.inc.php';
 //自動加載類
-require_once MODULE_DIR . "/configs/autoload.inc.php";
+require_once JILLNOTICE_DIR . "/configs/autoload.inc.php";
 //區塊主函式 (jill_notice_show)
 function jill_notice_show($options)
 {

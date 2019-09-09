@@ -20,14 +20,14 @@ class Action
     }
     public function run()
     {
-        global $can_notice;
 
         // 判斷權限
-        if ($can_notice) {
-            $_op = isset($_REQUEST['op']) ? $_REQUEST['op'] : 'main';
-        } else {
-            $_op = 'main';
-        }
+        // if ($can_notice) {
+        //     $_op = isset($_REQUEST['op']) ? $_REQUEST['op'] : 'main';
+        // } else {
+        //     $_op = 'main';
+        // }
+        $_op = isset($_REQUEST['op']) ? $_REQUEST['op'] : 'main';
         //檢查是否有方法
         method_exists($this, $_op) ? eval('$this->' . $_op . '();') : $this->main();
     }

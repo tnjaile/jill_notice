@@ -1,0 +1,24 @@
+$sql = "insert into " . $xoopsDB->prefix("newblocks") . " (mid, func_num, options, name, title, content, side, weight, visible, block_type, c_type, isactive, bcachetime, last_modified) values('0', '0', '', '自訂區塊（HTML）', '{$title}', '{$content}', '{$side}', '{$weight}', '1', 'C', 'H', '1', '0', '{$last_modified}')";
+        $xoopsDB->queryF($sql) or Utility::web_error($sql);
+        $bid = $xoopsDB->getInsertId();
+
+        if ($bid) {
+            // 新增區塊顯示方式
+            $sql = "insert into " . $xoopsDB->prefix("block_module_link") . " (block_id, module_id) values('{$bid}', '{$TDC['display']}')";
+            $xoopsDB->queryF($sql) or Utility::web_error($sql);
+
+            // 新增區塊設定
+            $sql = "insert into " . $xoopsDB->prefix("tad_blocks") . " (bid, type, uid, create_date) values('{$bid}','{$type}', '{$uid}', now())";
+            $xoopsDB->queryF($sql) or Utility::web_error($sql);
+
+            // 新增區塊讀取權限
+            foreach ($_POST['TDC']['groups'] as $group_id) {
+                $sql = "insert into " . $xoopsDB->prefix("group_permission") . " (gperm_groupid, gperm_itemid, gperm_modid, gperm_name) values('$group_id', '{$bid}', '1', 'block_read')";
+                $xoopsDB->queryF($sql) or Utility::web_error($sql);
+            }
+
+            $TadDataCenter = new TadDataCenter($module_dirname);
+            $TadDataCenter->set_col('bid', $bid);
+            $TadDataCenter->set_var('auto_col_id', true);
+            $TadDataCenter->saveData();
+        }

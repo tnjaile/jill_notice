@@ -13,7 +13,7 @@
 include_once $_SERVER["DOCUMENT_ROOT"] . "/modules/jill_notice/configs/run.inc.php";
 $_SESSION['notice_adm'] = true;
 
-$_obj = new CateAction();
+$_obj = new NoticeCateAction();
 $_obj->run();
 // die(print_r(get_declared_classes()));
 /*-----------秀出結果區--------------*/

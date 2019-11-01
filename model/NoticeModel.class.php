@@ -32,7 +32,6 @@ class NoticeModel extends Model
         if (!empty($_whereData)) {
             $_where = $_whereData;
         }
-
         $_AllNotice = parent::select($this->_fields, array('where' => $_where, 'limit' => $this->_limit, 'order' => 'cate_sn,status,sort desc'));
         // 增加外鍵查詢欄
         $this->_tables = array(DB_PREFIX . "jill_notice_cate");
@@ -77,14 +76,14 @@ class NoticeModel extends Model
     public function notice_add()
     {
         global $xoopsUser;
-        
+
         // 檢查表單是否有填
         if (!$this->_check->allCheck($this, array('type' => "{$this->_R['type']}"))) {
             $this->_check->error();
         }
 
         // json型態轉陣列(不在欄位的額外變數，不過濾)
-        $_status=json_decode($_POST['status'],true);
+        $_status = json_decode($_POST['status'], true);
         // die(var_dump($_status));
         //過濾表單 $_POST
         $_addData = $this->getRequest()->filter($this->_fields);
@@ -94,7 +93,7 @@ class NoticeModel extends Model
         // 增加額外欄位
         $_addData['create_date'] = date("Y-m-d H:i:s", xoops_getUserTimestamp(time()));
         $_addData['uid']         = $xoopsUser->uid();
-        $_addData['status']= $_status[$_addData['cate_sn']];
+        $_addData['status']      = $_status[$_addData['cate_sn']];
         // 去除自動遞增
         unset($_addData['sn']);
         return parent::add($_addData);
@@ -115,11 +114,11 @@ class NoticeModel extends Model
         }
 
         // json型態轉陣列(不在欄位的額外變數，不過濾)
-        $_status=json_decode($_POST['status'],true);
+        $_status = json_decode($_POST['status'], true);
 
         $_updateData = $this->getRequest()->filter($this->_fields);
 
-        $_updateData['status']= $_status[$_updateData['cate_sn']];
+        $_updateData['status'] = $_status[$_updateData['cate_sn']];
         parent::update($_where, $_updateData);
         return $this->_R['sn'];
     }

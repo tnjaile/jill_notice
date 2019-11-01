@@ -1,5 +1,5 @@
 <?php
-class CateModel extends Model
+class NoticeCateModel extends Model
 {
     public function __construct()
     {
@@ -26,20 +26,20 @@ class CateModel extends Model
         $_ALLCate = parent::select($this->_fields, array('limit' => $this->_limit, 'order' => 'cate_sort DESC'));
         foreach ($_ALLCate as $key => $value) {
             if (!empty($value['post_group'])) {
-                $post_group=array();
+                $post_group = array();
                 foreach ($value['post_group'] as $group_id) {
                     $post_group[] = Group::get_groupname($group_id);
                 }
                 $_ALLCate[$key]['post_group'] = implode(" | ", $post_group);
-                
+
             }
             if (!empty($value['read_group'])) {
-                $read_group=array();
+                $read_group = array();
                 foreach ($value['read_group'] as $group_id) {
                     $read_group[] = Group::get_groupname($group_id);
                 }
                 $_ALLCate[$key]['read_group'] = implode(" | ", $read_group);
-                
+
             }
             if (!empty($value['auditors'])) {
                 $auditors = explode(";", $value['auditors']);
@@ -50,10 +50,9 @@ class CateModel extends Model
                 }
                 $_ALLCate[$key]['auditors'] = implode(" | ", $auditor_uname);
             }
-           
-            
+
         }
-        
+
         // die(var_dump($_ALLCate));
         return $_ALLCate;
     }
@@ -121,11 +120,11 @@ class CateModel extends Model
             $_OneCate[0]['read_group_name'] = implode(" | ", $read_group);
         }
         if (!empty($_OneCate[0]['auditors'])) {
-            $auditors = explode(";", $_OneCate[0]['auditors']);
+            $auditors      = explode(";", $_OneCate[0]['auditors']);
             $auditor_uname = array();
             foreach ($auditors as $auditor) {
                 $_OneCate[0]['auditor_group'][$auditor] = XoopsUser::getUnameFromId($auditor, 0);
-                $auditor_uname[] = XoopsUser::getUnameFromId($auditor, 0);
+                $auditor_uname[]                        = XoopsUser::getUnameFromId($auditor, 0);
             }
             $_OneCate[0]['auditors_name'] = implode(" | ", $auditor_uname);
         }
@@ -141,14 +140,14 @@ class CateModel extends Model
     // 產生分類選單
     public function findCateTitle()
     {
-        $_cates = parent::select(array('cate_sn' => 'int', 'cate_title' => 'string','auditors' => 'string'));
+        $_cates = parent::select(array('cate_sn' => 'int', 'cate_title' => 'string', 'auditors' => 'string'));
         // die(var_dump($_cates));
         $_allCate = array();
         foreach ($_cates as $value) {
-            $value['cate_sn']=intval($value['cate_sn']);
+            $value['cate_sn']                     = intval($value['cate_sn']);
             $_allCate['cates'][$value['cate_sn']] = $value['cate_title'];
-            // Notice是否啟用           
-            $_allCate['status'][$value['cate_sn']]=(empty($value['auditors']))?1:0;
+            // Notice是否啟用
+            $_allCate['status'][$value['cate_sn']] = (empty($value['auditors'])) ? 1 : 0;
         }
         return $_allCate;
     }
@@ -156,12 +155,12 @@ class CateModel extends Model
     // 判斷讀寫群組
     public function findGroup($_group_name)
     {
-        $_cates = parent::select(array('cate_sn' => 'int', 'post_group' => 'json','read_group' => 'json'));
+        $_cates = parent::select(array('cate_sn' => 'int', 'post_group' => 'json', 'read_group' => 'json'));
         // die(var_dump($_cates));
-        $_groups =array();
+        $_groups = array();
         foreach ($_cates as $value) {
-            $value['cate_sn']=intval($value['cate_sn']);
-            $_groups[$value['cate_sn']] = implode(',',$value[$_group_name]);
+            $value['cate_sn']           = intval($value['cate_sn']);
+            $_groups[$value['cate_sn']] = implode(',', $value[$_group_name]);
         }
         return $_groups;
     }

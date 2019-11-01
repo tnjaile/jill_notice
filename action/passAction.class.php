@@ -13,7 +13,7 @@ class PassAction extends Action
     {
         parent::__construct();
         $this->_notice = new NoticeModel();
-        $this->_cate   = new CateModel();
+        $this->_cate   = new NoticeCateModel();
     }
 
     //頁面載入

@@ -4,13 +4,13 @@ use XoopsModules\Tadtools\SweetAlert;
 use XoopsModules\Tadtools\Utility;
 
 //分類控制器(後臺分類)
-class CateAction extends Action
+class NoticeCateAction extends Action
 {
     private $_cate = null;
     public function __construct()
     {
         parent::__construct();
-        $this->_cate = new CateModel();
+        $this->_cate = new NoticeCateModel();
     }
 
     //頁面載入

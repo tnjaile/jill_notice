@@ -6,7 +6,7 @@ class AuditorsAction extends Action
     public function __construct()
     {
         parent::__construct();
-        $this->_cate = new CateModel();
+        $this->_cate = new NoticeCateModel();
     }
 
     //載入資訊

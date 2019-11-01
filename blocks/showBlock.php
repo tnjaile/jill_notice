@@ -9,11 +9,10 @@
  * @author     jill Lee
  * @version    $Id $
  **/
-define('JILLNOTICE_DIR', XOOPS_ROOT_PATH . "/modules/" . basename(dirname(__DIR__)));
 //引入系统配置文件
-require_once JILLNOTICE_DIR . '/configs/profile.inc.php';
+require_once XOOPS_ROOT_PATH . "/modules/jillbase/profile.inc.php";
 //自動加載類
-require_once JILLNOTICE_DIR . "/configs/autoload.inc.php";
+include_once XOOPS_ROOT_PATH . "/modules/jill_notice/configs/autoload.inc.php";
 //區塊主函式 (jill_notice_show)
 function jill_notice_show($options)
 {
@@ -34,7 +33,7 @@ function jill_notice_show($options)
 //區塊編輯函式 (jill_notice_show_edit)
 function jill_notice_show_edit($options)
 {
-    $_cate    = new CateModel();
+    $_cate    = new NoticeCateModel();
     $_allCate = $_cate->findCateTitle();
 
     $opt = "";

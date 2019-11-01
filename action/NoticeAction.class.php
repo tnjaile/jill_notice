@@ -11,9 +11,8 @@ class NoticeAction extends Action
     public function __construct()
     {
         parent::__construct();
-        die(var_dump($this->_model));
         $this->_notice = new NoticeModel();
-        $this->_cate   = new CateModel();
+        $this->_cate   = new NoticeCateModel();
     }
 
     //頁面載入
@@ -32,9 +31,9 @@ class NoticeAction extends Action
                 $this->_tpl->assign("OneNotice", $_OneNotice[0]);
             } else {
                 //分頁
-                parent::page(20, 10, $this->_notice);
+                parent::page(2, 10, $this->_notice);
                 $_AllNotice = $this->_notice->notice_list(array("uid='{$uid}'"));
-                // die(var_dump($_AllNotice));
+
                 $this->_tpl->assign('AllNotice', $_AllNotice);
                 $this->_tpl->assign('now_op', "notice_list");
 

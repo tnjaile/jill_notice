@@ -2,7 +2,7 @@
 //公告驗證類
 class NoticeCheck extends Check
 {
-    public function allCheck(Model $_model, array $_param)
+    public function allCheck(Model &$_model, array $_param)
     {
 
         if (self::isNullString($_POST['title'])) {

@@ -90,7 +90,8 @@ class NoticeCateModel extends Model
 
         $_selectData = empty($_selectData) ? $this->_fields : $_selectData;
         $_updateData = $this->getRequest()->filter($_selectData);
-        return parent::update($_where, $_updateData);
+        parent::update($_where, $_updateData);
+        return $this->_R['sn'];
     }
     public function findOne($_whereData = array())
     {

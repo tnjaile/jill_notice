@@ -6,11 +6,14 @@ use XoopsModules\Tadtools\Utility;
 //分類控制器(後臺分類)
 class NoticeCateAction extends Action
 {
-    private $_cate = null;
+    private $_cate      = null;
+    private $_newblocks = null;
+
     public function __construct()
     {
         parent::__construct();
-        $this->_cate = new NoticeCateModel();
+        $this->_cate      = new NoticeCateModel();
+        $this->_newblocks = new NewBlocksModel();
     }
 
     //頁面載入
@@ -59,10 +62,22 @@ class NoticeCateAction extends Action
             }
             if (isset($_POST['next_op'])) {
                 if ($_POST['next_op'] == "update") {
-                    $_message = $this->_cate->cate_update() ? "修改成功!" : "修改失敗";
+                    $_sn = $this->_cate->cate_update();
+                    if (!empty($_sn)) {
+                        $_message = "修改成功!";
+                    } else {
+                        $_message = "修改失敗!";
+                    }
                 }
                 if ($_POST['next_op'] == "add") {
-                    $_message = $this->_cate->cate_add() ? "新增成功!" : "新增失敗";
+                    $_sn = $this->_cate->cate_add();
+                    $this->_newblocks->newblocks_add($_sn);
+                    if (!empty($_sn)) {
+                        $_message = "新增成功!";
+                    } else {
+                        $_message = "新增失敗";
+                    }
+
                 }
             }
 

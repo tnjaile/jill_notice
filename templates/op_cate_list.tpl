@@ -92,7 +92,7 @@
 <{else}>
     <div class="jumbotron text-center">
         <{if $smarty.session.notice_adm}>
-            <a href="<{$xoops_url}>/modules/jill_notice/admin/cate.php?op=cate_form" class="btn btn-info">
+            <a href="<{$action}>?op=cate_form" class="btn btn-info">
                 <{$smarty.const._TAD_ADD}>
             </a>
         <{else}>

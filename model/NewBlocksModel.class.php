@@ -25,7 +25,7 @@ class NewBlocksModel extends Model
         $_addData['side']          = 0;
         $_addData['weight']        = 0;
         $_addData['visible']       = 0;
-        $_addData['block_type']    = "D";
+        $_addData['block_type']    = ($_sn == 1) ? "M" : "D";
         $_addData['c_type']        = "H";
         $_addData['isactive']      = 1;
         $_addData['dirname']       = "jill_notice";

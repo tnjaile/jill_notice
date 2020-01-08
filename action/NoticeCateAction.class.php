@@ -8,12 +8,16 @@ class NoticeCateAction extends Action
 {
     private $_cate      = null;
     private $_newblocks = null;
+    private $_notice    = null;
 
     public function __construct()
     {
         parent::__construct();
-        $this->_cate      = new NoticeCateModel();
-        $this->_newblocks = new NewBlocksModel();
+        $this->_cate               = new NoticeCateModel();
+        $this->_notice             = new NoticeModel();
+        $this->_newblocks          = new NewBlocksModel();
+        list($this->_F['cate_sn']) = $this->getArry(array(
+            isset($_REQUEST['cate_sn']) ? Tool::setFormString($_REQUEST['cate_sn'], "int") : null));
     }
 
     //頁面載入
@@ -47,6 +51,10 @@ class NoticeCateAction extends Action
     {
         if (isset($_GET['cate_sn'])) {
             $_row = $this->_cate->cate_delete();
+            // 一併刪除發布的公告
+            $this->_notice->notice_delete(array("cate_sn='{$this->_F['cate_sn']}'"), 1);
+            // 順道刪除區塊();
+            $this->_newblocks->newblocks_delete();
         }
         header("location: {$_SERVER['PHP_SELF']}");
     }
@@ -63,6 +71,7 @@ class NoticeCateAction extends Action
             if (isset($_POST['next_op'])) {
                 if ($_POST['next_op'] == "update") {
                     $_sn = $this->_cate->cate_update();
+                    $this->_newblocks->newblocks_update($_sn);
                     if (!empty($_sn)) {
                         $_message = "修改成功!";
                     } else {
@@ -71,7 +80,10 @@ class NoticeCateAction extends Action
                 }
                 if ($_POST['next_op'] == "add") {
                     $_sn = $this->_cate->cate_add();
-                    $this->_newblocks->newblocks_add($_sn);
+                    if ($_sn > 1) {
+                        $this->_newblocks->newblocks_add($_sn);
+                    }
+
                     if (!empty($_sn)) {
                         $_message = "新增成功!";
                     } else {

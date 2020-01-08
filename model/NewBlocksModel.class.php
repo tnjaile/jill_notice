@@ -8,8 +8,11 @@ class NewBlocksModel extends Model
         $this->_fields = array('bid' => 'int', 'mid' => 'int', 'func_num' => 'int', 'options' => 'string', 'name' => 'string', 'title' => 'string', 'content' => 'textarea', 'side' => 'int', 'weight' => 'int', 'visible' => 'int', 'block_type' => 'string', 'c_type' => 'string', 'isactive' => 'int', 'dirname' => 'string', 'func_file' => 'string', 'show_func' => 'string', 'edit_func' => 'string', 'template' => 'string', 'bcachetime' => 'int', 'last_modified' => 'int');
         // 要查詢的表
         $this->_tables = array(DB_PREFIX . "newblocks");
-        list($this->_R['cate_title']
-        ) = $this->getRequest()->getParam(array(isset($_REQUEST['cate_title']) ? Tool::setFormString($_REQUEST['cate_title'], "string") : null));
+        list($this->_R['cate_title'],
+            $this->_R['cate_sn']
+        ) = $this->getRequest()->getParam(array(
+            isset($_REQUEST['cate_title']) ? Tool::setFormString($_REQUEST['cate_title'], "string") : null,
+            isset($_REQUEST['cate_sn']) ? Tool::setFormString($_REQUEST['cate_sn'], "int") : null));
     }
 
     public function newblocks_add($_sn)
@@ -56,5 +59,38 @@ class NewBlocksModel extends Model
         $this->_fields = array('bid' => 'int', 'mid' => 'int', 'func_num' => 'int', 'options' => 'string', 'name' => 'string', 'title' => 'string', 'content' => 'textarea', 'side' => 'int', 'weight' => 'int', 'visible' => 'int', 'block_type' => 'string', 'c_type' => 'string', 'isactive' => 'int', 'dirname' => 'string', 'func_file' => 'string', 'show_func' => 'string', 'edit_func' => 'string', 'template' => 'string', 'bcachetime' => 'int', 'last_modified' => 'int');
         $this->_tables = array(DB_PREFIX . "newblocks");
         return $bid;
+    }
+
+    public function newblocks_update($_sn)
+    {
+        global $xoopsModule;
+        $_where                       = array("dirname='jill_notice' && options={$_sn}");
+        $_updateData['name']          = "臨時公告：" . $this->_R['cate_title'];
+        $_updateData['title']         = $this->_R['cate_title'];
+        $_updateData['last_modified'] = time();
+        parent::update($_where, $_updateData);
+        return parent::update($_where, $_updateData);
+    }
+    public function newblocks_delete()
+    {
+        $_where = array("dirname='jill_notice' && options={$this->_R['cate_sn']}");
+        $_One   = $this->findOne($_where);
+        if (!empty($_One)) {
+            parent::delete($_where);
+            // 刪除block_module_link
+            $this->_tables = array(DB_PREFIX . "block_module_link");
+            parent::delete(array("block_id='{$_One['bid']}'"));
+            // 刪除權限group_permission(多筆)
+            $this->_tables = array(DB_PREFIX . "group_permission");
+            parent::delete(array("gperm_itemid='{$_One['bid']}'"), 1);
+            $this->_tables = array(DB_PREFIX . "newblocks");
+            return $_One['bid'];
+        }
+    }
+    public function findOne($_whereData = array())
+    {
+        // 秀出此編號的詳細資訊
+        $_One = parent::select($this->_fields, array('where' => $_whereData, 'limit' => '1'));
+        return $_One[0];
     }
 }

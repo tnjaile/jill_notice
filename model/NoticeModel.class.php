@@ -28,11 +28,7 @@ class NoticeModel extends Model
 
     public function notice_list($_whereData = array())
     {
-        $_where = array();
-        if (!empty($_whereData)) {
-            $_where = $_whereData;
-        }
-        $_AllNotice = parent::select($this->_fields, array('where' => $_where, 'limit' => $this->_limit, 'order' => 'cate_sn,status,sort desc'));
+        $_AllNotice = parent::select($this->_fields, array('where' => $_whereData, 'limit' => $this->_limit, 'order' => 'cate_sn,status,sort desc'));
         // 增加外鍵查詢欄
         $this->_tables = array(DB_PREFIX . "jill_notice_cate");
 
@@ -64,13 +60,10 @@ class NoticeModel extends Model
         return $_AllNotice;
     }
 
-    public function notice_delete($_whereData = array())
+    public function notice_delete($_whereData = array(), $_non_limit = 0)
     {
-        $_where = array("sn='{$this->_R['sn']}'");
-        if (!empty($_whereData)) {
-            $_where = array_merge($_where, $_whereData);
-        }
-        return parent::delete($_where);
+        $_where = (empty($_whereData)) ? array("sn='{$this->_R['sn']}'") : $_whereData;
+        return parent::delete($_where, $_non_limit);
     }
 
     public function notice_add()
@@ -83,7 +76,7 @@ class NoticeModel extends Model
         }
 
         // json型態轉陣列(不在欄位的額外變數，不過濾)
-        $_status = json_decode($_POST['status'], true);
+        $_status = json_decode(stripslashes($_POST['status']), true);
         // die(var_dump($_status));
         //過濾表單 $_POST
         $_addData = $this->getRequest()->filter($this->_fields);
@@ -101,10 +94,7 @@ class NoticeModel extends Model
 
     public function notice_update($_whereData = array())
     {
-        $_where = array("sn='{$this->_R['sn']}'");
-        if (!empty($_whereData)) {
-            $_where = array_merge($_where, $_whereData);
-        }
+        $_where = (empty($_whereData)) ? array("sn='{$this->_R['sn']}'") : $_whereData;
 
         if (!$this->_check->oneCheck($this, $_where)) {
             $this->_check->error();
@@ -114,7 +104,7 @@ class NoticeModel extends Model
         }
 
         // json型態轉陣列(不在欄位的額外變數，不過濾)
-        $_status = json_decode($_POST['status'], true);
+        $_status = json_decode(stripslashes($_POST['status']), true);
 
         $_updateData = $this->getRequest()->filter($this->_fields);
 
@@ -124,10 +114,7 @@ class NoticeModel extends Model
     }
     public function findOne($_whereData = array())
     {
-        $_where = array("sn='{$this->_R['sn']}'");
-        if (!empty($_whereData)) {
-            $_where = array_merge($_where, $_whereData);
-        }
+        $_where = (empty($_whereData)) ? array("sn='{$this->_R['sn']}'") : $_whereData;
         // 先驗證是否有此編號的資料
         if (!$this->_check->oneCheck($this, $_where)) {
             $this->_check->error();
@@ -218,13 +205,9 @@ class NoticeModel extends Model
     // 區塊用
     public function show_block($_whereData = array())
     {
-        $_where = array();
-        if (!empty($_whereData)) {
-            $_where = $_whereData;
-        }
         $myts = \MyTextSanitizer::getInstance();
 
-        $_AllNotice = parent::select(array('sn' => 'int', 'create_date' => 'date', 'deadline' => 'date', 'type' => 'string', 'title' => 'string', 'content' => 'ckeditor', 'uid' => 'int', 'status' => 'int', 'note' => 'textarea', 'sort' => 'int', 'cate_sn' => 'int'), array('where' => $_where, 'order' => 'create_date desc,sort'));
+        $_AllNotice = parent::select(array('sn' => 'int', 'create_date' => 'date', 'deadline' => 'date', 'type' => 'string', 'title' => 'string', 'content' => 'ckeditor', 'uid' => 'int', 'status' => 'int', 'note' => 'textarea', 'sort' => 'int', 'cate_sn' => 'int'), array('where' => $_whereData, 'order' => 'create_date desc,sort'));
         foreach ($_AllNotice as $key => $value) {
             if ($value['type'] == "url") {
                 $_AllNotice[$key]['content'] = strip_tags($value['content']);

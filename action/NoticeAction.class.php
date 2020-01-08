@@ -31,7 +31,7 @@ class NoticeAction extends Action
                 $this->_tpl->assign("OneNotice", $_OneNotice[0]);
             } else {
                 //分頁
-                parent::page(2, 10, $this->_notice);
+                parent::page(20, 10, $this->_notice);
                 $_AllNotice = $this->_notice->notice_list(array("uid='{$uid}'"));
 
                 $this->_tpl->assign('AllNotice', $_AllNotice);
@@ -126,7 +126,7 @@ class NoticeAction extends Action
         // 分類選單
         $_allCate = $this->_cate->findCateTitle();
         $this->_tpl->assign('allCate', $_allCate['cates']);
-        $this->_tpl->assign('status', json_encode($_allCate['status'], JSON_UNESCAPED_UNICODE));
+        $this->_tpl->assign('status', json_encode($_allCate['status'], JSON_UNESCAPED_SLASHES));
         // die(var_dump(json_encode($_allCate['status'])));
         //套用formValidator驗證機制
         $formValidator      = new FormValidator("#myForm", true);

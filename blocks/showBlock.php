@@ -16,18 +16,23 @@ include_once XOOPS_ROOT_PATH . "/modules/jill_notice/configs/autoload.inc.php";
 //區塊主函式 (jill_notice_show)
 function jill_notice_show($options)
 {
-    $_notice  = new NoticeModel();
-    $_typeArr = $_notice->setType();
-    foreach ($_typeArr as $type => $typename) {
-        $_whereData = array("cate_sn='{$options[0]}'", "type='{$type}'", "status='1'");
-        $_AllNotice = $_notice->show_block($_whereData);
-        if (!empty($_AllNotice)) {
-            $block['content'][$type] = $_AllNotice;
+    $block = [];
+    if (!empty($options[0])) {
+        $_notice  = new NoticeModel();
+        $_typeArr = $_notice->setType();
+        foreach ($_typeArr as $type => $typename) {
+            $_whereData = array("cate_sn='{$options[0]}'", "type='{$type}'", "status='1'");
+            $_AllNotice = $_notice->show_block($_whereData);
+            if (!empty($_AllNotice)) {
+                $block['content'][$type] = $_AllNotice;
+            }
+
         }
 
     }
-    // die(var_dump($block));
     return $block;
+    // die(var_dump($block));
+
 }
 
 //區塊編輯函式 (jill_notice_show_edit)

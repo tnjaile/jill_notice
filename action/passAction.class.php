@@ -27,6 +27,7 @@ class PassAction extends Action
             $_ischeck   = ($_allCate['status'][$c] == 1) ? _MD_JILLNOTICE_PASS : _MD_JILLNOTICE_CHECK;
             $_cates[$c] = $title . " : " . $_ischeck;
         }
+
         $this->_tpl->assign('allCate', $_cates);
 
         $statusArr = array(0 => _MD_JILLNOTICE_STATUS0, 1 => _MD_JILLNOTICE_STATUS1, 2 => _MD_JILLNOTICE_STATUS2);

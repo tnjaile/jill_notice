@@ -91,14 +91,11 @@ class NoticeCateModel extends Model
         $_selectData = empty($_selectData) ? $this->_fields : $_selectData;
         $_updateData = $this->getRequest()->filter($_selectData);
         parent::update($_where, $_updateData);
-        return $this->_R['sn'];
+        return $this->_R['cate_sn'];
     }
     public function findOne($_whereData = array())
     {
-        $_where = array("cate_sn='{$this->_R['cate_sn']}'");
-        if (!empty($_whereData)) {
-            $_where = array_merge($_where, $_whereData);
-        }
+        $_where = (empty($_whereData)) ? array("cate_sn='{$this->_R['cate_sn']}'") : $_whereData;
         //先驗證是否有此編號的資料
         if (!$this->_check->oneCheck($this, $_where)) {
             $this->_check->error();

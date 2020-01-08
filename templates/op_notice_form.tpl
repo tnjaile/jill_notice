@@ -25,7 +25,7 @@
                         <{foreach from=$allCate key=c item=cate_title}>
                           <option value="<{$c}>" <{if $OneNotice.cate_sn==$c}>selected<{/if}> ><{$cate_title}>
                           </option>
-                        <{/foreach}>              
+                        <{/foreach}>
                         </select>
                     </div>
                 </div>

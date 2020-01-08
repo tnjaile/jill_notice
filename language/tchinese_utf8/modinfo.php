@@ -18,7 +18,7 @@
  **/
 xoops_loadLanguage('modinfo_common', 'tadtools');
 define('_MI_JILLNOTICE_NAME', '臨時公告');
-define('_MI_JILLNOTICE_AUTHOR', '臨時公告');
+define('_MI_JILLNOTICE_AUTHOR', 'tnjaile');
 define('_MI_JILLNOTICE_CREDITS', '');
 define('_MI_JILLNOTICE_DESC', '此模組的用途是提供管理者快速建立及撤銷臨時公告用');
 define('_MI_JILLNOTICE_AUTHOR_WEB', 'Jill開發網站');

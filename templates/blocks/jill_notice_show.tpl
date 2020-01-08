@@ -31,9 +31,8 @@
           <{if $data.content}>
             <div class="col-sm-12 col">
               <div class="media">
-                <div class="media-left">
-                  <a href="#">
-                    <img src="<{$xoops_url}>/uploads/jill_notice/image/sn_1_1.png" alt="<{$data.title}>" class="media-object" ></a>
+                <div class="media-left mr-2">
+                  <{$data.list_file}>
                 </div>
                   <div class="media-body">
                     <h4 class="media-heading"><a href="#"><{$data.title}></a></h4>
@@ -43,7 +42,7 @@
           <{else}>
             <div class="col-xs-6 col-sm-6 col">
               <a href="#" class="thumbnail">
-                <img src="<{$xoops_url}>/uploads/jill_notice/image/sn_1_1.png" alt="<{$data.title}>" >
+                <{$data.list_file}>
               </a>
             </div>
           <{/if}>

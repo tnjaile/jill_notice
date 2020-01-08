@@ -11,7 +11,9 @@
 /*-----------引入檔案區--------------*/
 use XoopsModules\Tadtools\Utility;
 include_once $_SERVER["DOCUMENT_ROOT"] . "/modules/jill_notice/configs/run.inc.php";
-
+if (!$_SESSION['can_post']) {
+    redirect_header(XOOPS_URL, 3, "尚未登入或您不具發布權限");
+}
 $_obj = new NoticeAction();
 
 $_obj->run();

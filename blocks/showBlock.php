@@ -38,28 +38,28 @@ function jill_notice_show($options)
 //區塊編輯函式 (jill_notice_show_edit)
 function jill_notice_show_edit($options)
 {
-    $_cate    = new NoticeCateModel();
-    $_allCate = $_cate->findCateTitle();
+    // $_cate    = new NoticeCateModel();
+    // $_allCate = $_cate->findCateTitle();
 
-    $opt = "";
-    foreach ($_allCate['cates'] as $cate_sn => $cate_title) {
-        $ckecked = ($cate_sn == $options[0]) ? "checked" : "";
-        $opt .= "
-            <span>
-              <input type='radio' id='c{$cate_sn}' name='options[0]' value='{$cate_sn}' $ckecked><label for='c{$cate_sn}'>$cate_title</label>
-            </span> ";
-    }
+    // $opt = "";
+    // foreach ($_allCate['cates'] as $cate_sn => $cate_title) {
+    //     $ckecked = ($cate_sn == $options[0]) ? "checked" : "";
+    //     $opt .= "
+    //         <span>
+    //           <input type='radio' id='c{$cate_sn}' name='options[0]' value='{$cate_sn}' $ckecked><label for='c{$cate_sn}'>$cate_title</label>
+    //         </span> ";
+    // }
+    // $form = "<table>
+    //             <tr>
+    //             <th>
+    //                 <!--顯示分類-->
+    //                 " . _MB_JILL_NOTICE_SHOWCATE . "
+    //             </th>
+    //             <td>
+    //                 {$opt}
+    //             </td>
+    //             </tr>
+    //         </table>";
 
-    $form = "<table>
-                <tr>
-                <th>
-                    <!--顯示分類-->
-                    " . _MB_JILL_NOTICE_SHOWCATE . "
-                </th>
-                <td>
-                    {$opt}
-                </td>
-                </tr>
-            </table>";
-    return $form;
+    // return $form;
 }

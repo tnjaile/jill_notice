@@ -138,14 +138,26 @@ class NoticeCateModel extends Model
     // 產生分類選單
     public function findCateTitle()
     {
-        $_cates = parent::select(array('cate_sn' => 'int', 'cate_title' => 'string', 'auditors' => 'string'));
-        // die(var_dump($_cates));
+        global $xoopsUser;
+        $_user_group = array_unique($xoopsUser->groups());
+
+        $_cates = parent::select($this->_fields);
+
         $_allCate = array();
         foreach ($_cates as $value) {
-            $value['cate_sn']                     = intval($value['cate_sn']);
-            $_allCate['cates'][$value['cate_sn']] = $value['cate_title'];
-            // Notice是否啟用
-            $_allCate['status'][$value['cate_sn']] = (empty($value['auditors'])) ? 1 : 0;
+            if ($_SESSION['notice_adm']) {
+                $_allCate['cates'][$value['cate_sn']] = $value['cate_title'];
+                // Notice是否啟用
+                $_allCate['status'][$value['cate_sn']] = (empty($value['auditors'])) ? 1 : 0;
+            } else {
+                if (empty(array_intersect($value['post_group'], $_user_group))) {
+                    continue;
+                } else {
+                    $_allCate['cates'][$value['cate_sn']] = $value['cate_title'];
+                    // Notice是否啟用
+                    $_allCate['status'][$value['cate_sn']] = (empty($value['auditors'])) ? 1 : 0;
+                }
+            }
         }
         return $_allCate;
     }

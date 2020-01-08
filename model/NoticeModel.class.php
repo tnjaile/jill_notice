@@ -205,15 +205,20 @@ class NoticeModel extends Model
     // 區塊用
     public function show_block($_whereData = array())
     {
-        $myts = \MyTextSanitizer::getInstance();
-
+        $TadUpFiles = new TadUpFiles("jill_notice");
+        $myts       = \MyTextSanitizer::getInstance();
         $_AllNotice = parent::select(array('sn' => 'int', 'create_date' => 'date', 'deadline' => 'date', 'type' => 'string', 'title' => 'string', 'content' => 'ckeditor', 'uid' => 'int', 'status' => 'int', 'note' => 'textarea', 'sort' => 'int', 'cate_sn' => 'int'), array('where' => $_whereData, 'order' => 'create_date desc,sort'));
         foreach ($_AllNotice as $key => $value) {
             if ($value['type'] == "url") {
                 $_AllNotice[$key]['content'] = strip_tags($value['content']);
+            } elseif ($value['type'] == "img" || $value['type'] == 'text') {
+                $TadUpFiles->set_col("sn", $value['sn']);
+                $_show_files = $TadUpFiles->show_files('up_sn', true, 'file_name', false, false, null, null, false);
+
+                $_AllNotice[$key]['list_file'] = $_show_files;
             }
         }
-
+        // die(var_dump($_AllNotice));
         return $_AllNotice;
     }
 }

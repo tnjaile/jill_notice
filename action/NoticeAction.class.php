@@ -100,6 +100,10 @@ class NoticeAction extends Action
         }
         if (isset($_GET['sn'])) {
             $_OneNotice = $this->_notice->findOne(array("uid='{$uid}'"));
+            if ($_OneNotice[0]['type'] == "url") {
+                $_OneNotice[0]['content'] = strip_tags($_OneNotice[0]['content']);
+            }
+
             // die(var_dump($_OneNotice));
             $TadUpFiles->set_col("sn", $_OneNotice[0]['sn']);
             $this->_tpl->assign('next_op', "update");

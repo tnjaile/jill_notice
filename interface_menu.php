@@ -1,13 +1,15 @@
 <?php
 //判斷是否對該模組有管理權限
-$isAdmin = $can_post = false;
 if ($xoopsUser) {
     $module_id = $xoopsModule->getVar('mid');
-    $isAdmin   = $xoopsUser->isAdmin($module_id);
     if (!isset($_SESSION['notice_adm'])) {
-        $_SESSION['notice_adm'] = (empty($isAdmin)) ? false : true;
+        $_SESSION['notice_adm'] = $xoopsUser->isAdmin($module_id);
     }
-    $can_post = NoticeGroup::group_perm('post_group');
+    if (!isset($_SESSION['can_post'])) {
+        $_SESSION['can_post'] = NoticeGroup::group_perm('post_group');
+    }
+} else {
+    unset($_SESSION['can_post']);
 }
 
 $interface_menu[_MD_JILLNOTICE_SMNAME1] = "index.php";

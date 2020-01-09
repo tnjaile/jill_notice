@@ -5,9 +5,9 @@ class NoticeGroup
     //檢查是否具有預約權限
     public static function group_perm()
     {
-        global $xoopsUser, $xoopsModuleConfig, $isAdmin;
+        global $xoopsUser, $xoopsModuleConfig;
         if ($xoopsUser) {
-            if ($isAdmin) {
+            if ($_SESSION['notice_adm']) {
                 return true;
                 exit;
             }

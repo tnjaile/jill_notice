@@ -11,10 +11,10 @@ class NewBlocksModel extends Model
         list($this->_R['cate_title'],
             $this->_R['cate_sn'],
             $this->_R['read_group']
-        ) = $this->getRequest()->getParam(array(
-            isset($_REQUEST['cate_title']) ? Tool::setFormString($_REQUEST['cate_title'], "string") : null,
-            isset($_REQUEST['cate_sn']) ? Tool::setFormString($_REQUEST['cate_sn'], "int") : null,
-            isset($_REQUEST['read_group']) ? Tool::setFormString($_REQUEST['read_group'], "int") : null));
+        ) = $this->getRequest()->getParam([
+            isset($_GET['cate_title']) ? Tool::setFormString($_GET['cate_title'], "string") : null,
+            isset($_GET['cate_sn']) ? Tool::setFormString($_GET['cate_sn'], "int") : null,
+            isset($_GET['read_group']) ? Tool::setFormString($_GET['read_group'], "int") : null]);
     }
 
     public function newblocks_add($_sn)

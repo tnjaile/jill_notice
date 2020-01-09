@@ -11,6 +11,7 @@ class NoticeAction extends Action
     public function __construct()
     {
         parent::__construct();
+
         $this->_notice = new NoticeModel();
         $this->_cate   = new NoticeCateModel();
     }
@@ -69,10 +70,11 @@ class NoticeAction extends Action
 
         if (isset($_POST['send'])) {
             //XOOPS表單安全檢查
-            if (!$GLOBALS['xoopsSecurity']->check()) {
-                $error = implode("<br />", $GLOBALS['xoopsSecurity']->getErrors());
-                redirect_header($_SERVER['PHP_SELF'], 3, $error);
-            }
+            // if (!$GLOBALS['xoopsSecurity']->check()) {
+            //     $error = implode("<br />", $GLOBALS['xoopsSecurity']->getErrors());
+            //     redirect_header($_SERVER['PHP_SELF'], 3, $error);
+            // }
+
             if (isset($_POST['next_op'])) {
                 if ($_POST['next_op'] == "update") {
                     $_sn      = $this->_notice->notice_update(array("uid='{$uid}'"));

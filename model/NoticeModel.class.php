@@ -13,17 +13,16 @@ class NoticeModel extends Model
         $this->_tables = array(DB_PREFIX . "jill_notice");
         // 欄位檢查
         $this->_check = new NoticeCheck();
+
         // 過濾參數
         list(
             $this->_R['sn'],
-            $this->_R['deadline'],
-            $this->_R['type'],
-            $this->_R['title'],
-            $this->_R['content'],
-            $this->_R['note'],
-            $this->_R['cate_sn']
-        ) = $this->getRequest()->getParam(array(
-            isset($_REQUEST['sn']) ? Tool::setFormString($_REQUEST['sn'], "int") : null, isset($_REQUEST['deadline']) ? Tool::setFormString($_REQUEST['deadline'], "date") : null, isset($_REQUEST['type']) ? Tool::setFormString($_REQUEST['type']) : null, isset($_REQUEST['title']) ? Tool::setFormString($_REQUEST['title']) : null, isset($_REQUEST['content']) ? Tool::setFormString($_REQUEST['content']) : null, isset($_REQUEST['note']) ? Tool::setFormString($_REQUEST['note']) : null, isset($_REQUEST['cate_sn']) ? Tool::setFormString($_REQUEST['cate_sn'], "int") : null));
+            $this->_R['type']
+        ) = $this->getRequest()->getParam([
+            isset($_GET['sn']) ? Tool::setFormString($_GET['sn'], "int") : null,
+            isset($_GET['type']) ? Tool::setFormString($_GET['type'], "string") : null,
+        ]);
+
     }
 
     public function notice_list($_whereData = array())

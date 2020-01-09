@@ -12,13 +12,8 @@ class NoticeCateModel extends Model
         // 欄位檢查
         $this->_check = new CateCheck();
         // 過濾參數
-        list(
-            $this->_R['cate_sn'],
-            $this->_R['cate_title'],
-            $this->_R['cate_desc']
-        ) = $this->getRequest()->getParam(array(
-            isset($_REQUEST['cate_sn']) ? Tool::setFormString($_REQUEST['cate_sn'], "int") : null,
-            isset($_REQUEST['cate_title']) ? Tool::setFormString($_REQUEST['cate_title'], "string") : null, isset($_REQUEST['cate_desc']) ? Tool::setFormString($_REQUEST['cate_desc']) : null));
+        list($this->_R['cate_sn']) = $this->getRequest()->getParam([
+            isset($_GET['cate_sn']) ? Tool::setFormString($_GET['cate_sn'], "int") : null]);
     }
 
     public function cate_list()

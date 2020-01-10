@@ -18,8 +18,18 @@
  **/
 
 define('_MB_JILL_NOTICE_SHOWCATE', '顯示分類');
-define('_MD_JILLNOTICE_TYPE0', '標題');
-define('_MD_JILLNOTICE_TYPE1', '大量文字');
-define('_MD_JILLNOTICE_TYPE2', '超連結');
-define('_MD_JILLNOTICE_TYPE3', '圖文集');
-define('_MD_JILLNOTICE_TYPE4', '線上編輯器');
+if (!defined('_MD_JILLNOTICE_TYPE0')) {
+    define('_MD_JILLNOTICE_TYPE0', '標題');
+}
+if (!defined('_MD_JILLNOTICE_TYPE1')) {
+    define('_MD_JILLNOTICE_TYPE1', '大量文字');
+}
+if (!defined('_MD_JILLNOTICE_TYPE2')) {
+    define('_MD_JILLNOTICE_TYPE2', '超連結');
+}
+if (!defined('_MD_JILLNOTICE_TYPE3')) {
+    define('_MD_JILLNOTICE_TYPE3', '圖文集');
+}
+if (!defined('_MD_JILLNOTICE_TYPE4')) {
+    define('_MD_JILLNOTICE_TYPE4', '線上編輯器');
+}

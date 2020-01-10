@@ -23,9 +23,7 @@ class NoticeAction extends Action
     {
         global $xoopsUser;
 
-        if (!$xoopsUser) {
-            $this->_tpl->assign('now_op', "notice_list");
-        } else {
+        if ($_SESSION['can_post']) {
             $uid = $xoopsUser->uid();
             if (isset($_GET['sn'])) {
                 $_OneNotice = $this->_notice->findOne(array("uid='{$uid}' && sn='{$this->_F['sn']}'"));
@@ -46,6 +44,8 @@ class NoticeAction extends Action
             $sweet_alert->render('delete_notice_func',
                 "{$_SERVER['PHP_SELF']}?op=delete&sn=", "sn");
             $this->_tpl->assign('can_notice', 1);
+        } else {
+            $this->_tpl->assign('now_op', "notice_list");
         }
         $this->_tpl->assign('action', $_SERVER['PHP_SELF']);
     }
@@ -134,7 +134,7 @@ class NoticeAction extends Action
         // 分類選單
         $_allCate = $this->_cate->findCateTitle();
         $this->_tpl->assign('allCate', $_allCate['cates']);
-        $this->_tpl->assign('status', json_encode($_allCate['status'], JSON_UNESCAPED_SLASHES));
+        $this->_tpl->assign('OneNotice.status', json_encode($_allCate['status'], JSON_UNESCAPED_SLASHES));
         // die(var_dump(json_encode($_allCate['status'])));
         //套用formValidator驗證機制
         $formValidator      = new FormValidator("#myForm", true);

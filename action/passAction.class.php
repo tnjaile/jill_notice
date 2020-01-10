@@ -14,6 +14,12 @@ class PassAction extends Action
         parent::__construct();
         $this->_notice = new NoticeModel();
         $this->_cate   = new NoticeCateModel();
+        list($this->_F['cate_sn'],
+            $this->_F['status']
+        ) = $this->getArry(array(
+            isset($_REQUEST['cate_sn']) ? Tool::setFormString($_REQUEST['cate_sn'], "int") : null,
+            isset($_REQUEST['status']) ? Tool::setFormString($_REQUEST['status'], "int") : null,
+        ));
     }
 
     //頁面載入
@@ -33,36 +39,37 @@ class PassAction extends Action
         $statusArr = array(0 => _MD_JILLNOTICE_STATUS0, 1 => _MD_JILLNOTICE_STATUS1, 2 => _MD_JILLNOTICE_STATUS2);
         $this->_tpl->assign('statusArr', $statusArr);
 
-        if (isset($_POST['send'])) {
-            $cate_sn = Tool::setFormString($_REQUEST['cate_sn'], "int");
-            $status  = Tool::setFormString($_REQUEST['status'], "int");
-        } else {
-            $_cateValues = array_keys($_allCate['cates']);
-            $cate_sn     = $_cateValues[0];
-            $status      = 0;
+        if (!isset($_POST['send'])) {
+            $_cateValues         = array_keys($_allCate['cates']);
+            $this->_F['cate_sn'] = $_cateValues[0];
+            $this->_F['status']  = 0;
         }
+        if (isset($_GET['sn'])) {
+            $_OneNotice = $this->_notice->findOne();
+            $this->_tpl->assign('now_op', "notice_show_one");
+            $this->_tpl->assign("OneNotice", $_OneNotice[0]);
 
-        $_AllNotice = $this->_notice->notice_list(array("cate_sn='{$cate_sn}'", "status='{$status}'"));
-        // die(var_dump($_AllNotice));
-        $this->_tpl->assign('AllNotice', $_AllNotice);
+        } else {
+            $_AllNotice = $this->_notice->notice_list(array("cate_sn='{$this->_F['cate_sn']}'", "status='{$this->_F['status']}'"));
+            // die(var_dump($_AllNotice));
+            $this->_tpl->assign('AllNotice', $_AllNotice);
+            // 刪除
+            $sweet_alert = new SweetAlert();
 
-        // 刪除
-        $sweet_alert = new SweetAlert();
+            $sweet_alert->render('delete_notice_func', "{$_SERVER['PHP_SELF']}?op=delete&sn=", "sn");
 
-        $sweet_alert->render('delete_notice_func', "{$_SERVER['PHP_SELF']}?op=delete&sn=", "sn");
+            // 點擊編輯
+            $file      = "pass_save.ajax.php";
+            $jeditable = new Jeditable();
+            $jeditable->setSelectCol(".jq_select", $file, "{0:'" . _MD_JILLNOTICE_STATUS0 . "' , 1:'" . _MD_JILLNOTICE_STATUS1 . "',2:'" . _MD_JILLNOTICE_STATUS2 . "'}");
+            $jeditable->render();
 
-        // 點擊編輯
-        $file      = "pass_save.ajax.php";
-        $jeditable = new Jeditable();
-        $jeditable->setSelectCol(".jq_select", $file, "{0:'" . _MD_JILLNOTICE_STATUS0 . "' , 1:'" . _MD_JILLNOTICE_STATUS1 . "',2:'" . _MD_JILLNOTICE_STATUS2 . "'}");
-        $jeditable->render();
-
-        $this->_tpl->assign('def_cate_sn', $cate_sn);
-        $this->_tpl->assign('def_status', $status);
+            $this->_tpl->assign('def_cate_sn', $this->_F['cate_sn']);
+            $this->_tpl->assign('def_status', $this->_F['status']);
+            $this->_tpl->assign('now_op', "pass_list");
+            $this->_tpl->assign('can_notice', 1);
+        }
         $this->_tpl->assign('action', $_SERVER['PHP_SELF']);
-        $this->_tpl->assign('now_op', "pass_list");
-        $this->_tpl->assign('can_notice', 1);
-
     }
 
     // 刪除

@@ -10,7 +10,7 @@
  **/
 
 /*-----------引入檔案區--------------*/
-include_once XOOPS_ROOT_PATH . "/modules/jill_notice/configs/run.inc.php";
+include_once "../configs/run.inc.php";
 $_SESSION['notice_adm'] = true;
 $_obj                   = new AuditorsAction();
 $_obj->run();

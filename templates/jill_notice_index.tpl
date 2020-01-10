@@ -4,7 +4,7 @@
         <{includeq file="$xoops_rootpath/modules/jill_notice/templates/op_`$now_op`.tpl"}>
     <{else}>
         <div class="jumbotron text-center">
-            <h3><{$smarty.const._MD_JILLNOTICE_ERRORLOGION}></h3>
+            <h3><{$smarty.const._MD_JILLNOTICE_PLEASELOGION}></h3>
         </div>
     <{/if}>
 <{/if}>

@@ -50,7 +50,7 @@
                     <input type="hidden" name="next_op" value="<{$next_op}>">
                     <input type="hidden" name="op" value="<{$now_op}>">
                     <input type="hidden" name="sn" value="<{$OneNotice.sn}>">
-                    <input type="hidden" name="status" value='<{$status}>'>
+                    <input type="hidden" name="status" value='<{$OneNotice.status}>'>
                     <input type="submit" name="send" value="<{$smarty.const._TAD_SAVE}>" class="btn btn-primary" />
             </div>
     </form>

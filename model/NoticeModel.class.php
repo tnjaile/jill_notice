@@ -107,7 +107,7 @@ class NoticeModel extends Model
         $_status     = json_decode($_POST['status'], true);
         $_updateData = $this->getRequest()->filter($this->_fields);
 
-        $_updateData['status'] = $_status[$_updateData['cate_sn']];
+        $_updateData['status'] = (empty($_POST['status'])) ? 0 : $_status[$_updateData['cate_sn']];
         parent::update($_where, $_updateData);
         return $this->_R['sn'];
     }

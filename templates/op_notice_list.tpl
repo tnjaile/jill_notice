@@ -13,7 +13,7 @@
         <a href="<{$action}>?op=notice_form" class="btn btn-info"><{$smarty.const._TAD_ADD}></a>
       <{else}>
         <div class="alert alert-danger">
-          您不具發布權限
+          <{$smarty.const._MD_JILLNOTICE_ERRORLOGION}>
         </div>
       <{/if}>
     </div>

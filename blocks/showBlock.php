@@ -10,7 +10,7 @@
  * @version    $Id $
  **/
 //引入系统配置文件
-require_once XOOPS_ROOT_PATH . "/modules/jillbase/profile.inc.php";
+include_once XOOPS_ROOT_PATH . "/modules/jillbase/profile.inc.php";
 //自動加載類
 include_once XOOPS_ROOT_PATH . "/modules/jill_notice/configs/autoload.inc.php";
 //區塊主函式 (jill_notice_show)

@@ -10,7 +10,9 @@
  **/
 /*-----------引入檔案區--------------*/
 use XoopsModules\Tadtools\Utility;
-include_once XOOPS_ROOT_PATH . "/modules/jill_notice/configs/run.inc.php";
+
+include_once "configs/run.inc.php";
+
 if (!$_SESSION['notice_adm']) {
     redirect_header(XOOPS_URL, 3, _MD_JILLNOTICE_ERRORLOGION);
 }

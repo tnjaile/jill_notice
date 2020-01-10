@@ -21,17 +21,16 @@ function jill_notice_show($options)
         $_notice  = new NoticeModel();
         $_typeArr = $_notice->setType();
         foreach ($_typeArr as $type => $typename) {
+
             $_whereData = array("cate_sn='{$options[0]}'", "type='{$type}'", "status='1'");
             $_AllNotice = $_notice->show_block($_whereData);
             if (!empty($_AllNotice)) {
                 $block['content'][$type] = $_AllNotice;
             }
-
         }
 
     }
     return $block;
-    // die(var_dump($block));
 
 }
 

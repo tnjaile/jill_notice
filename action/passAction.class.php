@@ -96,7 +96,7 @@ class PassAction extends Action
                     $_message = empty($_sn) ? "新增失敗" : "新增成功!";
                 }
                 if (!empty($_sn)) {
-                    if ($_POST['type'] == "img" || $_POST['type'] == "text") {
+                    if ($_POST['type'] == "img" || $_POST['type'] == "text" || $_POST['type'] == "url") {
                         $TadUpFiles->set_col("sn", $_sn);
                         // 單檔判斷
                         if ($_FILES['up_sn']['name'][0] != "") {

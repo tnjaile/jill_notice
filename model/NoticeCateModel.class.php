@@ -13,7 +13,7 @@ class NoticeCateModel extends Model
         $this->_check = new CateCheck();
         // 過濾參數
         list($this->_R['cate_sn']) = $this->getRequest()->getParam([
-            isset($_GET['cate_sn']) ? Tool::setFormString($_GET['cate_sn'], "int") : null]);
+            isset($_REQUEST['cate_sn']) ? Tool::setFormString($_REQUEST['cate_sn'], "int") : null]);
     }
 
     public function cate_list()
@@ -61,7 +61,7 @@ class NoticeCateModel extends Model
     public function cate_add()
     {
         if (!$this->_check->titleCheck($this)) {
-            $this->_check->error();
+            return;
         }
 
         $_addData = $this->getRequest()->filter($this->_fields);
@@ -75,11 +75,11 @@ class NoticeCateModel extends Model
     {
         $_where = array("cate_sn='{$this->_R['cate_sn']}'");
         if (!$this->_check->oneCheck($this, $_where)) {
-            $this->_check->error();
+            return;
         }
         if (!empty($_ischeck)) {
             if (!$this->_check->titleCheck($this)) {
-                $this->_check->error();
+                return;
             }
         }
 
@@ -93,7 +93,7 @@ class NoticeCateModel extends Model
         $_where = (empty($_whereData)) ? array("cate_sn='{$this->_R['cate_sn']}'") : $_whereData;
         //先驗證是否有此編號的資料
         if (!$this->_check->oneCheck($this, $_where)) {
-            $this->_check->error();
+            return;
         }
 
         // 秀出此編號的詳細資訊

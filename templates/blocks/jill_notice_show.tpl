@@ -18,13 +18,13 @@
 <div class="container-fluid">
   <{foreach from=$block.content key=type item=c}>
     <{if $type=="url"}>
-      <div class="list-group">
+      <ul class="vertical_menu">
         <{foreach from=$c item=data }>
           <li class="list-group-item">
-            <a href='<{$data.content}>' target='_blank'><{$data.title}></a>
+            <a href='<{$data.content}>' target='_blank'><{if $data.list_file}><img src="<{$data.list_file}>" class="img-fluid" alt="<{$data.title}>" style="margin-right: 4px;"><{else}><{$data.title}><{/if}></a>
           </li>
         <{/foreach}>
-      </div>
+      </ul>
     <{elseif $type=="img"}>
       <div class='row' >
         <{foreach from=$c item=data}>
@@ -41,9 +41,7 @@
               </div>
           <{else}>
             <div class="col-xs-6 col-sm-6 col">
-              <a href="#" class="thumbnail">
                 <{$data.list_file}>
-              </a>
             </div>
           <{/if}>
           </div>
@@ -57,11 +55,20 @@
         <{/foreach}>
       </div>
     <{else}>
-      <ul class="list-group">
-        <{foreach from=$c item=data }>
-          <li class="list-group-item list-group-item-info"><{$data.title}></li>
-        <{/foreach}>
-      </ul>
+      <{foreach from=$c item=data }>
+        <div class="card border-info mb-3">
+            <{if $data.list_file}>
+              <div class="card-body text-info">
+                <{$data.list_file}>
+                <h5 class="card-title"><{$data.title}></h5>
+              </div>
+            <{else}>
+              <div class="card-body text-info">
+                <h5 class="card-title text-center"><{$data.title}></h5>
+              </div>
+            <{/if}>
+        </div>
+      <{/foreach}>
     <{/if}>
   <{/foreach}>
 </div>

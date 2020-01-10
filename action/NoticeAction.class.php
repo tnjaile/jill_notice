@@ -12,8 +12,10 @@ class NoticeAction extends Action
     {
         parent::__construct();
 
-        $this->_notice = new NoticeModel();
-        $this->_cate   = new NoticeCateModel();
+        $this->_notice        = new NoticeModel();
+        $this->_cate          = new NoticeCateModel();
+        list($this->_F['sn']) = $this->getArry(array(
+            isset($_REQUEST['sn']) ? Tool::setFormString($_REQUEST['sn'], "int") : null));
     }
 
     //頁面載入
@@ -26,7 +28,7 @@ class NoticeAction extends Action
         } else {
             $uid = $xoopsUser->uid();
             if (isset($_GET['sn'])) {
-                $_OneNotice = $this->_notice->findOne(array("uid='{$uid}'"));
+                $_OneNotice = $this->_notice->findOne(array("uid='{$uid}' && sn='{$this->_F['sn']}'"));
                 // die(var_dump($_OneNotice));
                 $this->_tpl->assign('now_op', "notice_show_one");
                 $this->_tpl->assign("OneNotice", $_OneNotice[0]);
@@ -55,7 +57,7 @@ class NoticeAction extends Action
         $uid = $xoopsUser->uid();
 
         if (isset($_GET['sn'])) {
-            $_row = $this->_notice->notice_delete(array("uid='{$uid}'"));
+            $_row = $this->_notice->notice_delete(array("uid='{$uid}' && sn='{$this->_F['sn']}'"));
         }
         header("location: {$_SERVER['PHP_SELF']}");
     }
@@ -70,14 +72,14 @@ class NoticeAction extends Action
 
         if (isset($_POST['send'])) {
             //XOOPS表單安全檢查
-            // if (!$GLOBALS['xoopsSecurity']->check()) {
-            //     $error = implode("<br />", $GLOBALS['xoopsSecurity']->getErrors());
-            //     redirect_header($_SERVER['PHP_SELF'], 3, $error);
-            // }
+            if (!$GLOBALS['xoopsSecurity']->check()) {
+                $error = implode("<br />", $GLOBALS['xoopsSecurity']->getErrors());
+                redirect_header($_SERVER['PHP_SELF'], 3, $error);
+            }
 
             if (isset($_POST['next_op'])) {
                 if ($_POST['next_op'] == "update") {
-                    $_sn      = $this->_notice->notice_update(array("uid='{$uid}'"));
+                    $_sn      = $this->_notice->notice_update(array("uid='{$uid}' && sn='{$this->_F['sn']}'"));
                     $_message = empty($_sn) ? "修改失敗" : "修改成功!";
                 }
                 if ($_POST['next_op'] == "add") {
@@ -85,7 +87,7 @@ class NoticeAction extends Action
                     $_message = empty($_sn) ? "新增失敗" : "新增成功!";
                 }
                 if (!empty($_sn)) {
-                    if ($_POST['type'] == "img" || $_POST['type'] == "text") {
+                    if ($_POST['type'] == "img" || $_POST['type'] == "text" || $_POST['type'] == "url") {
                         $TadUpFiles->set_col("sn", $_sn);
                         // 單檔判斷
                         if ($_FILES['up_sn']['name'][0] != "") {
@@ -101,7 +103,7 @@ class NoticeAction extends Action
             exit();
         }
         if (isset($_GET['sn'])) {
-            $_OneNotice = $this->_notice->findOne(array("uid='{$uid}'"));
+            $_OneNotice = $this->_notice->findOne(array("uid='{$uid}' && sn='{$this->_F['sn']}'"));
             if ($_OneNotice[0]['type'] == "url") {
                 $_OneNotice[0]['content'] = strip_tags($_OneNotice[0]['content']);
             }

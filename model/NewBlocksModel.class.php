@@ -12,9 +12,9 @@ class NewBlocksModel extends Model
             $this->_R['cate_sn'],
             $this->_R['read_group']
         ) = $this->getRequest()->getParam([
-            isset($_GET['cate_title']) ? Tool::setFormString($_GET['cate_title'], "string") : null,
-            isset($_GET['cate_sn']) ? Tool::setFormString($_GET['cate_sn'], "int") : null,
-            isset($_GET['read_group']) ? Tool::setFormString($_GET['read_group'], "int") : null]);
+            isset($_POST['cate_title']) ? Tool::setFormString($_POST['cate_title'], "string") : null,
+            isset($_POST['cate_sn']) ? Tool::setFormString($_POST['cate_sn'], "int") : null,
+            isset($_POST['read_group']) ? Tool::setFormString($_POST['read_group'], "int") : null]);
     }
 
     public function newblocks_add($_sn)
@@ -29,7 +29,7 @@ class NewBlocksModel extends Model
         $_addData['content']       = "";
         $_addData['side']          = 0;
         $_addData['weight']        = 0;
-        $_addData['visible']       = 0;
+        $_addData['visible']       = 1;
         $_addData['block_type']    = ($_sn == 1) ? "M" : "D";
         $_addData['c_type']        = "H";
         $_addData['isactive']      = 1;

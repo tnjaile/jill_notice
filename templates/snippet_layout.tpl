@@ -57,6 +57,16 @@
       <input type="text" name="content" id="content" class="form-control validate[required,custom[url]]" value="<{$OneNotice.content}>" placeholder="<{$smarty.const._MD_JILLNOTICE_URL}>">
     </div>
   </div>
+  <!--上傳-->
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label text-md-right">
+      <{$smarty.const._MD_JILLNOTICE_SHOW_SN_FILES}>
+      <p class="help-block"><{$smarty.const._MD_JILLNOTICE_RECTANGLE}></p>
+    </label>
+    <div class="col-sm-10">
+      <{$up_sn_form}>
+    </div>
+  </div>
 <{else}>
   <!--上傳-->
   <div class="form-group row">

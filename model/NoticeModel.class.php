@@ -19,8 +19,8 @@ class NoticeModel extends Model
             $this->_R['sn'],
             $this->_R['type']
         ) = $this->getRequest()->getParam([
-            isset($_GET['sn']) ? Tool::setFormString($_GET['sn'], "int") : null,
-            isset($_GET['type']) ? Tool::setFormString($_GET['type'], "string") : null,
+            isset($_REQUEST['sn']) ? Tool::setFormString($_REQUEST['sn'], "int") : null,
+            isset($_POST['type']) ? Tool::setFormString($_POST['type'], "string") : null,
         ]);
 
     }
@@ -46,7 +46,7 @@ class NoticeModel extends Model
             $_AllNotice[$key]['type_name']   = $this->getTypeName($value['type']);
 
             // 檢查是否有檔案
-            if ($value['type'] == 'img' || $value['type'] == 'text') {
+            if ($value['type'] == 'img' || $value['type'] == 'text' || $value['type'] == 'url') {
                 $TadUpFiles = new TadUpFiles("jill_notice");
                 $TadUpFiles->set_col("sn", $value['sn']);
 
@@ -71,12 +71,12 @@ class NoticeModel extends Model
 
         // 檢查表單是否有填
         if (!$this->_check->allCheck($this, array('type' => "{$this->_R['type']}"))) {
-            $this->_check->error();
+            return;
         }
 
         // json型態轉陣列(不在欄位的額外變數，不過濾)
-        $_status = json_decode(stripslashes($_POST['status']), true);
-        // die(var_dump($_status));
+        // $_status = json_decode(stripslashes($_POST['status']), true);
+        $_status = json_decode($_POST['status'], true);
         //過濾表單 $_POST
         $_addData = $this->getRequest()->filter($this->_fields);
         // die(var_dump($_POST));
@@ -96,15 +96,15 @@ class NoticeModel extends Model
         $_where = (empty($_whereData)) ? array("sn='{$this->_R['sn']}'") : $_whereData;
 
         if (!$this->_check->oneCheck($this, $_where)) {
-            $this->_check->error();
+            return;
         }
         if (!$this->_check->allCheck($this, array('type' => "{$this->_R['type']}"))) {
-            $this->_check->error();
+            return;
         }
 
         // json型態轉陣列(不在欄位的額外變數，不過濾)
-        $_status = json_decode(stripslashes($_POST['status']), true);
-
+        // $_status = json_decode(stripslashes($_POST['status']), true);
+        $_status     = json_decode($_POST['status'], true);
         $_updateData = $this->getRequest()->filter($this->_fields);
 
         $_updateData['status'] = $_status[$_updateData['cate_sn']];
@@ -116,7 +116,7 @@ class NoticeModel extends Model
         $_where = (empty($_whereData)) ? array("sn='{$this->_R['sn']}'") : $_whereData;
         // 先驗證是否有此編號的資料
         if (!$this->_check->oneCheck($this, $_where)) {
-            $this->_check->error();
+            return;
         }
 
         // 秀出此編號的詳細資訊
@@ -138,7 +138,7 @@ class NoticeModel extends Model
         $_OneNotice[0]['status_name'] = $this->getStatusName($_OneNotice[0]['status']);
 
         // 檢查是否有檔案
-        if ($_OneNotice[0]['type'] == 'img' || $_OneNotice[0]['type'] == 'text') {
+        if ($_OneNotice[0]['type'] == 'img' || $_OneNotice[0]['type'] == 'text' || $_OneNotice[0]['type'] == 'url') {
             $TadUpFiles = new TadUpFiles("jill_notice");
             $TadUpFiles->set_col("sn", $_OneNotice[0]['sn']);
 
@@ -207,14 +207,20 @@ class NoticeModel extends Model
         $TadUpFiles = new TadUpFiles("jill_notice");
         $myts       = \MyTextSanitizer::getInstance();
         $_AllNotice = parent::select(array('sn' => 'int', 'create_date' => 'date', 'deadline' => 'date', 'type' => 'string', 'title' => 'string', 'content' => 'ckeditor', 'uid' => 'int', 'status' => 'int', 'note' => 'textarea', 'sort' => 'int', 'cate_sn' => 'int'), array('where' => $_whereData, 'order' => 'create_date desc,sort'));
-        foreach ($_AllNotice as $key => $value) {
-            if ($value['type'] == "url") {
-                $_AllNotice[$key]['content'] = strip_tags($value['content']);
-            } elseif ($value['type'] == "img" || $value['type'] == 'text') {
-                $TadUpFiles->set_col("sn", $value['sn']);
-                $_show_files = $TadUpFiles->show_files('up_sn', true, 'file_name', false, false, null, null, false);
 
-                $_AllNotice[$key]['list_file'] = $_show_files;
+        foreach ($_AllNotice as $key => $value) {
+            if ($value['type'] == "img" || $value['type'] == 'text') {
+                $TadUpFiles->set_col("sn", $value['sn']);
+                $_show_files                   = $TadUpFiles->show_files('up_sn', true, 'file_name', false, false, null, null, false);
+                $_AllNotice[$key]['list_file'] = strip_tags($_show_files, '<a>');
+                if ($value['type'] == "url") {
+
+                }
+            } elseif ($value['type'] == "url") {
+                $TadUpFiles->set_col("sn", $value['sn']);
+
+                $_AllNotice[$key]['list_file'] = $TadUpFiles->get_pic_file('thumb');
+                $_AllNotice[$key]['content']   = strip_tags($value['content']);
             }
         }
         // die(var_dump($_AllNotice));

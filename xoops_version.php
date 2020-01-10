@@ -38,7 +38,7 @@ $modversion['module_website_name'] = _MI_JILLNOTICE_AUTHOR_WEB;
 $modversion['module_status']       = 'release';
 $modversion['author_website_url']  = 'https://github.com/tnjaile/';
 $modversion['author_website_name'] = _MI_JILLNOTICE_AUTHOR_WEB;
-$modversion['min_php']             = '7.0';
+$modversion['min_php']             = '5.6';
 $modversion['min_xoops']           = '2.5.10';
 
 //---paypal資訊---//

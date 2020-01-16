@@ -57,7 +57,7 @@
                 <{$smarty.const._MI_JILLNOTICE_ADMENU2}>
             </a>
             <{if $tad_blocks}>
-                <a href="<{$xoops_url}>/modules/tad_blocks/blocks.php" class="btn btn-sm btn-info" target="_blank"><{$smarty.const._MA_TAD_BLOCKS}></a>
+                <a href="<{$xoops_url}>/modules/tad_blocks/blocks.php" class="btn btn-sm btn-secondary" target="_blank"><{$smarty.const._MA_TAD_BLOCKS}></a>
             <{/if}>
         <{/if}>
 

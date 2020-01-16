@@ -17,7 +17,6 @@ $_obj = new NoticeCateAction();
 $_obj->run();
 // die(print_r(get_declared_classes()));
 /*-----------秀出結果區--------------*/
-$xoopsTpl->assign("isAdmin", true);
 $xoTheme->addStylesheet('/modules/tadtools/css/font-awesome/css/font-awesome.css');
 $xoTheme->addStylesheet(XOOPS_URL . '/modules/tadtools/css/xoops_adm3.css');
 include_once 'footer.php';

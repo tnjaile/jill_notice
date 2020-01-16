@@ -6,23 +6,23 @@
             <thead>
                 <tr>
                     <!--分類標題-->
-                    <th class="col-sm-2">
+                    <th>
                         <{$smarty.const._MA_JILL_NOTICE_CATE_TITLE}>
                     </th>
                     <!--分類說明-->
-                    <th class="col-sm-2">
+                    <th>
                         <{$smarty.const._MA_JILL_NOTICE_CATE_DESC}>
                     </th>
                     <!--可發佈群組-->
-                    <th class="col-sm-2">
+                    <th>
                         <{$smarty.const._MA_JILLNOTICE_POST_GROUP}>
                     </th>
                     <!--可讀取群組-->
-                    <th class="col-sm-2">
+                    <th>
                         <{$smarty.const._MA_JILLNOTICE_READ_GROUP}>
                     </th>
                     <!--審核者-->
-                    <th class="col-sm-2">
+                    <th>
                         <{$smarty.const._MA_JILLNOTICE_AUDITORS}>
                     </th>
                     <th>
@@ -68,13 +68,13 @@
                                 <a href="<{$action}>?op=cate_form&cate_sn=<{$data.cate_sn}>" class="btn btn-xs btn-warning"><{$smarty.const._TAD_EDIT}></a>
                                 <a href="<{$xoops_url}>/modules/jill_notice/admin/auditors.php?cate_sn=<{$data.cate_sn}>" class="btn btn-sm btn-primary"><{$smarty.const._MI_JILLNOTICE_ADMENU2}></a>
                                 <{if $tad_blocks}>
-                                    <a href="<{$xoops_url}>/modules/tad_blocks/blocks.php" class="btn btn-sm btn-info" target="_blank"><{$smarty.const._MA_TAD_BLOCKS}></a>
+                                    <a href="<{$xoops_url}>/modules/tad_blocks/blocks.php" class="btn btn-sm btn-secondary" target="_blank"><{$smarty.const._MA_TAD_BLOCKS}></a>
                                 <{/if}>
                                 <i class="fa fa-sort" aria-hidden="true" title="<{$smarty.const._TAD_SORTABLE}>"></i>
                             </td>
                         <{/if}>
                     </tr>
-                    <{/foreach}>
+                <{/foreach}>
             </tbody>
         </table>
 

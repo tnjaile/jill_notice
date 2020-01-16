@@ -26,7 +26,7 @@ class PassAction extends Action
     public function main()
     {
         // 分類選單
-        $_allCate = $this->_cate->findCateTitle();
+        $_allCate = $this->_cate->findCateTitle(array("cate_sn in({$_SESSION['auditors']})"));
 
         $_cates = array();
         foreach ($_allCate['cates'] as $c => $title) {

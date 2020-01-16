@@ -23,7 +23,7 @@ class NoticeAction extends Action
     {
         global $xoopsUser;
 
-        if ($_SESSION['can_post']) {
+        if (isset($_SESSION['can_post']) && $_SESSION['can_post']) {
             $uid = $xoopsUser->uid();
             if (isset($_GET['sn'])) {
                 $_OneNotice = $this->_notice->findOne(array("uid='{$uid}' && sn='{$this->_F['sn']}'"));

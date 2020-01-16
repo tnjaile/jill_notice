@@ -82,7 +82,6 @@ class NoticeCateModel extends Model
                 return;
             }
         }
-
         $_selectData = empty($_selectData) ? $this->_fields : $_selectData;
         $_updateData = $this->getRequest()->filter($_selectData);
         parent::update($_where, $_updateData);
@@ -113,7 +112,7 @@ class NoticeCateModel extends Model
             $_OneCate[0]['read_group_name'] = implode(" | ", $read_group);
         }
         if (!empty($_OneCate[0]['auditors'])) {
-            $auditors      = explode(";", $_OneCate[0]['auditors']);
+            $auditors      = explode(",", $_OneCate[0]['auditors']);
             $auditor_uname = array();
             foreach ($auditors as $auditor) {
                 $_OneCate[0]['auditor_group'][$auditor] = XoopsUser::getUnameFromId($auditor, 0);
@@ -131,12 +130,13 @@ class NoticeCateModel extends Model
     }
 
     // 產生分類選單
-    public function findCateTitle()
+    public function findCateTitle($_whereData = array())
     {
         global $xoopsUser;
+        $_where      = (empty($_whereData)) ? array() : $_whereData;
         $_user_group = array_unique($xoopsUser->groups());
 
-        $_cates = parent::select($this->_fields);
+        $_cates = parent::select($this->_fields, array('where' => $_where));
 
         $_allCate = array();
         foreach ($_cates as $value) {
@@ -157,7 +157,7 @@ class NoticeCateModel extends Model
         return $_allCate;
     }
 
-    // 判斷讀寫群組
+    // 判斷讀寫群組及審核者
     public function findGroup($_group_name)
     {
         $_cates = parent::select(array('cate_sn' => 'int', 'post_group' => 'json', 'read_group' => 'json'));
@@ -168,6 +168,12 @@ class NoticeCateModel extends Model
             $_groups[$value['cate_sn']] = implode(',', $value[$_group_name]);
         }
         return $_groups;
+    }
+
+    // 判斷審核者
+    public function findAuditors()
+    {
+        return parent::select(array('cate_sn' => 'int', 'auditors' => 'string'), array('order' => 'cate_sort DESC'));
     }
 
 }

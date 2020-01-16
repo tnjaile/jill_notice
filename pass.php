@@ -12,8 +12,7 @@
 use XoopsModules\Tadtools\Utility;
 
 include_once "configs/run.inc.php";
-
-if (!$_SESSION['notice_adm']) {
+if (empty($_SESSION['auditors'])) {
     redirect_header(XOOPS_URL, 3, _MD_JILLNOTICE_ERRORLOGION);
 }
 $_obj = new PassAction();

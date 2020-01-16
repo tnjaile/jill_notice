@@ -5,7 +5,7 @@ function gettmtOptions() {
         if (i == 0) {
             txt = x.options[0].value;
         } else {
-            txt = txt + ';' + x.options[i].value;
+            txt = txt + ',' + x.options[i].value;
         }
 
     }

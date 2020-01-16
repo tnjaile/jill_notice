@@ -2,10 +2,9 @@
 include_once "../../mainfile.php";
 include_once $GLOBALS['xoops']->path('/modules/system/include/functions.php');
 
-if (!$_SESSION['notice_adm']) {
-    die(_MD_JILLNOTICE_ILLEGAL);
+if (!$_SESSION['auditors']) {
+    redirect_header(XOOPS_URL, 3, _MD_JILLNOTICE_ERRORLOGION);
 }
-
 $value = system_CleanVars($_REQUEST, 'value', '', 'string');
 $id    = system_CleanVars($_REQUEST, 'id', '', 'string');
 

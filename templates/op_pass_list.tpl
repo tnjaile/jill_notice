@@ -1,7 +1,5 @@
-<{if $smarty.session.notice_adm}>
-  <{$jquery}>
-  <script type="text/javascript" src="<{$xoops_url}>/modules/tadtools/jeditable/jquery.jeditable.mini.js"></script>
-<{/if}>
+<{$jquery}>
+<script type="text/javascript" src="<{$xoops_url}>/modules/tadtools/jeditable/jquery.jeditable.mini.js"></script>
 <div class="alert alert-primary">
   <form action="<{$action}>" method="post" id="myForm" class="form-inline" role="form">
     <div class="form-group mr-2">

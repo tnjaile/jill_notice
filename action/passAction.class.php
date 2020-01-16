@@ -120,6 +120,9 @@ class PassAction extends Action
         }
         if (isset($_GET['sn'])) {
             $_OneNotice = $this->_notice->findOne();
+            if ($_OneNotice[0]['type'] == "url") {
+                $_OneNotice[0]['content'] = strip_tags($_OneNotice[0]['content']);
+            }
             // die(var_dump($_OneNotice));
             $TadUpFiles->set_col("sn", $_OneNotice[0]['sn']);
             $this->_tpl->assign('next_op', "update");
@@ -131,7 +134,6 @@ class PassAction extends Action
             $this->_tpl->assign('typeArr', $this->_notice->setType());
             $_type = !isset($_GET['type']) ? 'text' : Tool::setFormString($_GET['type']);
             $this->_tpl->assign('next_op', "add");
-
         }
         $this->_tpl->assign('def_type', $_type);
         if ($_type == "ckeditor") {

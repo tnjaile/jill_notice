@@ -56,10 +56,13 @@
             <a href="<{$xoops_url}>/modules/jill_notice/admin/auditors.php?cate_sn=<{$OneCate.cate_sn}>" class="btn btn-sm btn-primary">
                 <{$smarty.const._MI_JILLNOTICE_ADMENU2}>
             </a>
+            <{if $tad_blocks}>
+                <a href="<{$xoops_url}>/modules/tad_blocks/blocks.php" class="btn btn-sm btn-info" target="_blank"><{$smarty.const._MA_TAD_BLOCKS}></a>
             <{/if}>
+        <{/if}>
 
-                <a href="<{$action}>" class="btn btn-success">
-                    <{$smarty.const._MA_JILL_BACK}>
-                </a>
+        <a href="<{$action}>" class="btn btn-success">
+            <{$smarty.const._MA_JILL_BACK}>
+        </a>
     </div>
 </div>

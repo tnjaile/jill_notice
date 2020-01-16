@@ -23,6 +23,7 @@ class NoticeCateAction extends Action
     //頁面載入
     public function main()
     {
+
         if (isset($_GET['cate_sn'])) {
             $_OneCate = $this->_cate->findOne();
             $this->_tpl->assign('now_op', "cate_show_one");
@@ -43,6 +44,10 @@ class NoticeCateAction extends Action
         $sweet_alert = new SweetAlert();
         $sweet_alert->render('delete_cate_func',
             "{$_SERVER['PHP_SELF']}?op=delete&cate_sn=", "cate_sn");
+
+        if (file_exists(XOOPS_ROOT_PATH . "/modules/tad_blocks/blocks.php")) {
+            $this->_tpl->assign('tad_blocks', 1);
+        }
         $this->_tpl->assign('action', $_SERVER['PHP_SELF']);
     }
 

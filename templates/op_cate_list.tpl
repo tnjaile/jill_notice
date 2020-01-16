@@ -58,24 +58,21 @@
                         <td>
                             <{if $data.auditors}>
                                 <{$data.auditors}>
-                                    <{else}>
-                                        <img src="<{$xoops_url}>/modules/jill_notice/images/no.gif" style="cursor: s-resize;margin:0px 4px;" alt="<{$smarty.const._NO}>" title="<{$smarty.const._NO}>">
-                                        <{/if}>
+                            <{else}>
+                                <img src="<{$xoops_url}>/modules/jill_notice/images/no.gif" style="cursor: s-resize;margin:0px 4px;" alt="<{$smarty.const._NO}>" title="<{$smarty.const._NO}>">
+                            <{/if}>
                         </td>
                         <{if $smarty.session.notice_adm}>
                             <td>
-                                <a href="javascript:delete_cate_func(<{$data.cate_sn}>);" class="btn btn-xs btn-danger">
-                                    <{$smarty.const._TAD_DEL}>
-                                </a>
-                                <a href="<{$action}>?op=cate_form&cate_sn=<{$data.cate_sn}>" class="btn btn-xs btn-warning">
-                                    <{$smarty.const._TAD_EDIT}>
-                                </a>
-                                <a href="<{$xoops_url}>/modules/jill_notice/admin/auditors.php?cate_sn=<{$data.cate_sn}>" class="btn btn-sm btn-primary">
-                                    <{$smarty.const._MI_JILLNOTICE_ADMENU2}>
-                                </a>
+                                <a href="javascript:delete_cate_func(<{$data.cate_sn}>);" class="btn btn-xs btn-danger"><{$smarty.const._TAD_DEL}></a>
+                                <a href="<{$action}>?op=cate_form&cate_sn=<{$data.cate_sn}>" class="btn btn-xs btn-warning"><{$smarty.const._TAD_EDIT}></a>
+                                <a href="<{$xoops_url}>/modules/jill_notice/admin/auditors.php?cate_sn=<{$data.cate_sn}>" class="btn btn-sm btn-primary"><{$smarty.const._MI_JILLNOTICE_ADMENU2}></a>
+                                <{if $tad_blocks}>
+                                    <a href="<{$xoops_url}>/modules/tad_blocks/blocks.php" class="btn btn-sm btn-info" target="_blank"><{$smarty.const._MA_TAD_BLOCKS}></a>
+                                <{/if}>
                                 <i class="fa fa-sort" aria-hidden="true" title="<{$smarty.const._TAD_SORTABLE}>"></i>
                             </td>
-                            <{/if}>
+                        <{/if}>
                     </tr>
                     <{/foreach}>
             </tbody>

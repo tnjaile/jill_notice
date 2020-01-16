@@ -12,7 +12,6 @@ class AdminAction extends Action
     {
         $configs    = Group::get_config_group();
         $group_list = Group::get_all_groups(array(3));
-
         $this->_tpl->assign('def_groups', $configs["notice_group"]);
         $this->_tpl->assign('group_list', $group_list);
         $this->_tpl->assign('action', $_SERVER["PHP_SELF"]);

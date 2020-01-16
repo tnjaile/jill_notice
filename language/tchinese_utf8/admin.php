@@ -27,3 +27,4 @@ define('_MA_JILLNOTICE_POST_GROUP', '前台首頁可發佈群組');
 define('_MA_JILLNOTICE_READ_GROUP', '區塊可讀取群組');
 define('_MA_JILLNOTICE_ALLUSERS', '所有註冊者');
 define('_MA_JILLNOTICE_AUDITORS', '審核者');
+define('_MA_TAD_BLOCKS', '區塊管理');

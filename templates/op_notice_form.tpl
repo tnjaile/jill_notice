@@ -4,21 +4,21 @@
         <!--類型-->
         <div class="form-group row">
             <label class="col-sm-2 col-form-label text-md-right">
-        <{$smarty.const._MD_JILLNOTICE_TYPE}>/分類
-      </label>
+                <{$smarty.const._MD_JILLNOTICE_TYPE}>/分類
+            </label>
             <div class="col-sm-10">
                 <div class="row">
                     <div class="col">
                         <{if $OneNotice.sn}>
                             <{$OneNotice.type_name}>
                                 <input type="hidden" name="type" value="<{$def_type}>">
-                                <{else}>
-                                    <select name="type" id="type" class="form-control" onchange="location.href='<{$action}>?op=notice_form&type='+this.value">
-                  <{foreach from=$typeArr key=k item=c}>
-                    <option value=<{$k}> <{if $def_type==$k}>selected<{/if}> ><{$c}></option>
-                  <{/foreach}>
-                </select>
-                                    <{/if}>
+                        <{else}>
+                            <select name="type" id="type" class="form-control" onchange="location.href='<{$action}>?op=notice_form&type='+this.value">
+                                <{foreach from=$typeArr key=k item=c}>
+                                    <option value=<{$k}> <{if $def_type==$k}>selected<{/if}> ><{$c}></option>
+                                <{/foreach}>
+                            </select>
+                        <{/if}>
                     </div>
                     <div class="col">
                         <select name="cate_sn" id="cate_sn" class="form-control">
@@ -47,11 +47,11 @@
 
             <div class="text-center">
                 <{$token_form}>
-                    <input type="hidden" name="next_op" value="<{$next_op}>">
-                    <input type="hidden" name="op" value="<{$now_op}>">
-                    <input type="hidden" name="sn" value="<{$OneNotice.sn}>">
-                    <input type="hidden" name="status" value='<{$OneNotice.status}>'>
-                    <input type="submit" name="send" value="<{$smarty.const._TAD_SAVE}>" class="btn btn-primary" />
+                <input type="hidden" name="next_op" value="<{$next_op}>">
+                <input type="hidden" name="op" value="<{$now_op}>">
+                <input type="hidden" name="sn" value="<{$OneNotice.sn}>">
+                <input type="hidden" name="status_js" value='<{$status}>'>
+                <input type="submit" name="send" value="<{$smarty.const._TAD_SAVE}>" class="btn btn-primary" />
             </div>
     </form>
 </div>

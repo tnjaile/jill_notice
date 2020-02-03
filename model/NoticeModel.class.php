@@ -76,7 +76,8 @@ class NoticeModel extends Model
 
         // json型態轉陣列(不在欄位的額外變數，不過濾)
         // $_status = json_decode(stripslashes($_POST['status']), true);
-        $_status = json_decode($_POST['status'], true);
+        $_status = json_decode($_POST['status_js'], true);
+        // die(var_dump($_status));
         //過濾表單 $_POST
         $_addData = $this->getRequest()->filter($this->_fields);
         // die(var_dump($_POST));
@@ -102,12 +103,8 @@ class NoticeModel extends Model
             return;
         }
 
-        // json型態轉陣列(不在欄位的額外變數，不過濾)
-        // $_status = json_decode(stripslashes($_POST['status']), true);
-        // $_status     = json_decode($_POST['status'], true);
         $_updateData = $this->getRequest()->filter($this->_fields);
 
-        // $_updateData['status'] = (empty($_POST['status'])) ? 0 : $_status[$_updateData['cate_sn']];
         parent::update($_where, $_updateData);
         return $this->_R['sn'];
     }

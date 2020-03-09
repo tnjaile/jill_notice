@@ -1,5 +1,5 @@
 <style>
-  .container-fluid{
+  .notice-container{
     margin:10px 0;
     color: #666;
   }
@@ -15,7 +15,7 @@
     display: block;
   }
 </style>
-<div class="container-fluid">
+<div class="notice-container">
   <{foreach from=$block.content key=type item=c}>
     <{if $type=="url"}>
       <ul class="vertical_menu">

@@ -12,10 +12,12 @@ class NoticeAction extends Action
     {
         parent::__construct();
 
-        $this->_notice        = new NoticeModel();
-        $this->_cate          = new NoticeCateModel();
-        list($this->_F['sn']) = $this->getArry(array(
-            isset($_REQUEST['sn']) ? Tool::setFormString($_REQUEST['sn'], "int") : null));
+        $this->_notice = new NoticeModel();
+        $this->_cate   = new NoticeCateModel();
+        list($this->_F['sn'],
+            $this->_F['files_sn']) = $this->getArry(array(
+            isset($_REQUEST['sn']) ? Tool::setFormString($_REQUEST['sn'], "int") : null,
+            isset($_REQUEST['files_sn']) ? Tool::setFormString($_REQUEST['files_sn'], "int") : null));
     }
 
     //頁面載入
@@ -147,6 +149,14 @@ class NoticeAction extends Action
         $this->_tpl->assign('now_op', "notice_form");
         $this->_tpl->assign('action', $_SERVER['PHP_SELF']);
 
+    }
+
+    // 下載
+    public function tufdl()
+    {
+        $TadUpFiles = new TadUpFiles("jill_notice");
+        $TadUpFiles->add_file_counter($this->_F['files_sn']);
+        exit;
     }
 
 }

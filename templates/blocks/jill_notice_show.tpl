@@ -48,7 +48,7 @@
         <{/foreach}>
       </div>
     <{elseif $type=="textarea" || $type=="ckeditor"}>
-      <div class="list-group">
+      <div class="list-group ml-2">
         <{foreach from=$c item=data}>
           <h4 class="list-group-item-heading"><{$data.title}></h4>
           <p class="list-group-item-text"><{$data.content|nl2br}></p>
@@ -56,18 +56,17 @@
       </div>
     <{else}>
       <{foreach from=$c item=data }>
-        <div class="card border-info mb-3">
-            <{if $data.list_file}>
-              <div class="card-body text-info">
-                <{$data.list_file}>
-                <h5 class="card-title"><{$data.title}></h5>
-              </div>
-            <{else}>
-              <div class="card-body text-info">
-                <h5 class="card-title text-center"><{$data.title}></h5>
-              </div>
-            <{/if}>
-        </div>
+        <{if $data.list_file}>
+          <{foreach from=$data.list_file key=file_sn item=f }>
+            <div class="row ml-2">
+              <h5 class="card-title"><a href="<{$xoops_url}>/modules/jill_notice/index.php?op=tufdl&files_sn=<{$file_sn}>#<{$f.show_file_name}>" class="iconize"><{$data.title}></a></h5>
+            </div>
+          <{/foreach}>
+        <{else}>
+          <div class="row"">
+            <h5 class="card-title text-center"><{$data.title}></h5>
+          </div>
+        <{/if}>
       <{/foreach}>
     <{/if}>
   <{/foreach}>

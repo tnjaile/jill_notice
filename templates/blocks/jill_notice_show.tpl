@@ -36,7 +36,7 @@
                 </div>
                   <div class="media-body">
                     <h4 class="media-heading"><a href="#"><{$data.title}></a></h4>
-                    <p><{$data.content}></p>
+                    <p><{$data.content|nl2br}></p>
                   </div>
               </div>
           <{else}>
@@ -51,7 +51,7 @@
       <div class="list-group ml-2">
         <{foreach from=$c item=data}>
           <h4 class="list-group-item-heading"><{$data.title}></h4>
-          <p class="list-group-item-text"><{$data.content|nl2br}></p>
+          <p class="list-group-item-text"><{if $type=="textarea"}><{$data.content|nl2br}><{else}><{$data.content}><{/if}></p>
         <{/foreach}>
       </div>
     <{else}>

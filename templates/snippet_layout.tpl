@@ -14,7 +14,7 @@
       <{$smarty.const._MD_JILLNOTICE_CONTENT}>
     </label>
     <div class="col-sm-10">
-      <textarea name="content" rows=8 id="content" class="form-control " placeholder="<{$smarty.const._MD_JILLNOTICE_CONTENT}>"><{$OneNotice.content}></textarea>
+      <textarea name="content" rows=8 id="content" class="form-control " placeholder="<{$smarty.const._MD_JILLNOTICE_CONTENT}>"><{$OneNotice.content|nl2br}></textarea>
     </div>
   </div>
   <!--上傳-->
@@ -43,7 +43,7 @@
       <{$smarty.const._MD_JILLNOTICE_CONTENT}>
     </label>
     <div class="col-sm-10">
-      <textarea name="content" rows=8 id="content" class="form-control " placeholder="<{$smarty.const._MD_JILLNOTICE_CONTENT}>"><{$OneNotice.content}></textarea>
+      <textarea name="content" rows=8 id="content" class="form-control " placeholder="<{$smarty.const._MD_JILLNOTICE_CONTENT}>"><{$OneNotice.content|nl2br}></textarea>
     </div>
   </div>
 <{elseif $def_type=="ckeditor"}>

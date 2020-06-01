@@ -8,5 +8,12 @@ if (!class_exists('XoopsModules\Tadtools\Utility')) {
 function xoops_module_update_jill_notice($module, $old_version)
 {
     Update::del_interface();
+    if (Update::chk1()) {
+        Update::go_update1();
+    }
+
+    if (Update::chk2()) {
+        Update::go_update2();
+    }
     return true;
 }

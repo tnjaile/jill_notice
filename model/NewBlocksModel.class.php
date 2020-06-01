@@ -13,7 +13,7 @@ class NewBlocksModel extends Model
             $this->_R['read_group']
         ) = $this->getRequest()->getParam([
             isset($_POST['cate_title']) ? Tool::setFormString($_POST['cate_title'], "string") : null,
-            isset($_POST['cate_sn']) ? Tool::setFormString($_POST['cate_sn'], "int") : null,
+            isset($_REQUEST['cate_sn']) ? Tool::setFormString($_REQUEST['cate_sn'], "int") : null,
             isset($_POST['read_group']) ? Tool::setFormString($_POST['read_group'], "int") : null]);
     }
 

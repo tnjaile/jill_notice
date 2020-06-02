@@ -5,7 +5,7 @@
       <{$smarty.const._MD_JILLNOTICE_TITLE}>
     </label>
     <div class="col-sm-10">
-      <input type="text" name="title" id="title" class="form-control validate[required]" value="<{$OneNotice.title}>" placeholder="<{$smarty.const._MD_JILLNOTICE_TITLE}>">
+      <input type="text" name="title" id="title" class="form-control validate[required]" value="<{$OneNotice.title}>" placeholder="<{$smarty.const._MD_JILLNOTICE_TITLE}>" maxlength="40" minlength="2">
     </div>
   </div>
   <!--內文-->
@@ -14,7 +14,7 @@
       <{$smarty.const._MD_JILLNOTICE_CONTENT}>
     </label>
     <div class="col-sm-10">
-      <textarea name="content" rows=8 id="content" class="form-control " placeholder="<{$smarty.const._MD_JILLNOTICE_CONTENT}>"><{$OneNotice.content|nl2br}></textarea>
+      <textarea name="content" rows=8 id="content" class="form-control " placeholder="<{$smarty.const._MD_JILLNOTICE_CONTENT}>"><{$OneNotice.content}></textarea>
     </div>
   </div>
   <!--上傳-->
@@ -43,7 +43,7 @@
       <{$smarty.const._MD_JILLNOTICE_CONTENT}>
     </label>
     <div class="col-sm-10">
-      <textarea name="content" rows=8 id="content" class="form-control " placeholder="<{$smarty.const._MD_JILLNOTICE_CONTENT}>"><{$OneNotice.content|nl2br}></textarea>
+      <textarea name="content" rows=8 id="content" class="form-control " placeholder="<{$smarty.const._MD_JILLNOTICE_CONTENT}>"><{$OneNotice.content}></textarea>
     </div>
   </div>
 <{elseif $def_type=="ckeditor"}>

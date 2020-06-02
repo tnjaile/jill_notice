@@ -3,10 +3,12 @@ use XoopsModules\Tadtools\TadUpFiles;
 
 class NoticeModel extends Model
 {
+    private $_TadUpFiles = null;
     public function __construct()
     {
         parent::__construct();
 
+        $this->_TadUpFiles = new TadUpFiles("jill_notice");
         // 要顯示的欄位及欄位類型
         $this->_fields = array('sn' => 'int', 'create_date' => 'date', 'deadline' => 'date', 'type' => 'string', 'title' => 'string', 'content' => 'textarea', 'uid' => 'int', 'status' => 'int', 'note' => 'textarea', 'sort' => 'int', 'cate_sn' => 'int');
         // 要查詢的表
@@ -47,10 +49,9 @@ class NoticeModel extends Model
 
             // 檢查是否有檔案
             if ($value['type'] == 'img' || $value['type'] == 'text' || $value['type'] == 'url') {
-                $TadUpFiles = new TadUpFiles("jill_notice");
-                $TadUpFiles->set_col("sn", $value['sn']);
+                $this->_TadUpFiles->set_col("sn", $value['sn']);
 
-                $_show_files = $TadUpFiles->show_files('up_sn', true, 'small', false, false, null, null, false);
+                $_show_files = $this->_TadUpFiles->show_files('up_sn', true, 'small', false, false, null, null, false);
 
                 $_AllNotice[$key]['list_file'] = $_show_files;
             }
@@ -71,7 +72,7 @@ class NoticeModel extends Model
 
         // 檢查表單是否有填
         if (!$this->_check->allCheck($this, array('type' => "{$this->_R['type']}"))) {
-            return;
+            return $this->_check->error();
         }
 
         // json型態轉陣列(不在欄位的額外變數，不過濾)
@@ -100,7 +101,7 @@ class NoticeModel extends Model
             return;
         }
         if (!$this->_check->allCheck($this, array('type' => "{$this->_R['type']}"))) {
-            return;
+            return $this->_check->error();
         }
 
         $_updateData = $this->getRequest()->filter($this->_fields);
@@ -136,10 +137,9 @@ class NoticeModel extends Model
 
         // 檢查是否有檔案
         if ($_OneNotice[0]['type'] == 'img' || $_OneNotice[0]['type'] == 'text' || $_OneNotice[0]['type'] == 'url') {
-            $TadUpFiles = new TadUpFiles("jill_notice");
-            $TadUpFiles->set_col("sn", $_OneNotice[0]['sn']);
+            $this->_TadUpFiles->set_col("sn", $_OneNotice[0]['sn']);
 
-            $_show_files = $TadUpFiles->show_files('up_sn', true, 'file_name', false, false, null, null, false);
+            $_show_files = $this->_TadUpFiles->show_files('up_sn', true, 'file_name', false, false, null, null, false);
 
             $_OneNotice[0]['list_file'] = $_show_files;
         }
@@ -203,22 +203,21 @@ class NoticeModel extends Model
     {
         global $xoTheme;
         $xoTheme->addStylesheet('modules/tadtools/css/iconize.css');
-        $TadUpFiles = new TadUpFiles("jill_notice");
+
         $_AllNotice = parent::select(array('sn' => 'int', 'create_date' => 'date', 'deadline' => 'date', 'type' => 'string', 'title' => 'string', 'content' => 'ckeditor', 'uid' => 'int', 'status' => 'int', 'note' => 'textarea', 'sort' => 'int', 'cate_sn' => 'int'), array('where' => $_whereData, 'order' => 'create_date desc,sort'));
 
         foreach ($_AllNotice as $key => $value) {
             if ($value['type'] == "img") {
-                $TadUpFiles->set_col("sn", $value['sn']);
-                $_show_files                   = $TadUpFiles->show_files('up_sn', true, '', false, false, null, null, false);
+                $this->_TadUpFiles->set_col("sn", $value['sn']);
+                $_show_files                   = $this->_TadUpFiles->show_files('up_sn', true, '', false, false, null, null, false);
                 $_AllNotice[$key]['list_file'] = strip_tags($_show_files, '<a>');
             } elseif ($value['type'] == "url") {
-                $TadUpFiles->set_col("sn", $value['sn']);
-
-                $_AllNotice[$key]['list_file'] = $TadUpFiles->get_pic_file('thumb');
+                $this->_TadUpFiles->set_col("sn", $value['sn']);
+                $_AllNotice[$key]['list_file'] = $this->_TadUpFiles->get_pic_file();
                 $_AllNotice[$key]['content']   = strip_tags($value['content']);
             } elseif ($value['type'] == 'text') {
-                $TadUpFiles->set_col("sn", $value['sn']);
-                $_show_files = $TadUpFiles->get_file(null);
+                $this->_TadUpFiles->set_col("sn", $value['sn']);
+                $_show_files = $this->_TadUpFiles->get_file(null);
                 // $_AllNotice[$key]['list_file'] = strip_tags($_show_files, '<a>');
                 $_AllNotice[$key]['list_file'] = $_show_files;
             }

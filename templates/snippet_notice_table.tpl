@@ -53,7 +53,12 @@
 
           <td>
             <!--標題-->
-            <a href="<{$action}>?op=notice_show_one&sn=<{$data.sn}>"><{$data.title}></a>
+            <{if $data.type=='ckeditor'}>
+              <a href="<{$action}>?op=notice_show_one&sn=<{$data.sn}>"><{$smarty.const._MD_JILLNOTICE_CONTENT}>
+              </a>
+            <{else}>
+              <a href="<{$action}>?op=notice_show_one&sn=<{$data.sn}>"><{$data.title}></a>
+            <{/if}>
           </td>
 
           <td>

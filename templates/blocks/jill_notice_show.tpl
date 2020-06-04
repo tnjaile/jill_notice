@@ -47,13 +47,17 @@
           </div>
         <{/foreach}>
       </div>
-    <{elseif $type=="textarea" || $type=="ckeditor"}>
+    <{elseif $type=="textarea"}>
       <div class="list-group ml-2">
         <{foreach from=$c item=data}>
           <h4 class="list-group-item-heading"><{$data.title}></h4>
-          <p class="list-group-item-text"><{if $type=="textarea"}><{$data.content|nl2br}><{else}><{$data.content}><{/if}></p>
+          <p class="list-group-item-text"><{$data.content|nl2br}><{$data.content}></p>
         <{/foreach}>
       </div>
+    <{elseif $type=="ckeditor"}>
+      <{foreach from=$c item=data}>
+        <{$data.content}>
+      <{/foreach}>
     <{else}>
       <{foreach from=$c item=data }>
         <{if $data.list_file}>

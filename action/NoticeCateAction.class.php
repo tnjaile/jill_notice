@@ -1,7 +1,6 @@
 <?php
 use XoopsModules\Tadtools\FormValidator;
 use XoopsModules\Tadtools\SweetAlert;
-use XoopsModules\Tadtools\Utility;
 
 //分類控制器(後臺分類)
 class NoticeCateAction extends Action
@@ -37,8 +36,6 @@ class NoticeCateAction extends Action
             // die(var_dump($_AllCate));
             $this->_tpl->assign('AllCate', $_AllCate);
             $this->_tpl->assign('now_op', "cate_list");
-            // 排序
-            $this->_tpl->assign('jquery', Utility::get_jquery(true));
         }
 
         $sweet_alert = new SweetAlert();

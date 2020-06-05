@@ -1,7 +1,4 @@
-<{$jquery}>
-    <script type="text/javascript" src="<{$xoops_url}>/modules/jill_notice/js/cate.js"></script>
 <{if $AllCate}>
-        <div id="cate_sort_save_msg"></div>
         <table class="table table-striped table-hover">
             <thead>
                 <tr>
@@ -68,9 +65,8 @@
                                 <a href="<{$action}>?op=cate_form&cate_sn=<{$data.cate_sn}>" class="btn btn-xs btn-warning"><{$smarty.const._TAD_EDIT}></a>
                                 <a href="<{$xoops_url}>/modules/jill_notice/admin/auditors.php?cate_sn=<{$data.cate_sn}>" class="btn btn-sm btn-primary"><{$smarty.const._MI_JILLNOTICE_ADMENU2}></a>
                                 <{if $tad_blocks}>
-                                    <a href="<{$xoops_url}>/modules/tad_blocks/blocks.php" class="btn btn-sm btn-secondary" target="_blank"><{$smarty.const._MA_TAD_BLOCKS}></a>
+                                    <a href="<{$xoops_url}>/modules/tad_blocks/blocks.php" class="btn btn-sm btn-success" target="_blank"><{$smarty.const._MA_TAD_BLOCKS}></a>
                                 <{/if}>
-                                <i class="fa fa-sort" aria-hidden="true" title="<{$smarty.const._TAD_SORTABLE}>"></i>
                             </td>
                         <{/if}>
                     </tr>

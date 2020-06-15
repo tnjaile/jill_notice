@@ -85,6 +85,11 @@ class NoticeAction extends Action
                     $_message = empty($_sn) ? "修改失敗" : "修改成功!";
                 }
                 if ($_POST['next_op'] == "add") {
+                    if ($_sn == 1) {
+                        $this->_newblocks->newblocks_update(1);
+                    } elseif ($_sn > 1) {
+                        $this->_newblocks->newblocks_add($_sn);
+                    }
                     $_sn      = $this->_notice->notice_add();
                     $_message = empty($_sn) ? "新增失敗" : "新增成功!";
                 }

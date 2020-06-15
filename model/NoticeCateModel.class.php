@@ -37,12 +37,13 @@ class NoticeCateModel extends Model
 
             }
             if (!empty($value['auditors'])) {
-                $auditors = explode(";", $value['auditors']);
-
+                $auditors      = explode(",", $value['auditors']);
                 $auditor_uname = array();
                 foreach ($auditors as $auditor) {
+
                     $auditor_uname[] = XoopsUser::getUnameFromId($auditor, 0);
                 }
+
                 $_ALLCate[$key]['auditors'] = implode(" | ", $auditor_uname);
             }
 

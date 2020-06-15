@@ -83,7 +83,12 @@ class NoticeCateAction extends Action
                 if ($_POST['next_op'] == "add") {
                     $_sn = $this->_cate->cate_add();
                     if (!empty($_sn)) {
-                        $this->_newblocks->newblocks_add($_sn);
+                        if ($_sn == 1) {
+                            $this->_newblocks->newblocks_update($_sn);
+                        } else {
+                            $this->_newblocks->newblocks_add($_sn);
+                        }
+
                         $_message = "新增成功!";
                     } else {
                         $_message = "新增失敗";

@@ -30,7 +30,7 @@ class NewBlocksModel extends Model
         $_addData['side']          = 0;
         $_addData['weight']        = 0;
         $_addData['visible']       = 1;
-        $_addData['block_type']    = ($_sn == 1) ? "M" : "D";
+        $_addData['block_type']    = "D";
         $_addData['c_type']        = "H";
         $_addData['isactive']      = 1;
         $_addData['dirname']       = "jill_notice";
@@ -73,6 +73,10 @@ class NewBlocksModel extends Model
         $_updateData['name']          = "臨時公告：" . $this->_R['cate_title'];
         $_updateData['title']         = $this->_R['cate_title'];
         $_updateData['last_modified'] = time();
+        if ($_sn == 1) {
+            $_updateData['visible'] = 1;
+        }
+
         parent::update($_where, $_updateData);
         // 更新權限
         $this->_fields = array('gperm_groupid' => 'int', 'gperm_itemid' => 'int', 'gperm_modid' => 'int', 'gperm_name' => 'string');
@@ -115,7 +119,7 @@ class NewBlocksModel extends Model
     {
         $_where = array("dirname='jill_notice' && options={$this->_R['cate_sn']}");
         $_One   = $this->findOne($_where);
-        if (!empty($_One)) {
+        if (!empty($_One) && $this->_R['cate_sn'] != 1) {
             parent::delete($_where);
             // 刪除block_module_link
             $this->_tables = array(DB_PREFIX . "block_module_link");

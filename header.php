@@ -13,15 +13,14 @@ if ($xoopsUser) {
     if (!isset($_SESSION['auditors'])) {
         NoticeGroup::auditors_perm();
     }
-    if ($_SESSION['auditors'] || $_SESSION['notice_adm']) {
+    if ($_SESSION['auditors']) {
         $interface_menu[_MD_JILLNOTICE_SMNAME2] = "pass.php";
         $interface_icon[_MD_JILLNOTICE_SMNAME2] = "fa-chevron-right";
-        if ($_SESSION['notice_adm']) {
-            $interface_menu[_TAD_TO_ADMIN] = "admin/main.php";
-            $interface_icon[_TAD_TO_ADMIN] = "fa-sign-in";
-        }
     }
-
+    if ($_SESSION['notice_adm']) {
+        $interface_menu[_TAD_TO_ADMIN] = "admin/main.php";
+        $interface_icon[_TAD_TO_ADMIN] = "fa-sign-in";
+    }
 } else {
     unset($_SESSION['can_post']);
     unset($_SESSION['auditors']);

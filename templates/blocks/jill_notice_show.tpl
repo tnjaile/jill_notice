@@ -67,7 +67,7 @@
             </div>
           <{/foreach}>
         <{else}>
-          <div class="row"">
+          <div class="row ml-2">
             <h5 class="card-title text-center"><{$data.title}></h5>
           </div>
         <{/if}>

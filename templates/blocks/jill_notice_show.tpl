@@ -51,7 +51,7 @@
       <div class="list-group ml-2">
         <{foreach from=$c item=data}>
           <h4 class="list-group-item-heading"><{$data.title}></h4>
-          <p class="list-group-item-text"><{$data.content|nl2br}><{$data.content}></p>
+          <p class="list-group-item-text"><{$data.content|nl2br}></p>
         <{/foreach}>
       </div>
     <{elseif $type=="ckeditor"}>

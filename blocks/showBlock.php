@@ -28,7 +28,6 @@ function jill_notice_show($options)
                 $block['content'][$type] = $_AllNotice;
             }
         }
-
     }
     return $block;
 

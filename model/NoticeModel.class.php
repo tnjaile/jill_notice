@@ -105,7 +105,9 @@ class NoticeModel extends Model
         }
 
         $_updateData = $this->getRequest()->filter($this->_fields);
-
+        if ($this->_R['type'] == 'textarea') {
+            $_updateData["content"] = strip_tags($_updateData["content"]);
+        }
         parent::update($_where, $_updateData);
         return $this->_R['sn'];
     }

@@ -15,5 +15,9 @@ function xoops_module_update_jill_notice($module, $old_version)
     if (Update::chk2()) {
         Update::go_update2();
     }
+
+    if (Update::chk3()) {
+        Update::go_update3();
+    }
     return true;
 }

@@ -43,7 +43,7 @@
           </td>
           <td>
             <!--建立時間-->
-            <{$data.list_file}><{$data.deadline}>
+            <{$data.list_file}><{$data.start}>~<{$data.deadline}>
           </td>
 
           <td>

@@ -18,6 +18,8 @@
  **/
 xoops_loadLanguage('main', 'tadtools');
 //jill_notice-list
+define('_MD_JILLNOTICE_PERIOD', '期間');
+define('_MD_JILLNOTICE_START', '上架時間');
 define('_MD_JILLNOTICE_SN', '流水號');
 define('_MD_JILLNOTICE_CREATE_DATE', '建立時間');
 define('_MD_JILLNOTICE_DEADLINE', '下架時間');
@@ -44,7 +46,7 @@ define('_MD_JILLNOTICE_ERRORLOGION', '無權限使用，請聯絡管理員!');
 define('_MD_JILLNOTICE_PLEASELOGION', '請先登入，才能發佈!');
 define('_MD_JILLNOTICE_NODATA', '無資料!');
 define('_MD_JILLNOTICE_URL', '網址');
-define('_MD_JILLNOTICE_RECTANGLE', '圖片格式:140X70');
+define('_MD_JILLNOTICE_RECTANGLE', '縮圖寬度為:140');
 define('_MD_JILLNOTICE_SQUARE', '圖片格式:140X140');
 define('_MD_UPDATE_FAILED', '更新失敗');
 define('_MD_UPDATE_COMPLETED', '更新成功');

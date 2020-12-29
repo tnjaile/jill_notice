@@ -10,7 +10,7 @@ class NoticeModel extends Model
 
         $this->_TadUpFiles = new TadUpFiles("jill_notice");
         // 要顯示的欄位及欄位類型
-        $this->_fields = array('sn' => 'int', 'create_date' => 'date', 'deadline' => 'date', 'type' => 'string', 'title' => 'string', 'content' => 'textarea', 'uid' => 'int', 'status' => 'int', 'note' => 'textarea', 'sort' => 'int', 'cate_sn' => 'int');
+        $this->_fields = array('sn' => 'int', 'create_date' => 'date', 'start' => 'date', 'deadline' => 'date', 'type' => 'string', 'title' => 'string', 'content' => 'textarea', 'uid' => 'int', 'status' => 'int', 'note' => 'textarea', 'sort' => 'int', 'cate_sn' => 'int');
         // 要查詢的表
         $this->_tables = array(DB_PREFIX . "jill_notice");
         // 欄位檢查
@@ -86,8 +86,12 @@ class NoticeModel extends Model
 
         // 增加額外欄位
         $_addData['create_date'] = date("Y-m-d H:i:s", xoops_getUserTimestamp(time()));
+        $_addData['start']       = (strtotime($_addData['start'])) ? $_addData['start'] : date("Y-m-d H:i:s", xoops_getUserTimestamp(time()));
         $_addData['uid']         = $xoopsUser->uid();
         $_addData['status']      = $_status[$_addData['cate_sn']];
+        if ($this->_R['type'] == 'textarea') {
+            $_addData["content"] = strip_tags($_addData["content"]);
+        }
         // 去除自動遞增
         unset($_addData['sn']);
         return parent::add($_addData);
@@ -104,7 +108,8 @@ class NoticeModel extends Model
             return $this->_check->error();
         }
 
-        $_updateData = $this->getRequest()->filter($this->_fields);
+        $_updateData          = $this->getRequest()->filter($this->_fields);
+        $_updateData['start'] = (strtotime($_updateData['start'])) ? $_updateData['start'] : date("Y-m-d H:i:s", xoops_getUserTimestamp(time()));
         if ($this->_R['type'] == 'textarea') {
             $_updateData["content"] = strip_tags($_updateData["content"]);
         }
@@ -120,9 +125,10 @@ class NoticeModel extends Model
         }
 
         // 秀出此編號的詳細資訊
-        $_OneNotice = parent::select(array('sn' => 'int', 'create_date' => 'date', 'deadline' => 'date', 'type' => 'string', 'title' => 'string', 'content' => 'ckeditor', 'uid' => 'int', 'status' => 'int', 'note' => 'textarea', 'sort' => 'int', 'cate_sn' => 'int'), array('where' => $_where, 'limit' => '1'));
+        $_OneNotice = parent::select(array('sn' => 'int', 'create_date' => 'date', 'start' => 'date', 'deadline' => 'date', 'type' => 'string', 'title' => 'string', 'content' => 'ckeditor', 'uid' => 'int', 'status' => 'int', 'note' => 'textarea', 'sort' => 'int', 'cate_sn' => 'int'), array('where' => $_where, 'limit' => '1'));
 
         $_OneNotice[0]['type_name'] = $this->getTypeName($_OneNotice[0]['type']);
+
         // 增加外鍵查詢欄
         $this->_tables               = array(DB_PREFIX . "jill_notice_cate");
         $_where                      = array("cate_sn='{$_OneNotice[0]['cate_sn']}'");
@@ -206,7 +212,7 @@ class NoticeModel extends Model
         global $xoTheme;
         $xoTheme->addStylesheet('modules/tadtools/css/iconize.css');
 
-        $_AllNotice = parent::select(array('sn' => 'int', 'create_date' => 'date', 'deadline' => 'date', 'type' => 'string', 'title' => 'string', 'content' => 'ckeditor', 'uid' => 'int', 'status' => 'int', 'note' => 'textarea', 'sort' => 'int', 'cate_sn' => 'int'), array('where' => $_whereData, 'order' => 'create_date desc,sort'));
+        $_AllNotice = parent::select(array('sn' => 'int', 'create_date' => 'date', 'start' => 'date', 'deadline' => 'date', 'type' => 'string', 'title' => 'string', 'content' => 'ckeditor', 'uid' => 'int', 'status' => 'int', 'note' => 'textarea', 'sort' => 'int', 'cate_sn' => 'int'), array('where' => $_whereData, 'order' => 'create_date desc,sort'));
 
         foreach ($_AllNotice as $key => $value) {
             if ($value['type'] == "img") {

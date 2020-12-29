@@ -1,6 +1,7 @@
 CREATE TABLE `jill_notice` (
   `sn` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '流水號',
   `create_date` datetime NOT NULL COMMENT '建立時間',
+  `start` datetime NOT NULL COMMENT '上架時間',
   `deadline` datetime NOT NULL COMMENT '下架時間',
   `type` enum('text','textarea','url','img','ckeditor') NOT NULL COMMENT '類型',
   `title` varchar(255) NOT NULL DEFAULT '' COMMENT '標題',

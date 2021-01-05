@@ -1,6 +1,9 @@
 <?php
 use XoopsModules\Tadtools\TadUpFiles;
 
+if (!class_exists('XoopsModules\Tadtools\TadUpFiles')) {
+    require XOOPS_ROOT_PATH . '/modules/tadtools/preloads/autoloader.php';
+}
 class NoticeModel extends Model
 {
     private $_TadUpFiles = null;
@@ -230,7 +233,6 @@ class NoticeModel extends Model
                 $_AllNotice[$key]['list_file'] = $_show_files;
             }
         }
-        // Utility::dd($_AllNotice);
         // die(var_dump($_AllNotice));
         return $_AllNotice;
     }

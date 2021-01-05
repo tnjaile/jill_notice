@@ -9,11 +9,6 @@
   .col {
     padding: 20px;
   }
-  .media-object{
-    height:140px;
-    width: 100%*140px;
-    display: block;
-  }
 </style>
 <div class="notice-fluid">
   <{foreach from=$block.content key=type item=c}>

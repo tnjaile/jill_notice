@@ -5,7 +5,7 @@
       <{$smarty.const._MD_JILLNOTICE_TITLE}>
     </label>
     <div class="col-sm-10">
-      <input type="text" name="title" id="title" class="form-control validate[required]" value="<{$OneNotice.title}>" placeholder="<{$smarty.const._MD_JILLNOTICE_TITLE}>" maxlength="40" minlength="2">
+      <input type="text" name="title" id="title" class="form-control validate[required]" value="<{$OneNotice.title}>" placeholder="<{$smarty.const._MD_JILLNOTICE_TITLE}>" maxlength="40" minlength="2" title='notice'>
     </div>
   </div>
   <!--內文-->
@@ -34,7 +34,7 @@
       <{$smarty.const._MD_JILLNOTICE_TITLE}>
     </label>
     <div class="col-sm-10">
-      <input type="text" name="title" id="title" class="form-control" value="<{$OneNotice.title}>" placeholder="<{$smarty.const._MD_JILLNOTICE_TITLE}>">
+      <input type="text" name="title" id="title" class="form-control" value="<{$OneNotice.title}>" placeholder="<{$smarty.const._MD_JILLNOTICE_TITLE}>" title='notice'>
     </div>
   </div>
   <!--內文-->
@@ -63,7 +63,7 @@
       <{$smarty.const._MD_JILLNOTICE_TITLE}>
     </label>
     <div class="col-sm-10">
-      <input type="text" name="title" id="title" class="form-control validate[required]" value="<{$OneNotice.title}>" placeholder="<{$smarty.const._MD_JILLNOTICE_TITLE}>">
+      <input type="text" name="title" id="title" class="form-control validate[required]" value="<{$OneNotice.title}>" placeholder="<{$smarty.const._MD_JILLNOTICE_TITLE}>" title='notice'>
     </div>
   </div>
   <!--網址-->
@@ -72,7 +72,7 @@
       <{$smarty.const._MD_JILLNOTICE_URL}>
     </label>
     <div class="col-sm-10">
-      <input type="text" name="content" id="content" class="form-control validate[required,custom[url]]" value="<{$OneNotice.content}>" placeholder="<{$smarty.const._MD_JILLNOTICE_URL}>">
+      <input type="text" name="content" id="content" class="form-control validate[required,custom[url]]" value="<{$OneNotice.content}>" placeholder="<{$smarty.const._MD_JILLNOTICE_URL}>" title='notice'>
     </div>
   </div>
   <!--上傳-->
@@ -91,7 +91,7 @@
       <{$smarty.const._MD_JILLNOTICE_TITLE}>
     </label>
     <div class="col-sm-10">
-      <input type="text" name="title" id="title" class="form-control validate[required]" value="<{$OneNotice.title}>" placeholder="<{$smarty.const._MD_JILLNOTICE_TITLE}>">
+      <input type="text" name="title" id="title" class="form-control validate[required]" value="<{$OneNotice.title}>" placeholder="<{$smarty.const._MD_JILLNOTICE_TITLE}>" title='notice'>
     </div>
   </div>
   <!--上傳-->

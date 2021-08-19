@@ -37,7 +37,7 @@ class NoticeCateModel extends Model
 
             }
             if (!empty($value['auditors'])) {
-                $auditors = explode(";", $value['auditors']);
+                $auditors = explode(",", $value['auditors']);
 
                 $auditor_uname = array();
                 foreach ($auditors as $auditor) {
@@ -61,7 +61,7 @@ class NoticeCateModel extends Model
     public function cate_add()
     {
         if (!$this->_check->titleCheck($this)) {
-            return;
+            $this->_check->error();
         }
 
         $_addData = $this->getRequest()->filter($this->_fields);
@@ -79,7 +79,7 @@ class NoticeCateModel extends Model
         }
         if (!empty($_ischeck)) {
             if (!$this->_check->titleCheck($this)) {
-                return;
+                $this->_check->error();
             }
         }
         $_selectData = empty($_selectData) ? $this->_fields : $_selectData;

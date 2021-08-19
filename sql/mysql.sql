@@ -1,10 +1,11 @@
 CREATE TABLE `jill_notice` (
   `sn` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '流水號',
   `create_date` datetime NOT NULL COMMENT '建立時間',
+  `start` datetime NOT NULL COMMENT '上架時間',
   `deadline` datetime NOT NULL COMMENT '下架時間',
   `type` enum('text','textarea','url','img','ckeditor') NOT NULL COMMENT '類型',
-  `title` varchar(255) NOT NULL COMMENT '標題',
-  `content` text NOT NULL COMMENT '內文',
+  `title` varchar(255) NOT NULL DEFAULT '' COMMENT '標題',
+  `content` text NULL COMMENT '內文',
   `uid` mediumint(8) unsigned NOT NULL DEFAULT '0' COMMENT '申請人員',
   `status` enum('0','1','2') NOT NULL DEFAULT '0' COMMENT '是否啟用',
   `note` varchar(300) NULL COMMENT '備註',

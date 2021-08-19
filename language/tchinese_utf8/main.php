@@ -18,6 +18,8 @@
  **/
 xoops_loadLanguage('main', 'tadtools');
 //jill_notice-list
+define('_MD_JILLNOTICE_PERIOD', '期間');
+define('_MD_JILLNOTICE_START', '上架時間');
 define('_MD_JILLNOTICE_SN', '流水號');
 define('_MD_JILLNOTICE_CREATE_DATE', '建立時間');
 define('_MD_JILLNOTICE_DEADLINE', '下架時間');
@@ -28,7 +30,8 @@ define('_MD_JILLNOTICE_CONTENT', '內文');
 define('_MD_JILLNOTICE_UID', '申請人員');
 define('_MD_JILLNOTICE_STATUS', '是否啟用');
 define('_MD_JILLNOTICE_NOTE', '備註');
-define('_MD_JILLNOTICE_SHOW_SN_FILES', '圖片上傳');
+define('_MD_JILLNOTICE_SHOW_SN_FILES', '檔案上傳');
+define('_MD_JILLNOTICE_SHOW_SN_IMG', '圖片上傳');
 define('_MD_JILLNOTICE_SMNAME1', '臨時公告主頁');
 define('_MD_JILLNOTICE_SMNAME2', '審核清單');
 define('_MD_JILLNOTICE_STATUS1', '已啟用');
@@ -43,7 +46,7 @@ define('_MD_JILLNOTICE_ERRORLOGION', '無權限使用，請聯絡管理員!');
 define('_MD_JILLNOTICE_PLEASELOGION', '請先登入，才能發佈!');
 define('_MD_JILLNOTICE_NODATA', '無資料!');
 define('_MD_JILLNOTICE_URL', '網址');
-define('_MD_JILLNOTICE_RECTANGLE', '圖片格式:140X70');
+define('_MD_JILLNOTICE_RECTANGLE', '縮圖寬度為:140');
 define('_MD_JILLNOTICE_SQUARE', '圖片格式:140X140');
 define('_MD_UPDATE_FAILED', '更新失敗');
 define('_MD_UPDATE_COMPLETED', '更新成功');

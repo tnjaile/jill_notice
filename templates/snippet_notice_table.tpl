@@ -43,7 +43,7 @@
           </td>
           <td>
             <!--建立時間-->
-            <{$data.list_file}><{$data.deadline}>
+            <{$data.list_file}><{$data.start}>~<{$data.deadline}>
           </td>
 
           <td>
@@ -53,7 +53,12 @@
 
           <td>
             <!--標題-->
-            <a href="<{$action}>?op=notice_show_one&sn=<{$data.sn}>"><{$data.title}></a>
+            <{if $data.type=='ckeditor'}>
+              <a href="<{$action}>?op=notice_show_one&sn=<{$data.sn}>"><{$smarty.const._MD_JILLNOTICE_CONTENT}>
+              </a>
+            <{else}>
+              <a href="<{$action}>?op=notice_show_one&sn=<{$data.sn}>"><{$data.title}></a>
+            <{/if}>
           </td>
 
           <td>

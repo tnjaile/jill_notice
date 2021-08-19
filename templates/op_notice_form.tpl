@@ -31,13 +31,21 @@
                 </div>
             </div>
         </div>
-
+        <!--上架時間 datetime-->
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label text-md-right">
+                <{$smarty.const._MD_JILLNOTICE_START}>
+            </label>
+            <div class="col-sm-10">
+                <input type="text" name="start" id="start" class="form-control validate[required]" value="<{$OneNotice.start}>" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm', startDate:'%y-%M-%d %H:%m',minDate:'%y-%M-%d'})" placeholder="<{$smarty.const._MD_JILLNOTICE_START}>">
+            </div>
+        </div>
 
         <!--下架時間 datetime-->
         <div class="form-group row">
             <label class="col-sm-2 col-form-label text-md-right">
-        <{$smarty.const._MD_JILLNOTICE_DEADLINE}>
-      </label>
+                <{$smarty.const._MD_JILLNOTICE_DEADLINE}>
+            </label>
             <div class="col-sm-10">
                 <input type="text" name="deadline" id="deadline" class="form-control validate[required]" value="<{$OneNotice.deadline}>" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm', startDate:'%y-%M-%d %H:%m',minDate:'%y-%M-%d+1'})" placeholder="<{$smarty.const._MD_JILLNOTICE_DEADLINE}>">
             </div>
@@ -45,13 +53,13 @@
 
         <{includeq file="$xoops_rootpath/modules/jill_notice/templates/snippet_layout.tpl" }>
 
-            <div class="text-center">
-                <{$token_form}>
-                <input type="hidden" name="next_op" value="<{$next_op}>">
-                <input type="hidden" name="op" value="<{$now_op}>">
-                <input type="hidden" name="sn" value="<{$OneNotice.sn}>">
-                <input type="hidden" name="status_js" value='<{$status}>'>
-                <input type="submit" name="send" value="<{$smarty.const._TAD_SAVE}>" class="btn btn-primary" />
-            </div>
+        <div class="text-center">
+            <{$token_form}>
+            <input type="hidden" name="next_op" value="<{$next_op}>">
+            <input type="hidden" name="op" value="<{$now_op}>">
+            <input type="hidden" name="sn" value="<{$OneNotice.sn}>">
+            <input type="hidden" name="status_js" value='<{$status}>'>
+            <input type="submit" name="send" value="<{$smarty.const._TAD_SAVE}>" class="btn btn-primary" />
+        </div>
     </form>
 </div>

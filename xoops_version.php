@@ -21,7 +21,7 @@ $modversion = array();
 
 //---模組基本資訊---//
 $modversion['name']        = _MI_JILLNOTICE_NAME;
-$modversion['version']     = '1.1';
+$modversion['version']     = '1.31';
 $modversion['description'] = _MI_JILLNOTICE_DESC;
 $modversion['author']      = _MI_JILLNOTICE_AUTHOR;
 $modversion['credits']     = _MI_JILLNOTICE_CREDITS;
@@ -31,8 +31,8 @@ $modversion['image']       = "images/logo.png";
 $modversion['dirname']     = basename(__DIR__);
 
 //---模組狀態資訊---//
-$modversion['status_version']      = '1.1';
-$modversion['release_date']        = '2020-02-03';
+$modversion['status_version']      = '1.31';
+$modversion['release_date']        = '2020-06-15';
 $modversion['module_website_url']  = 'https://github.com/tnjaile/';
 $modversion['module_website_name'] = _MI_JILLNOTICE_AUTHOR_WEB;
 $modversion['module_status']       = 'release';
@@ -75,7 +75,6 @@ $modversion['sub'][$i]['url']  = "pass.php";
 //---樣板設定---//
 $modversion['templates'][] = array('file' => 'jill_notice_admin_main.tpl', 'description' => 'jill_notice_admin_main.tpl');
 $modversion['templates'][] = array('file' => 'jill_notice_index.tpl', 'description' => 'jill_notice_index.tpl');
-
 //---區塊設定(後台已自動化)---//
 $i                                       = 0;
 $modversion['blocks'][$i]['file']        = 'showBlock.php';
@@ -86,11 +85,3 @@ $modversion['blocks'][$i]['show_func']   = 'jill_notice_show';
 $modversion['blocks'][$i]['template'] = 'jill_notice_show.tpl';
 $modversion['blocks'][$i]['options']  = '1';
 $modversion['blocks'][$i]['visible']  = '1';
-//---偏好設定(後台已自動化)---//
-// $i                                       = 0;
-// $modversion['config'][$i]['name']        = 'notice_group';
-// $modversion['config'][$i]['title']       = '_MI_JILLNOTICE_NOTICE_GROUP';
-// $modversion['config'][$i]['description'] = '_MI_JILLNOTICE_NOTICE_GROUP_DESC';
-// $modversion['config'][$i]['formtype']    = 'group_multi';
-// $modversion['config'][$i]['valuetype']   = 'array';
-// $modversion['config'][$i]['default']     = '1';

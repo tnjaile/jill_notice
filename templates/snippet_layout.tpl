@@ -1,13 +1,13 @@
-<!--標題-->
-<div class="form-group row">
-  <label class="col-sm-2 col-form-label text-md-right">
-    <{$smarty.const._MD_JILLNOTICE_TITLE}>
-  </label>
-  <div class="col-sm-10">
-    <input type="text" name="title" id="title" class="form-control validate[required]" value="<{$OneNotice.title}>" placeholder="<{$smarty.const._MD_JILLNOTICE_TITLE}>">
-  </div>
-</div>
 <{if $def_type=="img"}>
+  <!--標題-->
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label text-md-right">
+      <{$smarty.const._MD_JILLNOTICE_TITLE}>
+    </label>
+    <div class="col-sm-10">
+      <input type="text" name="title" id="title" class="form-control validate[required]" value="<{$OneNotice.title}>" placeholder="<{$smarty.const._MD_JILLNOTICE_TITLE}>" maxlength="40" minlength="2">
+    </div>
+  </div>
   <!--內文-->
   <div class="form-group row">
     <label class="col-sm-2 col-form-label text-md-right">
@@ -20,7 +20,7 @@
   <!--上傳-->
   <div class="form-group row">
     <label class="col-sm-2 col-form-label text-md-right">
-      <{$smarty.const._MD_JILLNOTICE_SHOW_SN_FILES}>
+      <{$smarty.const._MD_JILLNOTICE_SHOW_SN_IMG}>
       <p class="help-block"><{$smarty.const._MD_JILLNOTICE_SQUARE}></p>
     </label>
     <div class="col-sm-10">
@@ -28,6 +28,15 @@
     </div>
   </div>
 <{elseif $def_type=="textarea"}>
+  <!--標題-->
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label text-md-right">
+      <{$smarty.const._MD_JILLNOTICE_TITLE}>
+    </label>
+    <div class="col-sm-10">
+      <input type="text" name="title" id="title" class="form-control" value="<{$OneNotice.title}>" placeholder="<{$smarty.const._MD_JILLNOTICE_TITLE}>">
+    </div>
+  </div>
   <!--內文-->
   <div class="form-group row">
     <label class="col-sm-2 col-form-label text-md-right">
@@ -48,6 +57,15 @@
     </div>
   </div>
 <{elseif $def_type=="url"}>
+  <!--標題-->
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label text-md-right">
+      <{$smarty.const._MD_JILLNOTICE_TITLE}>
+    </label>
+    <div class="col-sm-10">
+      <input type="text" name="title" id="title" class="form-control validate[required]" value="<{$OneNotice.title}>" placeholder="<{$smarty.const._MD_JILLNOTICE_TITLE}>">
+    </div>
+  </div>
   <!--網址-->
   <div class="form-group row">
     <label class="col-sm-2 col-form-label text-md-right">
@@ -60,7 +78,7 @@
   <!--上傳-->
   <div class="form-group row">
     <label class="col-sm-2 col-form-label text-md-right">
-      <{$smarty.const._MD_JILLNOTICE_SHOW_SN_FILES}>
+      <{$smarty.const._MD_JILLNOTICE_SHOW_SN_IMG}>
       <p class="help-block"><{$smarty.const._MD_JILLNOTICE_RECTANGLE}></p>
     </label>
     <div class="col-sm-10">
@@ -68,11 +86,18 @@
     </div>
   </div>
 <{else}>
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label text-md-right">
+      <{$smarty.const._MD_JILLNOTICE_TITLE}>
+    </label>
+    <div class="col-sm-10">
+      <input type="text" name="title" id="title" class="form-control validate[required]" value="<{$OneNotice.title}>" placeholder="<{$smarty.const._MD_JILLNOTICE_TITLE}>">
+    </div>
+  </div>
   <!--上傳-->
   <div class="form-group row">
     <label class="col-sm-2 col-form-label text-md-right">
       <{$smarty.const._MD_JILLNOTICE_SHOW_SN_FILES}>
-      <p class="help-block"><{$smarty.const._MD_JILLNOTICE_RECTANGLE}></p>
     </label>
     <div class="col-sm-10">
       <{$up_sn_form}>

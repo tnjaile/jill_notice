@@ -12,10 +12,12 @@ class NoticeAction extends Action
     {
         parent::__construct();
 
-        $this->_notice        = new NoticeModel();
-        $this->_cate          = new NoticeCateModel();
-        list($this->_F['sn']) = $this->getArry(array(
-            isset($_REQUEST['sn']) ? Tool::setFormString($_REQUEST['sn'], "int") : null));
+        $this->_notice = new NoticeModel();
+        $this->_cate   = new NoticeCateModel();
+        list($this->_F['sn'],
+            $this->_F['files_sn']) = $this->getArry(array(
+            isset($_REQUEST['sn']) ? Tool::setFormString($_REQUEST['sn'], "int") : null,
+            isset($_REQUEST['files_sn']) ? Tool::setFormString($_REQUEST['files_sn'], "int") : null));
     }
 
     //頁面載入
@@ -34,7 +36,6 @@ class NoticeAction extends Action
                 //分頁
                 parent::page(20, 10, $this->_notice);
                 $_AllNotice = $this->_notice->notice_list(array("uid='{$uid}'"));
-
                 $this->_tpl->assign('AllNotice', $_AllNotice);
                 $this->_tpl->assign('now_op', "notice_list");
 
@@ -76,6 +77,9 @@ class NoticeAction extends Action
                 $error = implode("<br />", $GLOBALS['xoopsSecurity']->getErrors());
                 redirect_header($_SERVER['PHP_SELF'], 3, $error);
             }
+            if (strtotime($_POST['deadline']) < strtotime($_POST['start'])) {
+                redirect_header($_SERVER['PHP_SELF'], 3, "下架日期比上架日期早，儲存失敗");
+            }
 
             if (isset($_POST['next_op'])) {
                 if ($_POST['next_op'] == "update") {
@@ -83,6 +87,11 @@ class NoticeAction extends Action
                     $_message = empty($_sn) ? "修改失敗" : "修改成功!";
                 }
                 if ($_POST['next_op'] == "add") {
+                    if ($_sn == 1) {
+                        $this->_newblocks->newblocks_update(1);
+                    } elseif ($_sn > 1) {
+                        $this->_newblocks->newblocks_add($_sn);
+                    }
                     $_sn      = $this->_notice->notice_add();
                     $_message = empty($_sn) ? "新增失敗" : "新增成功!";
                 }
@@ -111,11 +120,11 @@ class NoticeAction extends Action
             // die(var_dump($_OneNotice));
             $TadUpFiles->set_col("sn", $_OneNotice[0]['sn']);
             $this->_tpl->assign('next_op', "update");
-            $this->_tpl->assign("OneNotice", $_OneNotice[0]);
             $_type = $_OneNotice[0]['type'];
 
         } else {
             // 給定預設值
+            $_OneNotice[0]['start'] = date("Y-m-d H:i:s", xoops_getUserTimestamp(time()));
             $this->_tpl->assign('typeArr', $this->_notice->setType());
             $_type = !isset($_GET['type']) ? 'text' : Tool::setFormString($_GET['type']);
             $this->_tpl->assign('next_op', "add");
@@ -144,9 +153,18 @@ class NoticeAction extends Action
         $token      = new \XoopsFormHiddenToken();
         $token_form = $token->render();
         $this->_tpl->assign("token_form", $token_form);
+        $this->_tpl->assign('OneNotice', $_OneNotice[0]);
         $this->_tpl->assign('now_op', "notice_form");
         $this->_tpl->assign('action', $_SERVER['PHP_SELF']);
 
+    }
+
+    // 下載
+    public function tufdl()
+    {
+        $TadUpFiles = new TadUpFiles("jill_notice");
+        $TadUpFiles->add_file_counter($this->_F['files_sn']);
+        exit;
     }
 
 }

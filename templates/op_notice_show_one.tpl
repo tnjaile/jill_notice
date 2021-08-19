@@ -32,10 +32,10 @@
   <!--下架時間-->
   <div class="row">
     <label class="col-sm-3 text-right">
-      <{$smarty.const._MD_JILLNOTICE_DEADLINE}>
+      <{$smarty.const._MD_JILLNOTICE_PERIOD}>
     </label>
     <div class="col-sm-9">
-      <{$OneNotice.deadline}>
+      <{$OneNotice.start}> ~ <{$OneNotice.deadline}>
     </div>
   </div>
   <{if $OneNotice.content}>
@@ -65,7 +65,7 @@
     </div>
   </div>
   <{if $OneNotice.list_file}>
-    <!--上傳圖片-->
+    <!--上傳-->
     <div class="row">
       <label class="col-sm-3 text-right">
         <{$smarty.const._MD_JILLNOTICE_SHOW_SN_FILES}>

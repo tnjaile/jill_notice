@@ -1,7 +1,6 @@
 <?php
 use XoopsModules\Tadtools\FormValidator;
 use XoopsModules\Tadtools\SweetAlert;
-use XoopsModules\Tadtools\Utility;
 
 //分類控制器(後臺分類)
 class NoticeCateAction extends Action
@@ -37,8 +36,6 @@ class NoticeCateAction extends Action
             // die(var_dump($_AllCate));
             $this->_tpl->assign('AllCate', $_AllCate);
             $this->_tpl->assign('now_op', "cate_list");
-            // 排序
-            $this->_tpl->assign('jquery', Utility::get_jquery(true));
         }
 
         $sweet_alert = new SweetAlert();
@@ -76,8 +73,8 @@ class NoticeCateAction extends Action
             if (isset($_POST['next_op'])) {
                 if ($_POST['next_op'] == "update") {
                     $_sn = $this->_cate->cate_update();
-                    $this->_newblocks->newblocks_update($_sn);
                     if (!empty($_sn)) {
+                        $this->_newblocks->newblocks_update($_sn);
                         $_message = "修改成功!";
                     } else {
                         $_message = "修改失敗!";
@@ -85,11 +82,13 @@ class NoticeCateAction extends Action
                 }
                 if ($_POST['next_op'] == "add") {
                     $_sn = $this->_cate->cate_add();
-                    if ($_sn > 1) {
-                        $this->_newblocks->newblocks_add($_sn);
-                    }
-
                     if (!empty($_sn)) {
+                        if ($_sn == 1) {
+                            $this->_newblocks->newblocks_update($_sn);
+                        } else {
+                            $this->_newblocks->newblocks_add($_sn);
+                        }
+
                         $_message = "新增成功!";
                     } else {
                         $_message = "新增失敗";

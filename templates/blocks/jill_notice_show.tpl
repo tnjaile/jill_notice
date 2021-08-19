@@ -10,13 +10,14 @@
     padding: 20px;
   }
 </style>
+<h3 class="sr-only">showBlock</h3>
 <div class="notice-fluid">
   <{foreach from=$block.content key=type item=c}>
     <{if $type=="url"}>
       <ul class="vertical_menu">
-        <{foreach from=$c item=data }>
+        <{foreach from=$c item=data}>
           <li class="list-group-item">
-            <a href='<{$data.content}>' target='_blank'><{if $data.list_file}><img src="<{$data.list_file}>" class="img-fluid" alt="<{$data.title}>" style="margin-right: 4px;"><{else}><{$data.title}><{/if}></a>
+            <a href="<{$data.content}>" target='_blank'><{if $data.list_file}><img src="<{$data.list_file}>" class="img-fluid" alt="<{$data.title}>" style="margin-right: 4px;"><{else}><{$data.title}><{/if}></a>
           </li>
         <{/foreach}>
       </ul>

@@ -225,7 +225,10 @@ class NoticeModel extends Model
             } elseif ($value['type'] == "url") {
                 $this->_TadUpFiles->set_col("sn", $value['sn']);
                 $_AllNotice[$key]['list_file'] = $this->_TadUpFiles->get_pic_file();
-                $_AllNotice[$key]['content']   = strip_tags($value['content']);
+                // $_AllNotice[$key]['content']   = strip_tags($value['content']);
+                preg_match_all('/<a[^>]+href=([\'"])(?<href>.+?)\1[^>]*>/i', $value['content'], $result);
+                $_AllNotice[$key]['content'] = $result['href'][0];
+
             } elseif ($value['type'] == 'text') {
                 $this->_TadUpFiles->set_col("sn", $value['sn']);
                 $_show_files = $this->_TadUpFiles->get_file(null);

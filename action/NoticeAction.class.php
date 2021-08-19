@@ -132,7 +132,7 @@ class NoticeAction extends Action
         }
         $this->_tpl->assign('def_type', $_type);
         if ($_type == "ckeditor") {
-            $_content = (empty($_OneNotice)) ? "" : $_OneNotice[0]['content'];
+            $_content = (isset($_OneNotice)) ? $_OneNotice[0]['content'] : "";
             $ck       = new CkEditor("jill_notice", "content", $_content);
             $ck->setHeight(400);
             $this->_tpl->assign('editor_content', $ck->render());
